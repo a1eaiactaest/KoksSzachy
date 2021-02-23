@@ -13,3 +13,5 @@ Dla tych, którzy nie zapisali linku: [docsy](https://docs.google.com/document/d
 * Przychodzić na spotkania
 
 * Nie być śmierdzącym leniem
+
+* Dobrze się bawić :)
