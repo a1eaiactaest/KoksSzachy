@@ -1,11 +1,10 @@
-# inf-projekt
+# KoksSzachy
 
-### Pomysly
+### docsy
 
-* statystyki sejmowe
-* p2p voice chat / text chat
-* apka do speed testu pisania na klawie B)
-* porownanie wizualne na stronie internetowej algorytmow sortowania
+** usunac gdy repo bedzie public **
+
+Dla tych, którzy nie zapisali linku: [docsy](https://docs.google.com/document/d/1dUMeNNF1RS_UTGbHJZl_R7POuJ2NfcSvtbeZV_7FDjg/edit?usp=sharing)
 
 ### TODO
 
