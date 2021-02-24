@@ -13,13 +13,14 @@
   <script src="static/chessboard.min.js"></script>
 </head>
 <body>
+  <div id="board" style="width: 600px; height: 600px; z-index:10"></div>
+  <p></p>
   <script type="text/javascript">
     var config = {
-      showNotation: true,
       position: 'start',
-      onDrop: onDrop; // rob tą funkcje za kazdym ruchem bierki
+      //onDrop: onDrop // rob tą funkcje za kazdym ruchem bierki
     }
-    var board = ChessBoard('board', 'start');
+    var board = ChessBoard('board', config);
 
     var cords = {"a": 0, "b": 1, "c": 2, "d": 3, "e": 4, "f": 5, "g": 6, "h": 7};
     function get_square(sq){

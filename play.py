@@ -4,18 +4,26 @@ import os
 import chess
 import chess.svg
 import time
+from state import State
 
-from flask import Flask, render_template
-app = Flask(__name__, static_url_path='')
+s = State() # plansza itd
+
+from flask import Flask, Response, request
+app = Flask(__name__) 
 
 @app.route("/")
 def hello():
-  #return render_template("index.html")
-  return app.send.static_url_path='index.html')
+  ret = open('index.html').read()
+  return ret.replace('start', s.board.fen())
 
 @app.route("/newgame")
 def newgame():
-  pass
+  s.board.reset()
+  response = app.response_class(
+    response=s.board.fen(),
+    status=200
+  )
+  return response
 
 if __name__ == "__main__":
   app.run(debug=True)
