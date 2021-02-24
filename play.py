@@ -16,6 +16,7 @@ def hello():
   ret = open('index.html').read()
   return ret.replace('start', s.board.fen())
 
+
 @app.route("/newgame")
 def newgame():
   s.board.reset()
