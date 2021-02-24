@@ -30,11 +30,11 @@
       return 8*(parseInt(sq.charAt(1))-1) + cords[sq.charAt(0)];
     }
 
-    /*function onDrop(source, target, piece){
+     var onDrop = function(source, target, piece){
       if(source == target) return
 
       var promo = piece.toLowerCase().charAt(1) == 'p' && parseInt(target.charAt(1)) == 8; 
-    }*/
+    }
 
     function newGame(){
       $.get('/newgame', function(r) {
