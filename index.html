@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>KoksSzachy</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="static/style.css"> <!--ziomy od css tutaj macie wgrane juz-->
+  <link rel="stylesheet" type="text/css" href="static/chessboard.min.css">
+
+  
+  <script src="static/jquery.min.js"></script>
+  <script src="static/chessboard.min.js"></script>
+</head>
+<body>
+  <script type="text/javascript">
+    var config = {
+      showNotation: true,
+      position: 'start',
+      onDrop: onDrop; // rob tą funkcje za kazdym ruchem bierki
+    }
+    var board = ChessBoard('board', 'start');
+
+    var cords = {"a": 0, "b": 1, "c": 2, "d": 3, "e": 4, "f": 5, "g": 6, "h": 7};
+    function get_square(sq){
+      return 8*(parseInt(sq.charAt(1))-1) + cords[sq.charAt(0)];
+    }
+
+    /*function onDrop(source, target, piece){
+      if(source == target) return
+
+      var promo = piece.toLowerCase().charAt(1) == 'p' && parseInt(target.charAt(1)) == 8; 
+    }*/
+
+    function newGame(){
+      $.get('/newgame', function(r) {
+        document.querySelector('p').innerText = '';
+        board.position(r);
+      });
+    }
+  </script>
+</body>
+</html>
