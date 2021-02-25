@@ -2,7 +2,7 @@
 
 ## Użycie
 
-Do odpalenia KoksSzachów potrzeba pythonowych bibliotek w pliku [requirements.txt](https://github.com/a1eaiactaest/KoksSzachy/requirements.txt)   
+Do odpalenia KoksSzachów potrzeba pythonowych bibliotek w pliku [requirements.txt](https://github.com/a1eaiactaest/KoksSzachy/blob/main/requirements.txt)
 
 ```bash
 
