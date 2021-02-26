@@ -25,7 +25,7 @@ class Valuator():
         5, 5, 10, 25, 25, 10, 5, 5,
         0, 0, 0, 20, 20, 0, 0, 0,
         5, -5, -10, 0, 0, -10, -5, 5,
-        5, 10, 10, -20, -20, 10, 10, 5
+        5, 10, 10, -20, -20, 10, 10, 5,
         0, 0, 0, 0, 0, 0, 0, 0
         ],
         chess.KNIGHT: [
@@ -78,6 +78,18 @@ class Valuator():
         20, 30, 10, 0, 0, 10, 30, 20
         ]
     }
+    self.board.set_fen(fen)
+    self.depth = 0 
+
+  def reset(self):
+    self.count = 0
+
+  def value(self):
+    val = 0
+    for i in range(1,7):
+      val += len(self.board.pieces(i, chess.WHITE))*self.values[i]
+      val -= len(self.board.pieces(i, chess.BLACK))*self.values[i]
+    return val
 
 
 
@@ -92,15 +104,37 @@ def hello():
   ret = open('index.html').read()
   return ret.replace('start', s.board.fen())
 
-
-@app.route("/newgame")
-def newgame():
-  s.board.reset()
-  response = app.response_class(
-    response=s.board.fen(),
-    status=200
-  )
-  return response
+@app.route("/move")
+def move():
+  if not s.board.is_game_over():
+    move = request.args.get('move',default="")
+    if move is not None and move != "":
+      print("your move: ", move)
+      try:
+        s.board.push_san(move)
+      except Exception:
+        traceback.print_exc()
+      response = app.response_class(
+        response=s.board.fen(),
+        status=200
+      )
+      return response
+  else:
+    print("GAME OVER")
+    response = app.response_class(
+      response="game over",
+      status=200
+    )
+    return response
+  print("hello ran")
+  return hello()
 
 if __name__ == "__main__":
-  app.run(debug=True)
+  t = False
+  if t == True:
+    s = State()
+    while not s.board.is_game_over():
+      print(s.board)
+    print(s.board.result())
+  else:
+    app.run(debug=True)
