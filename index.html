@@ -16,25 +16,25 @@
   <div id="board" style="width: 600px; height: 600px; z-index:10"></div>
   <p></p>
   <script type="text/javascript">
-    var config = {
-      //pieceTheme: 'static/img/chesspieces/wikipedia/{piece}.png' // tutaj sie zmienia ksztaly figur, narazie ustawione na te wikipediowe.
-      //showNotation: true, // kordy z boku
-      draggable: true,
+    var board = ChessBoard('board', {
       position: 'start',
-      //onDrop: onDrop // rob tą funkcje za kazdym ruchem bierki
-    }
-    var board = ChessBoard('board', config);
+      draggable: true,
+      onDrop: onDrop
+    });
 
     var cords = {"a": 0, "b": 1, "c": 2, "d": 3, "e": 4, "f": 5, "g": 6, "h": 7};
     function get_square(sq){
       return 8*(parseInt(sq.charAt(1))-1) + cords[sq.charAt(0)];
     }
 
-     var onDrop = function(source, target, piece){
-      if(source == target) return
-
-      var promo = piece.toLowerCase().charAt(1) == 'p' && parseInt(target.charAt(1)) == 8; 
-    }
+    var onDrop = function(source, target){
+      var move = game.move({ // ruch jest legalny
+        from: source,
+        to: target,
+        promotion: 'q' //autopromocja od queena, mozna zrobic funkcje do wybierania promocji
+      });
+      if (move === null) return 'snapback';
+    };
 
     function newGame(){
       $.get('/newgame', function(r) {
