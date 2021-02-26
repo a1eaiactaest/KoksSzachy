@@ -3,7 +3,13 @@ import chess
 
 class State(object):
   def __init__(self, board=None):
-    self.board = chess.Board() 
+    if board is None:
+      self.board = chess.Board()
+    else:
+      self.board = board
+
+  def key(self):
+    
   def edges(self):
     return list(self.board.legal_moves)
 
