@@ -7,18 +7,18 @@ import traceback
 import time
 from state import State
 
-class Valuator():
-  def __init__(self, fen):
-    self.board = chess.Board()
-    self.values = {
+MAXVALUE = 10000
+class Engine(object):
+  values = {
         chess.PAWN: 1,
         chess.KNIGHT: 3,
         chess.BISHOP: 3,
         chess.ROOK: 3,
         chess.QUEEN: 9,
-        chess.KING: 0}
+        chess.KING: 0
+        }
 
-    self.position_table = position_table = {
+  position_table = {
         chess.PAWN: [
         0, 0, 0, 0, 0, 0, 0, 0,
         50, 50, 50, 50, 50, 50, 50, 50,
@@ -79,19 +79,38 @@ class Valuator():
         20, 30, 10, 0, 0, 10, 30, 20
         ]
     }
-    self.board.set_fen(fen)
-    self.depth = 0 
+  def __init__(self):
+    self.reset()
+    self.memory = {}
 
-  def value(self):
-    val = 0
-    for i in range(1,7):
-      val += len(self.board.pieces(i, chess.WHITE))*self.values[i]
-      val -= len(self.board.pieces(i, chess.BLACK))*self.values[i]
-    return val
+  def reset(self):
+    self.count = 0
 
+  def __call__(self, s):
+    self.count += 1
+    key = s.key()
+    if key not in self.memory:
+      self.memory[key] = self.eval(s)
+    return self.memory[key]
+
+  def eval(self, s):
+    bd = s.board # plansza
+    if bd.is_game_over():
+      if bd.result() == "1-0":
+        return MAXVALUE # wygrana
+      elif bd.result() == "0-1":
+        return -MAXVALUE # przegrana
+      else:
+        return 0 
+
+    value = 0 
+    piece_map = s.board.piece_map()
+    for x in piece_map:
+      tvalue = self.values
 
 
 s = State() # plansza itd
+v = Engine()
 
 from flask import Flask, Response, request
 app = Flask(__name__) 
@@ -146,12 +165,12 @@ def move_cords():
         s.board.push_san(move)
         ai_move(s, V)
       except Exception:
-        traceback.print_exc()
+        traceback.print_exc() # to samo co wczesniej
     response = app.response_class(
       response = s.board.fen(),
       status = 200
     )
-    return response
+    return response 
 
 if __name__ == "__main__":
   s = State()
