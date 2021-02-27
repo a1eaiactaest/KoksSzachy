@@ -16,5 +16,12 @@ class State(object):
     return list(self.board.legal_moves)
 
 
+class Valuator(object):
+  def __init__(self, fen):
+    self.board = chess.Board()
+    
+  def move_selection(depth):
+    pass
+
 if __name__ == "__main__":
   s = State()

@@ -14,16 +14,23 @@ pip3 install -r requirements.txt
 
 # Plan
 
-* Narysować boarda na stronie. - [x]
+* <s>Narysować boarda na stronie.</s>
 * Podpiąć chessboardjs pod python-chessa.
-* Bardzo podstawowe działanie takie jak ograniczenie tylko do legalnych ruchów.
+* <s>Bardzo podstawowe działanie takie jak ograniczenie tylko do legalnych ruchów.</s>
 * Troche bardziej rozwinięte działanie.
-  * Promocja
-  * En passant
-  * Roszada
+  * <s>Promocja</s>
+  * <s>En passant</s>
+  * <s>Roszada</s>
 * Ewaluacja dla poszczególnych bierek.
 * Minimax
   * Alpha-beta
+* Javascriptowe funkcje
+  * takeBack()
+    * implementacja
+    * guziczek
+  * newGame()
+    * <s>implementacja</s>
+    * guziczek
 
 ## docsy
 
