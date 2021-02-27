@@ -18,12 +18,12 @@ pip3 install -r requirements.txt
 * Podpiąć chessboardjs pod python-chessa.
 * Bardzo podstawowe działanie takie jak ograniczenie tylko do legalnych ruchów.
 * Troche bardziej rozwinięte działanie.
-** Promocja
-** En passant
-** Roszada
+  * Promocja
+  * En passant
+  * Roszada
 * Ewaluacja dla poszczególnych bierek.
 * Minimax
-** Alpha-beta
+  * Alpha-beta
 
 ## docsy
 
