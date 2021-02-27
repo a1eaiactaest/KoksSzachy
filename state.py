@@ -10,7 +10,7 @@ class State(object):
 
 
   def key(self):
-    return (self.board.board_fen(), self.board.turn, self.board.castling_rigths, self.board.ep_square)    
+    return (self.board.board_fen(), self.board.turn, self.board.castling_rights, self.board.ep_square)    
 
   def edges(self):
     return list(self.board.legal_moves)
