@@ -32,6 +32,11 @@ pip3 install -r requirements.txt
     * <s>implementacja</s>
     * guziczek
 
+## TODO
+
+* Ktoś może sportować javascripta z index.html do oddzielnego pliku.
+* To co jest w planie nie zrobione
+
 ## docsy
 
 ***usunac gdy repo bedzie public***
