@@ -104,37 +104,5 @@ def hello():
   ret = open('index.html').read()
   return ret.replace('start', s.board.fen())
 
-@app.route("/move")
-def move():
-  if not s.board.is_game_over():
-    move = request.args.get('move',default="")
-    if move is not None and move != "":
-      print("your move: ", move)
-      try:
-        s.board.push_san(move)
-      except Exception:
-        traceback.print_exc()
-      response = app.response_class(
-        response=s.board.fen(),
-        status=200
-      )
-      return response
-  else:
-    print("GAME OVER")
-    response = app.response_class(
-      response="game over",
-      status=200
-    )
-    return response
-  print("hello ran")
-  return hello()
-
 if __name__ == "__main__":
-  t = False
-  if t == True:
-    s = State()
-    while not s.board.is_game_over():
-      print(s.board)
-    print(s.board.result())
-  else:
-    app.run(debug=True)
+  app.run(debug=True)

@@ -12,18 +12,18 @@ pip3 install -r requirements.txt
 
 ```
 
-## TODO
+# Plan
 
-* Sprawdzić docsy
-
-* Przychodzić na spotkania
-
-* Nie być śmierdzącym leniem
-
-* Dobrze się bawić :)
-
-* Właściwe TODO może być traktowane jako zakładka issues
-
+* Narysować boarda na stronie. - [x]
+* Podpiąć chessboardjs pod python-chessa.
+* Bardzo podstawowe działanie takie jak ograniczenie tylko do legalnych ruchów.
+* Troche bardziej rozwinięte działanie.
+** Promocja
+** En passant
+** Roszada
+* Ewaluacja dla poszczególnych bierek.
+* Minimax
+** Alpha-beta
 
 ## docsy
 
