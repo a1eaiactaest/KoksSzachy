@@ -45,7 +45,7 @@
       var move = game.move({
         from: source,
         to: target,
-        promotion: 'q' // TODO: funkcja na wybor promocji
+        promotion: 'n' // TODO: funkcja na wybor promocji
       });
       if (move === null) return 'snapback';
 
@@ -64,14 +64,14 @@
       if (game.turn() === 'b'){
         moveColor = 'Black';
       }
-      
+
       // check for checkmate
       if (game.in_checkmate() === true){
         status = 'Game over, ' + moveColor + ' is in checkm8.';
       }
 
       // check for draw
-      if (game.in_draw() === true){
+      else if (game.in_draw() === true){
         status = 'Game over, draw';
       }
 
