@@ -95,22 +95,22 @@ class Valuator(object):
     self.leaves_explored = 0
 
   def poseval(self): # ocena pozycji
-    ret = 0
+    val  = 0
 
     for piece in self.values:
       # dla bialych
       ws = self.board.pieces(piece, chess.WHITE)
-      ret += len(ws) * self.values[piece]
+      val += len(ws) * self.values[piece]
       for square in ws: # for square in white squares
-        ret += self.positions[piece][-square]
+        val += self.positions[piece][-square]
       
       # dla czarnych 
       bs = self.board.pieces(piece, chess.BLACK)
-      ret -= len(bs) * self.values[piece]
+      val -= len(bs) * self.values[piece]
       for square in bs:
-        ret -= self.positions[piece][square]
+        val -= self.positions[piece][square]
 
-    return ret
+    return val
 
   def mm(self, depth, move, big): # MINIMAX :0
     if depth == 0:
@@ -127,8 +127,90 @@ class Valuator(object):
         self.board.push(move) # wykonaj ruch
         nmove, nscore = self.minimax(depth - 1, move, False) # new move, new score
         if nscore > bscore:
-          bscore, k
-           
+          bscore, bmove = nscore, move
+        self.board.pop()
+
+      # zwroc najlepszy ruch wraz z jego wartoscia
+      return bmove, bscore 
+
+  def ab(self, negative_depth, positive_depth, move, a, b, move_hist, big):
+    isort = [] # ruchy, posortowane
+    if negative_depth == 0:
+      isort.append(move)
+      return isort, self.poseval()
+    
+    moves = list(self.board.legal_moves)
+
+    if not moves: # komputer sprawdza czy ma w zasiegu jakies checkm8 albo paty
+      if self.board.is_checkmate():
+        if self.board.result() == "1-0": # jesli checkm8 jest z korzyscia dla nas
+          isort.append(move)
+          return isort, 1000000
+        elif self.board.result() == "0-1":
+          isort.append(move)
+          return isort, -1000000
+
+    bmove = None
+    bscore = -10000001 if big else 10000001 
+
+    # najnowszy obliczony najlepszy ruch na poczatek listy, powinno pomoc w obcinanu galezi z minimaxa
+    if move_hist and len(move_hist) >= negative_depth:
+      if negative_depth == 4 and not self.board.turn:
+        print(move_hist[negative_depth-1])
+      if move_hist[negative_depth-1] in moves:
+        moves.insert(0, move_hist[negative_depth-1]
+    
+    if big:
+      for move in moves:
+        self.leaves_explored += 1
+        self.board.push(move) # zrob ruch
+        # oblicz, zapisz w var(nseq)
+        nseq, nscore = self.ab(negative_depth-1, positive_depth+1, move, a, b, move_hist, False)
+        self.board.pop() # cofnij ruch
+
+        # sprawdz czy odkryty ruch jest lepszy niz poprzedni, jesli tak zamien 
+        if nscore > bscore:
+          isort = nseq
+          bscore, bmove = nscore, move
+
+        # robimy to samo z betą 
+        if nscore >= b:
+          isort.append(bmove)
+          return isort, bmove
+
+        # update alfy
+        if nscore > a:
+          a = nscore
+
+      # zwroc najlepszy wynik
+      isort.append.append(bmove)
+      return isort, bscore
+          
+    if not big: # to samo co powyżej tyle ze dla alfy
+      for move in moves:
+        self.leaves_explored += 1
+        self.board.push(move) # zrob ruch
+        # oblicz, zapisz w var(nseq)
+        nseq, nscore = self.ab(negative_depth-1, positive_depth+1, move, a, b, move_hist, True)
+        self.board.pop() # cofnij ruch
+
+        # sprawdz czy odkryty ruch jest lepszy niz poprzedni, jesli tak zamien 
+        if nscore < bscore:
+          isort = nseq
+          bscore, bmove = nscore, move
+
+        # robimy to samo z alfa
+        if nscore <= a:
+          isort.append(bmove)
+          return isort, bmove
+
+        # update bety
+        if nscore < b:
+          b = nscore
+
+      # zwroc najlepszy wynik
+      isort.append.append(bmove)
+      return isort, bscore
 
   def move_selection(depth):
     pass
