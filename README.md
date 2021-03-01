@@ -21,9 +21,9 @@ pip3 install -r requirements.txt
   * <s>Promocja</s>
   * <s>En passant</s>
   * <s>Roszada</s>
-* Ewaluacja dla poszczególnych bierek.
+* <s>Ewaluacja dla poszczególnych bierek.</s>
 * Minimax
-  * Alpha-beta
+  * <s>Alpha-beta</s>
 * Javascriptowe funkcje
   * takeBack()
     * implementacja

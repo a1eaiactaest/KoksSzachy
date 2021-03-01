@@ -1,36 +1,22 @@
 #!/usr/bin/env python3
 import chess
 
-class State(object):
-  def __init__(self, board=None):
-    if board is None:
-      self.board = chess.Board()
-    else:
-      self.board = board
-
-
-  def key(self):
-    return (self.board.board_fen(), self.board.turn, self.board.castling_rights, self.board.ep_square)    
-
-  def edges(self):
-    return list(self.board.legal_moves)
-
-
+MAXVAL = 1000000
 class Valuator(object):
   def __init__(self, fen):
     self.board = chess.Board()
     self.values = { # wartosci poszczegolnych figur
-      chess.PAWN: 1,
-      chess.KNIGHT: 3,
-      chess.BISHOP: 3,
-      chess.ROOK: 5,
-      chess.QUEEN: 9,
-      chess.KING: 99999
+      1: 100,
+      2: 300,
+      3: 300,
+      4: 500,
+      5: 900,
+      6: 99999
     }
 
     self.positions = positions = {
 			# gdzie najlepiej stac
-     	chess.PAWN: [ 
+      1: [ 
         0, 0, 0, 0, 0, 0, 0, 0,
         50, 50, 50, 50, 50, 50, 50, 50,
         10, 10, 20, 30, 30, 20, 10, 10,
@@ -39,8 +25,8 @@ class Valuator(object):
         5, -5, -10, 0, 0, -10, -5, 5,
         5, 10, 10, -20, -20, 10, 10, 5,
         0, 0, 0, 0, 0, 0, 0, 0
-        ],
-        chess.KNIGHT: [
+      ],
+      2: [
         -20, -10, -10, -10, -10, -10, -10, -20,
         -10, 0, 0, 0, 0, 0, 0, -10,
         -10, 0, 5, 10, 10, 5, 0, -10,
@@ -48,8 +34,8 @@ class Valuator(object):
         -10, 0, 10, 10, 10, 10, 0, -10,
         -10, 10, 10, 10, 10, 10, 10, -10,
         -20, -10, -10, -10, -10, -10, -10, 20
-        ],
-        chess.BISHOP: [
+      ],
+      3: [
         -20, -10, -10, -10, -10, -10, -10, -20,
         -10, 0, 0, 0, 0, 0, 0, -10,
         -10, 0, 5, 10, 10, 5, 0, -10,
@@ -58,8 +44,8 @@ class Valuator(object):
         -10, 10, 10, 10, 10, 10, 10, -10,
         -10, 5, 0, 0, 0, 0, 5, -10,
         -20, -10, -10, -10, -10, -10, -10, -20,
-        ],
-        chess.ROOK: [
+      ],
+      4: [
         0, 0, 0, 0, 0, 0, 0, 0,
         5, 10, 10, 10, 10, 10, 10, 5,
         -5, 0, 0, 0, 0, 0, 0, -5,
@@ -69,7 +55,7 @@ class Valuator(object):
         -5, 0, 0, 0, 0, 0, 0, -5,
         0, 0, 0, 5, 5, 0, 0, 0
         ],
-        chess.QUEEN: [
+      5: [
         -20, -10, -10, -5, -5, -10, -10, -20,
         -10, 0, 0, 0, 0, 0, 0, -10,
         -10, 0, 5, 5, 5, 5, 0, -10,
@@ -78,8 +64,8 @@ class Valuator(object):
         -10, 5, 5, 5, 5, 5, 0, -10,
         -10, 0, 5, 0, 0, 0, 0, -10,
         -20, -10, -10, -5, -5, -10, -10, -20
-        ],
-        chess.KING: [
+      ],
+      6: [
         -30, -40, -40, -50, -50, -40, -40, -30,
         -30, -40, -40, -50, -50, -40, -40, -30,
         -30, -40, -40, -50, -50, -40, -40, -30,
@@ -92,12 +78,13 @@ class Valuator(object):
     }
     
     self.board.set_fen(fen)
-    self.leaves_explored = 0
+    self.leaves_explored = 0 # konce gry, leaves(liscie) to konce "drzewka" minimaxu,
 
   def poseval(self): # ocena pozycji
-    val  = 0
-
-    for piece in self.values:
+    score  = 0
+    """
+    #for piece in self.values:
+    for piece in range(1,7):
       # dla bialych
       ws = self.board.pieces(piece, chess.WHITE)
       val += len(ws) * self.values[piece]
@@ -109,12 +96,35 @@ class Valuator(object):
       val -= len(bs) * self.values[piece]
       for square in bs:
         val -= self.positions[piece][square]
+        """
+    for i in range(0,7): # (1,7)
+      # eval white pieces
+      w_squares = self.board.pieces(i, chess.WHITE)
+      score += len(w_squares) * self.values[i]
+      for square in w_squares:
+        score += self.positions[i][-square]
+
+      b_squares = self.board.pieces(i, chess.BLACK)
+      score -= len(b_squares) * self.values[i]
+      for square in b_squares:
+        score -= self.positions[i][square]
+
+    return score
+  
+  def mateval(self): # ocena materialu
+    val = 0
+    #for piece in self.values:
+    for piece in range(1,7):
+      val += len(self.board.pieces(piece, chess.WHITE)) * self.values[piece]
+      val -= len(self.board.pieces(piece, chess.BLACK)) * self.values[piece]
 
     return val
 
+  # https://www.cs.cornell.edu/courses/cs312/2002sp/lectures/rec21.htm 
   def mm(self, depth, move, big): # MINIMAX :0
     if depth == 0:
-        return node, self.position_eval()
+      return move, self.poseval()
+
     if big:
       # best move 
       bmove = None
@@ -145,20 +155,20 @@ class Valuator(object):
       if self.board.is_checkmate():
         if self.board.result() == "1-0": # jesli checkm8 jest z korzyscia dla nas
           isort.append(move)
-          return isort, 1000000
+          return isort, MAXVAL
         elif self.board.result() == "0-1":
           isort.append(move)
-          return isort, -1000000
+          return isort, -MAXVAL
 
     bmove = None
-    bscore = -10000001 if big else 10000001 
+    bscore = -MAXVAL + 1 if big else MAXVAL + 1 
 
     # najnowszy obliczony najlepszy ruch na poczatek listy, powinno pomoc w obcinanu galezi z minimaxa
     if move_hist and len(move_hist) >= negative_depth:
       if negative_depth == 4 and not self.board.turn:
         print(move_hist[negative_depth-1])
       if move_hist[negative_depth-1] in moves:
-        moves.insert(0, move_hist[negative_depth-1]
+        moves.insert(0, move_hist[negative_depth-1])
     
     if big:
       for move in moves:
@@ -212,8 +222,51 @@ class Valuator(object):
       isort.append.append(bmove)
       return isort, bscore
 
-  def move_selection(depth):
+  def run_mm(self, depth):
+    big = self.board.turn
+    bmove, bscore = self.mm(depth, None, big)
+    return str(bmove) # zwroc najlepszy ruch obliczony przez minimaxa
+
+  def run_ab(self, depth):
+    big = self.board.turn
+    isort, bscore = self.ab(depth, 0, None, -MAXVAL + 1, MAXVAL + 1, None, big)
+    for i in range(1, len(isort)):
+      print(f"computers move: {isort[-i]}")
+    return str(isort[-i])
+
+  def leaves(self): # zwroc 
+    my_leaves = self.leaves_explored
+    self.leaves_explored = 0 # reset
+    return my_leaves
+
+  def calc_moves(self): # oblicz wartosci ruchow i posegreguj je w tej kolejnosci
+    moves = list(self.board.legal_moves)
+    ret = []
+    for move in moves:
+      self.board.push(move)
+      ret.append(self.mateval())
+      self.board.pop()
+    my_sorted = sorted(range(len(ret)), key=lambda x: ret[x], reverse=False)
+    return [moves[i] for i in my_sorted]
+
+  def timeout():
     pass
 
+  # https://www.youtube.com/watch?v=JnXKZYFmGOg bardzo polecam koks filmik
+  def iter_deep(self, depth): 
+    tree, ret = self.ab(1, 0, None, -10000001, 10000001, None, self.board.turn)
+    for i in range(2, depth+1):
+      print(f"Iteration nr.{i}")
+      tree, ret = self.ab(i, 0, None, -10000001, 10000001, tree, self.board.turn)
+    print(f"depth reached {len(tree)}")
+    return str(tree[-1])
+    
+
 if __name__ == "__main__":
-  s = State()
+  import time
+  fen = "r2qkbr1/ppp1pppp/2n1b2n/8/8/5P2/PPPP2PP/RNB1KBNR b KQq - 0 6"
+  v = Valuator(fen)
+  start_time = time.time()
+  print(v.iter_deep(4))
+  print(v.leaves())
+  print("Time taken:", time.time() - start_time)

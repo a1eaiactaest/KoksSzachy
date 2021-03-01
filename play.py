@@ -9,15 +9,15 @@ s = State()
 @app.route("/")
 def hello():
   ret = open('index.html').read()
- #return ret.replace('start', s.board.fen()) # zastap pozycje w configu chassboard z obecnym fen stringiem
+  #return ret.replace('start', s.board.fen()) # zastap pozycje w configu chassboard z obecnym fen stringiem
   return ret
 
 @app.route("/move/<int:depth>/<path:fen>/") # routuj fen i depth do url tak zeby mozna bylo requestowac
 def calc_move(depth, fen):
   print(f'depth: {depth}')
   engine = Valuator(fen)
-  move = engine.move_selection(depth-1)
-  print('computer moves: ', move)
+  move = engine.iter_deep(depth - 1)
+  print(f'computer moves: {move}\n')
   return move
 
 
