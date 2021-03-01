@@ -2,16 +2,16 @@
 import chess
 
 MAXVAL = 1000000
-class Valuator(object):
+class Valuator:
   def __init__(self, fen):
     self.board = chess.Board()
     self.values = { # wartosci poszczegolnych figur
-      1: 100,
-      2: 300,
-      3: 300,
-      4: 500,
-      5: 900,
-      6: 99999
+      1: 100, # pion
+      2: 300, # skoczek
+      3: 300, # goniec
+      4: 500, # wieza
+      5: 900, # hetman
+      6: 99999 # krol
     }
 
     self.positions = positions = {
@@ -27,13 +27,14 @@ class Valuator(object):
         0, 0, 0, 0, 0, 0, 0, 0
       ],
       2: [
-        -20, -10, -10, -10, -10, -10, -10, -20,
-        -10, 0, 0, 0, 0, 0, 0, -10,
-        -10, 0, 5, 10, 10, 5, 0, -10,
-        -10, 5, 5, 10, 10, 5, 5, -10,
-        -10, 0, 10, 10, 10, 10, 0, -10,
-        -10, 10, 10, 10, 10, 10, 10, -10,
-        -20, -10, -10, -10, -10, -10, -10, 20
+        -50, -40, -30, -30, -30, -30, -40, -50,
+        -40, -20, 0, 0, 0, 0, -20, -40,
+        -30, 0, 10, 15, 15, 10, 0, -30,
+        -30, 5, 15, 20, 20, 15, 5, -30,
+        -30, 0, 15, 20, 20, 15, 0, -30,
+        -30, 5, 10, 15, 15, 10, 5, -30,
+        -40, -20, 0, 5, 5, 0, -20, -40,
+        -50, -40, -30, -30, -30, -30, -40, -50,
       ],
       3: [
         -20, -10, -10, -10, -10, -10, -10, -20,
@@ -80,6 +81,15 @@ class Valuator(object):
     self.board.set_fen(fen)
     self.leaves_explored = 0 # konce gry, leaves(liscie) to konce "drzewka" minimaxu,
 
+  def mateval(self): # ocena materialu
+    val = 0
+    #for piece in self.values:
+    for piece in range(1,7):
+      val += len(self.board.pieces(piece, chess.WHITE)) * self.values[piece]
+      val -= len(self.board.pieces(piece, chess.BLACK)) * self.values[piece]
+
+    return val
+
   def poseval(self): # ocena pozycji
     score  = 0
     """
@@ -97,7 +107,7 @@ class Valuator(object):
       for square in bs:
         val -= self.positions[piece][square]
         """
-    for i in range(0,7): # (1,7)
+    for i in range(1,7): # (1,7)
       # eval white pieces
       w_squares = self.board.pieces(i, chess.WHITE)
       score += len(w_squares) * self.values[i]
@@ -111,14 +121,7 @@ class Valuator(object):
 
     return score
   
-  def mateval(self): # ocena materialu
-    val = 0
-    #for piece in self.values:
-    for piece in range(1,7):
-      val += len(self.board.pieces(piece, chess.WHITE)) * self.values[piece]
-      val -= len(self.board.pieces(piece, chess.BLACK)) * self.values[piece]
-
-    return val
+  
 
   # https://www.cs.cornell.edu/courses/cs312/2002sp/lectures/rec21.htm 
   def mm(self, depth, move, big): # MINIMAX :0
@@ -144,24 +147,24 @@ class Valuator(object):
       return bmove, bscore 
 
   def ab(self, negative_depth, positive_depth, move, a, b, move_hist, big):
-    isort = [] # ruchy, posortowane
+    seq = [] # ruchy, posortowane
     if negative_depth == 0:
-      isort.append(move)
-      return isort, self.poseval()
+      seq.append(move)
+      return seq, self.poseval()
     
     moves = list(self.board.legal_moves)
 
     if not moves: # komputer sprawdza czy ma w zasiegu jakies checkm8 albo paty
       if self.board.is_checkmate():
         if self.board.result() == "1-0": # jesli checkm8 jest z korzyscia dla nas
-          isort.append(move)
-          return isort, MAXVAL
+          seq.append(move)
+          return seq, 1000000
         elif self.board.result() == "0-1":
-          isort.append(move)
-          return isort, -MAXVAL
+          seq.append(move)
+          return seq, -1000000
 
     bmove = None
-    bscore = -MAXVAL + 1 if big else MAXVAL + 1 
+    bscore = -10000001 if big else 10000001 
 
     # najnowszy obliczony najlepszy ruch na poczatek listy, powinno pomoc w obcinanu galezi z minimaxa
     if move_hist and len(move_hist) >= negative_depth:
@@ -180,21 +183,21 @@ class Valuator(object):
 
         # sprawdz czy odkryty ruch jest lepszy niz poprzedni, jesli tak zamien 
         if nscore > bscore:
-          isort = nseq
+          seq = nseq
           bscore, bmove = nscore, move
 
         # robimy to samo z betą 
         if nscore >= b:
-          isort.append(bmove)
-          return isort, bmove
+          seq.append(bmove)
+          return seq, bscore
 
         # update alfy
         if nscore > a:
           a = nscore
 
       # zwroc najlepszy wynik
-      isort.append.append(bmove)
-      return isort, bscore
+      seq.append(bmove)
+      return seq, bscore
           
     if not big: # to samo co powyżej tyle ze dla alfy
       for move in moves:
@@ -206,21 +209,21 @@ class Valuator(object):
 
         # sprawdz czy odkryty ruch jest lepszy niz poprzedni, jesli tak zamien 
         if nscore < bscore:
-          isort = nseq
+          seq = nseq
           bscore, bmove = nscore, move
 
         # robimy to samo z alfa
         if nscore <= a:
-          isort.append(bmove)
-          return isort, bmove
+          seq.append(bmove)
+          return seq, bscore
 
         # update bety
         if nscore < b:
           b = nscore
 
       # zwroc najlepszy wynik
-      isort.append.append(bmove)
-      return isort, bscore
+      seq.append(bmove)
+      return seq, bscore
 
   def run_mm(self, depth):
     big = self.board.turn
@@ -229,10 +232,10 @@ class Valuator(object):
 
   def run_ab(self, depth):
     big = self.board.turn
-    isort, bscore = self.ab(depth, 0, None, -MAXVAL + 1, MAXVAL + 1, None, big)
-    for i in range(1, len(isort)):
-      print(f"computers move: {isort[-i]}")
-    return str(isort[-i])
+    seq, bscore = self.ab(depth, 0, None, -10000001, 10000001, None, big)
+    for i in range(1, len(seq)):
+      print(f"computers move: {seq[-i]}")
+    return str(seq[-1])
 
   def leaves(self): # zwroc 
     my_leaves = self.leaves_explored

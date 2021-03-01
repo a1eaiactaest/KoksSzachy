@@ -4,7 +4,7 @@ from state import *
 from flask import Flask, Response, request, render_template
 app = Flask(__name__) 
 
-s = State()
+
 
 @app.route("/")
 def hello():
