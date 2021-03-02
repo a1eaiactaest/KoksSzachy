@@ -17,8 +17,11 @@ def calc_move(depth, fen):
   print(f'depth: {depth}')
   engine = Valuator(fen)
   move = engine.iter_deep(depth - 1)
-  print(f'computer moves: {move}\n')
-  return move
+  if move is None:
+    print('Game over')
+  else: 
+    print(f'computer moves: {move}\n')
+    return move
 
 
 if __name__ == "__main__":

@@ -6,27 +6,28 @@ class Valuator:
   def __init__(self, fen):
     self.board = chess.Board()
     self.values = { # wartosci poszczegolnych figur
-      1: 100, # pion
-      2: 300, # skoczek
-      3: 300, # goniec
-      4: 500, # wieza
-      5: 900, # hetman
-      6: 99999 # krol
+      chess.PAWN: 100, # pion
+      chess.BISHOP: 300, # skoczek
+      chess.KNIGHT: 300, # goniec
+      chess.ROOK: 500, # wieza
+      chess.QUEEN: 900, # hetman
+      chess.KING: 99999 # krol
     }
 
     self.positions = positions = {
-			# gdzie najlepiej stac
-      1: [ 
-        0, 0, 0, 0, 0, 0, 0, 0,
-        50, 50, 50, 50, 50, 50, 50, 50,
-        10, 10, 20, 30, 30, 20, 10, 10,
-        5, 5, 10, 25, 25, 10, 5, 5,
-        0, 0, 0, 20, 20, 0, 0, 0,
-        5, -5, -10, 0, 0, -10, -5, 5,
-        5, 10, 10, -20, -20, 10, 10, 5,
-        0, 0, 0, 0, 0, 0, 0, 0
+			# gdzie najlepiej stac przedstawione w arrayach 8x8 
+      chess.PAWN: [ 
+        0, 0, 0, 0, 0, 0, 0, 0,         # 8
+        50, 50, 50, 50, 50, 50, 50, 50, # 7
+        10, 10, 20, 30, 30, 20, 10, 10, # 6
+        5, 5, 10, 25, 25, 10, 5, 5,     # 5
+        0, 0, 0, 20, 20, 0, 0, 0,       # 4
+        5, -5, -10, 0, 0, -10, -5, 5,   # 3
+        5, 10, 10, -20, -20, 10, 10, 5, # 2
+        0, 0, 0, 0, 0, 0, 0, 0          # 1
+#       a  b  c  d  e  f  g  h 
       ],
-      2: [
+      chess.BISHOP: [
         -50, -40, -30, -30, -30, -30, -40, -50,
         -40, -20, 0, 0, 0, 0, -20, -40,
         -30, 0, 10, 15, 15, 10, 0, -30,
@@ -36,7 +37,7 @@ class Valuator:
         -40, -20, 0, 5, 5, 0, -20, -40,
         -50, -40, -30, -30, -30, -30, -40, -50,
       ],
-      3: [
+      chess.KNIGHT: [
         -20, -10, -10, -10, -10, -10, -10, -20,
         -10, 0, 0, 0, 0, 0, 0, -10,
         -10, 0, 5, 10, 10, 5, 0, -10,
@@ -46,7 +47,7 @@ class Valuator:
         -10, 5, 0, 0, 0, 0, 5, -10,
         -20, -10, -10, -10, -10, -10, -10, -20,
       ],
-      4: [
+      chess.ROOK: [
         0, 0, 0, 0, 0, 0, 0, 0,
         5, 10, 10, 10, 10, 10, 10, 5,
         -5, 0, 0, 0, 0, 0, 0, -5,
@@ -56,7 +57,7 @@ class Valuator:
         -5, 0, 0, 0, 0, 0, 0, -5,
         0, 0, 0, 5, 5, 0, 0, 0
         ],
-      5: [
+      chess.QUEEN: [
         -20, -10, -10, -5, -5, -10, -10, -20,
         -10, 0, 0, 0, 0, 0, 0, -10,
         -10, 0, 5, 5, 5, 5, 0, -10,
@@ -66,7 +67,7 @@ class Valuator:
         -10, 0, 5, 0, 0, 0, 0, -10,
         -20, -10, -10, -5, -5, -10, -10, -20
       ],
-      6: [
+      chess.KING: [
         -30, -40, -40, -50, -50, -40, -40, -30,
         -30, -40, -40, -50, -50, -40, -40, -30,
         -30, -40, -40, -50, -50, -40, -40, -30,
@@ -84,14 +85,14 @@ class Valuator:
   def mateval(self): # ocena materialu
     val = 0
     #for piece in self.values:
-    for piece in range(1,7):
+    for piece in self.values:
       val += len(self.board.pieces(piece, chess.WHITE)) * self.values[piece]
       val -= len(self.board.pieces(piece, chess.BLACK)) * self.values[piece]
 
     return val
 
   def poseval(self): # ocena pozycji
-    score  = 0
+    val  = 0
     """
     #for piece in self.values:
     for piece in range(1,7):
@@ -107,19 +108,19 @@ class Valuator:
       for square in bs:
         val -= self.positions[piece][square]
         """
-    for i in range(1,7): # (1,7)
+    for piece in self.values: # (1,7)
       # eval white pieces
-      w_squares = self.board.pieces(i, chess.WHITE)
-      score += len(w_squares) * self.values[i]
+      w_squares = self.board.pieces(piece, chess.WHITE)
+      val += len(w_squares) * self.values[piece]
       for square in w_squares:
-        score += self.positions[i][-square]
+        val += self.positions[piece][-square]
 
-      b_squares = self.board.pieces(i, chess.BLACK)
-      score -= len(b_squares) * self.values[i]
+      b_squares = self.board.pieces(piece, chess.BLACK)
+      val -= len(b_squares) * self.values[piece]
       for square in b_squares:
-        score -= self.positions[i][square]
+        val -= self.positions[piece][square]
 
-    return score
+    return val
   
   
 
