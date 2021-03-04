@@ -274,3 +274,4 @@ if __name__ == "__main__":
   print(v.iter_deep(4))
   print(v.leaves())
   print("Time taken:", time.time() - start_time)
+  print(v.board)

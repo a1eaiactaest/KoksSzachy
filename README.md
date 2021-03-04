@@ -1,5 +1,15 @@
 # KoksSzachy
 
+## Jak to działa?
+
+Silnik KoksSzachów działa na bardzo prostej zasadzie: 
+
+  * Pobranie pozycji [chessboard.js](https://chessboardjs.com/index.html) za pomocą [wpisywania w url](https://github.com/a1eaiactaest/KoksSzachy/blob/a9219e1f95fb4c26696c6a155eed329975d308c9/index.html#L114) [FEN](https://pl.wikipedia.org/wiki/Notacja_Forsytha-Edwardsa) stringów.
+  
+  * Rekreacja pozycji w bibliotece [python-chess](https://python-chess.readthedocs.io/), która umożliwia stworzenie listy możliwych ruchów i wiele innych, ktore przydadzą się w algorytime Minimax.
+
+  
+
 ## Użycie
 
 Do odpalenia KoksSzachów potrzeba pythonowych bibliotek w pliku [requirements.txt](https://github.com/a1eaiactaest/KoksSzachy/blob/main/requirements.txt)
@@ -15,7 +25,7 @@ pip3 install -r requirements.txt
 # Plan
 
 * <s>Narysować boarda na stronie.</s>
-* Podpiąć chessboardjs pod python-chessa.
+* <s>Podpiąć chessboardjs pod python-chessa.</s>
 * <s>Bardzo podstawowe działanie takie jak ograniczenie tylko do legalnych ruchów.</s>
 * Troche bardziej rozwinięte działanie.
   * <s>Promocja</s>
@@ -30,7 +40,7 @@ pip3 install -r requirements.txt
     * guziczek
   * newGame()
     * <s>implementacja</s>
-    * guziczek
+    * <s>guziczek</s>
 
 ## TODO
 

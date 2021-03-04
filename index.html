@@ -15,6 +15,7 @@
 <body>
   <div id="board" style="height:600px;width:600px;"></div>
   <p></p>
+  <button id='newGameButton' type="button" name="newGameButton" onclick="newGame()">New Game</button>
   <h3><span id="status">White to move</span></h3>
   <form class="from-inline">
     <select class="form-control" id="sel1">
@@ -139,7 +140,6 @@
       game.reset();
       board.start();
       updateStatus();
-      // TODO: podpiac pod guzik jakis
     }
 
     var getCapturedPieces = function(){
