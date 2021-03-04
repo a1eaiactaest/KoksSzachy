@@ -93,21 +93,6 @@ class Valuator:
 
   def poseval(self): # ocena pozycji
     val  = 0
-    """
-    #for piece in self.values:
-    for piece in range(1,7):
-      # dla bialych
-      ws = self.board.pieces(piece, chess.WHITE)
-      val += len(ws) * self.values[piece]
-      for square in ws: # for square in white squares
-        val += self.positions[piece][-square]
-      
-      # dla czarnych 
-      bs = self.board.pieces(piece, chess.BLACK)
-      val -= len(bs) * self.values[piece]
-      for square in bs:
-        val -= self.positions[piece][square]
-        """
     for piece in self.values: # (1,7)
       # eval white pieces
       w_squares = self.board.pieces(piece, chess.WHITE)
