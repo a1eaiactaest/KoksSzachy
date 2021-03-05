@@ -94,8 +94,4 @@ python play.py
 * Ktoś może sportować javascripta z index.html do oddzielnego pliku.
 * To co jest w planie nie zrobione
 
-## docsy
-
-***usunac gdy repo bedzie public***
-
-Dla tych, którzy nie zapisali linku: [docsy](https://docs.google.com/document/d/1dUMeNNF1RS_UTGbHJZl_R7POuJ2NfcSvtbeZV_7FDjg/edit?usp=sharing)
+##
