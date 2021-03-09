@@ -245,7 +245,7 @@ class Valuator:
   def iter_deep(self, depth): 
     tree, ret = self.ab(1, 0, None, -10000001, 10000001, None, self.board.turn)
     for i in range(2, depth+1):
-      print(f"Iteration nr.{i}")
+      print(f"iteration nr.{i}")
       tree, ret = self.ab(i, 0, None, -10000001, 10000001, tree, self.board.turn)
     print(f"depth reached {len(tree)}")
     return str(tree[-1])
@@ -258,5 +258,5 @@ if __name__ == "__main__":
   start_time = time.time()
   print(v.iter_deep(4))
   print(v.leaves())
-  print("Time taken:", time.time() - start_time)
+  print("czas obliczenia:", time.time() - start_time)
   print(v.board)
