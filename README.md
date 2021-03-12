@@ -2,7 +2,7 @@
 
 ## Jak to działa?
 
-Silnik KoksSzachów działa na bardzo prostej zasadzie: 
+Silnik KoksSzachów działa na bardzo prostej zasadzie:  
 
   * Pobranie pozycji [chessboard.js](https://chessboardjs.com/index.html) za pomocą [wpisywania w url](https://github.com/a1eaiactaest/KoksSzachy/blob/a9219e1f95fb4c26696c6a155eed329975d308c9/index.html#L114) [FEN](https://pl.wikipedia.org/wiki/Notacja_Forsytha-Edwardsa) stringów.
   
@@ -37,13 +37,13 @@ Silnik KoksSzachów działa na bardzo prostej zasadzie:
   W ten sposób algorytm ocenia, który ruch jest dla niego najlepszy. To na ile posunięć do przodu myśli jest kontrolowane przez zmienną ```depth+1```.   
   * Obliczone ruchy są zapisywane w odpowiedniej kolejności
   * Komputer wybiera pierwszy ruch z listy i go wykonuje.
-  * Wszystko działa dopóki są możliwe ruchy. Nie działa to na podstawie pętli.
-
-  Minimax jeset zooptyamlizowany poprzez [alpha-beta pruning](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning) oraz iterative deepening.
-
-  Ciekawe artykuły i źródła na temat algorytmu:  
+  * Wszystko działa dopóki są możliwe ruchy. Nie działa to na podstawie pętli. 
 
   ## Minimax
+
+  Minimax w KoksSzachach jest zooptyamlizowany poprzez [alpha-beta pruning](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning) oraz iterative deepening.
+
+  Ciekawe artykuły i źródła na temat tego algorytmu: 
 
   - https://www.cs.cornell.edu/courses/cs312/2002sp/lectures/rec21.htm   
   - https://www.cs.tau.ac.il/~wolf/papers/deepchess.pdf   
@@ -52,7 +52,8 @@ Silnik KoksSzachów działa na bardzo prostej zasadzie:
   - https://www.freecodecamp.org/news/simple-chess-ai-step-by-step-1d55a9266977/   
   - https://towardsdatascience.com/how-a-chess-playing-computer-thinks-about-its-next-move-8f028bd0e7b1   
   - https://pl.wikipedia.org/wiki/Algorytm_alfa-beta   
-  - https://www.chessprogramming.org/Iterative_Deepening   
+  - https://www.chessprogramming.org/Iterative_Deepening  
+ 
 ## Użycie
 
 Do odpalenia KoksSzachów potrzeba bibliotek zawartych w pliku [requirements.txt](https://github.com/a1eaiactaest/KoksSzachy/blob/main/requirements.txt)

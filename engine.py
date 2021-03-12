@@ -3,7 +3,9 @@ import chess
 
 MAXVAL = 1000000
 class ComputerEngine:
-  def __init__(self, fen):
+  def __init__(self, fen, minimizing, maximizing):
+    self.minimizing = minimizing
+    self.maximizing = maximizing
     self.board = chess.Board()
     self.values = { # wartosci poszczegolnych figur
       chess.PAWN: 100, # pion
@@ -86,18 +88,18 @@ class ComputerEngine:
     # ocena materialu
     mval = 0
     for piece in self.values:
-      mval += len(self.board.pieces(piece, chess.WHITE)) * self.values[piece]
-      mval -= len(self.board.pieces(piece, chess.BLACK)) * self.values[piece]
+      mval += len(self.board.pieces(piece, self.minimizing)) * self.values[piece]
+      mval -= len(self.board.pieces(piece, self.maximizing)) * self.values[piece]
 
     # ocena pozycji
     pval = 0
     for piece in self.values:
-      w_squares = self.board.pieces(piece, chess.WHITE) # pola, na ktorych stoi var(piece)
+      w_squares = self.board.pieces(piece, self.minimizing) # pola, na ktorych stoi var(piece)
       pval += len(w_squares) * self.values[piece]
       for square in w_squares:
         pval += self.positions[piece][-square]
 
-      b_squares = self.board.pieces(piece, chess.BLACK)
+      b_squares = self.board.pieces(piece, self.maximizing)
       pval -= len(b_squares) * self.values[piece]
       for square in b_squares:
         pval -= self.positions[piece][square]
