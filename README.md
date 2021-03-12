@@ -34,24 +34,25 @@ Silnik KoksSzachów działa na bardzo prostej zasadzie:
       Arraye są przedstawione z perspektywy pierwszej osoby.
   
   * Gdy białe, gracz, wykonają ruch, czarne czyli komputer analizują pozycje i materiał zapisując obecna wartość ogólną. Po tym procesie uruchamiany jest algorytm [Minimax](https://github.com/a1eaiactaest/KoksSzachy/blob/a4c1d77ba4bf93270c03e2da8e7c17c50c55f1ef/state.py#L128), który analizuje przyszłe i możliwe posunięcia przeciwnika po wykonanym ruchu.
-  W ten sposób algorytm ocenia, który ruch jest dla niego najlepszy. To na ile posunięć do przodu myśli jest kontrolowane przez zmienną ```depth+1```.
-  
-  Minimax jeset zooptyamlizowany poprzez [alpha-beta pruning](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning) oraz iterative deepening.
-
-    Ciekawe artykuły i źródła na temat algorytmu:  
-     * https://www.cs.cornell.edu/courses/cs312/2002sp/lectures/rec21.htm
-     * https://www.cs.tau.ac.il/~wolf/papers/deepchess.pdf
-     * https://en.wikipedia.org/wiki/Evaluation_function#In_chess
-     * https://www.youtube.com/watch?v=JnXKZYFmGOg
-     * https://www.freecodecamp.org/news/simple-chess-ai-step-by-step-1d55a9266977/
-     * https://towardsdatascience.com/how-a-chess-playing-computer-thinks-about-its-next-move-8f028bd0e7b1
-     * https://pl.wikipedia.org/wiki/Algorytm_alfa-beta
-     * https://www.chessprogramming.org/Iterative_Deepening
-  
+  W ten sposób algorytm ocenia, który ruch jest dla niego najlepszy. To na ile posunięć do przodu myśli jest kontrolowane przez zmienną ```depth+1```.   
   * Obliczone ruchy są zapisywane w odpowiedniej kolejności
   * Komputer wybiera pierwszy ruch z listy i go wykonuje.
   * Wszystko działa dopóki są możliwe ruchy. Nie działa to na podstawie pętli.
 
+  Minimax jeset zooptyamlizowany poprzez [alpha-beta pruning](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning) oraz iterative deepening.
+
+  Ciekawe artykuły i źródła na temat algorytmu:  
+
+  ## Minimax
+
+  - https://www.cs.cornell.edu/courses/cs312/2002sp/lectures/rec21.htm   
+  - https://www.cs.tau.ac.il/~wolf/papers/deepchess.pdf   
+  - https://en.wikipedia.org/wiki/Evaluation_function#In_chess   
+  - https://www.youtube.com/watch?v=JnXKZYFmGOg   
+  - https://www.freecodecamp.org/news/simple-chess-ai-step-by-step-1d55a9266977/   
+  - https://towardsdatascience.com/how-a-chess-playing-computer-thinks-about-its-next-move-8f028bd0e7b1   
+  - https://pl.wikipedia.org/wiki/Algorytm_alfa-beta   
+  - https://www.chessprogramming.org/Iterative_Deepening   
 ## Użycie
 
 Do odpalenia KoksSzachów potrzeba bibliotek zawartych w pliku [requirements.txt](https://github.com/a1eaiactaest/KoksSzachy/blob/main/requirements.txt)
