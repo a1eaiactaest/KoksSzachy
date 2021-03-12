@@ -2,7 +2,7 @@
 import chess
 
 MAXVAL = 1000000
-class Valuator:
+class ComputerEngine:
   def __init__(self, fen):
     self.board = chess.Board()
     self.values = { # wartosci poszczegolnych figur
@@ -81,6 +81,29 @@ class Valuator:
     
     self.board.set_fen(fen)
     self.leaves_explored = 0 # konce gry, leaves(liscie) to konce "drzewka" minimaxu,
+
+  def evaluate(self):
+    # ocena materialu
+    mval = 0
+    for piece in self.values:
+      mval += len(self.board.pieces(piece, chess.WHITE)) * self.values[piece]
+      mval -= len(self.board.pieces(piece, chess.BLACK)) * self.values[piece]
+
+    # ocena pozycji
+    pval = 0
+    for piece in self.values:
+      w_squares = self.board.pieces(piece, chess.WHITE) # pola, na ktorych stoi var(piece)
+      pval += len(w_squares) * self.values[piece]
+      for square in w_squares:
+        val+= self.positions[piece][-square]
+
+      b_squares = self.board.pieces(piece, chess.BLACK)
+      pval -= len(b_squares) * self.values[piece]
+      for square in b_squares:
+        val -= self.position[piece][square]
+    
+    return mval, pval
+
 
   def mateval(self): # ocena materialu
     val = 0

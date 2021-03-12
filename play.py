@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import sys
-from state import *
+from import *
 
 from flask import Flask, Response, request, render_template
 app = Flask(__name__) 
