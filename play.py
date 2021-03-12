@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import sys
-from import *
+from engine import *
 
 from flask import Flask, Response, request, render_template
 app = Flask(__name__) 
@@ -14,7 +14,7 @@ def hello():
 @app.route("/move/<int:depth>/<path:fen>/") # routuj fen i depth do url tak zeby mozna bylo requestowac
 def calc_move(depth, fen):
   print(f'depth: {depth}')
-  engine = Valuator(fen)
+  engine = ComputerEngine(fen)
   move = engine.iter_deep(depth - 1)
   if move is None:
     print('Game over')

@@ -82,7 +82,7 @@ class ComputerEngine:
     self.board.set_fen(fen)
     self.leaves_explored = 0 # konce gry, leaves(liscie) to konce "drzewka" minimaxu,
 
-  def evaluate(self):
+  def evaluate(self): # ewaluacja zmiennych takich jak material i pozycja
     # ocena materialu
     mval = 0
     for piece in self.values:
@@ -95,12 +95,12 @@ class ComputerEngine:
       w_squares = self.board.pieces(piece, chess.WHITE) # pola, na ktorych stoi var(piece)
       pval += len(w_squares) * self.values[piece]
       for square in w_squares:
-        val+= self.positions[piece][-square]
+        pval += self.positions[piece][-square]
 
       b_squares = self.board.pieces(piece, chess.BLACK)
       pval -= len(b_squares) * self.values[piece]
       for square in b_squares:
-        val -= self.position[piece][square]
+        pval -= self.positions[piece][square]
     
     return mval, pval
 
@@ -135,7 +135,7 @@ class ComputerEngine:
   # https://www.cs.cornell.edu/courses/cs312/2002sp/lectures/rec21.htm 
   def mm(self, depth, move, big): # MINIMAX :0
     if depth == 0:
-      return move, self.poseval()
+      return move, self.evaluate()[1]
 
     if big:
       # best move 
@@ -159,7 +159,7 @@ class ComputerEngine:
     seq = [] # ruchy, posortowane
     if negative_depth == 0:
       seq.append(move)
-      return seq, self.poseval()
+      return seq, self.evaluate()[1]
     
     moves = list(self.board.legal_moves)
 
@@ -256,7 +256,7 @@ class ComputerEngine:
     ret = []
     for move in moves:
       self.board.push(move)
-      ret.append(self.mateval())
+      ret.append(self.evaluate()[0])
       self.board.pop()
     my_sorted = sorted(range(len(ret)), key=lambda x: ret[x], reverse=False)
     return [moves[i] for i in my_sorted]
