@@ -1,4 +1,4 @@
-var $SCRIPT_ROOT = "" //"{{ request.script_root|tojson|safe }}";
+var $SCRIPT_ROOT = "/" //"{{ request.script_root|tojson|safe }}";
 var statusEl = $('#status'), fenEl = $('#fen'), pgnEl = $('#pgn');
 var board;
 var chess = new Chess()
