@@ -91,15 +91,17 @@ python play.py
   * <s>Alpha-beta</s>
 * Javascriptowe funkcje
   * takeBack()
-    * implementacja
-    * guziczek
+    * <s>implementacja</s>
+    * <s>guziczek</s>
   * newGame()
     * <s>implementacja</s>
     * <s>guziczek</s>
 
 ## TODO
 
-* Ktoś może sportować javascripta z index.html do oddzielnego pliku.
-* To co jest w planie nie zrobione
+* <s>Ktoś może sportować javascripta z index.html do oddzielnego pliku.</s>
+* Frontend
+* Analysis Button, czyli klikamy zapisujemy notacje PGN i  przekierowywyuje nas w new tabie do API Lichessa z możliwością analizy naszej gry na podstawie PGN.
+* Kto wygrywa, aka wartość zbitych pionów z obu stron.
 
 ##
