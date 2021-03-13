@@ -1,4 +1,4 @@
-var $SCRIPT_ROOT = "" //"{{ request.script_root|tojson|safe }}";
+var $SCRIPT_ROOT = "/" //"{{ request.script_root|tojson|safe }}";
 var statusEl = $('#status'), fenEl = $('#fen'), pgnEl = $('#pgn');
 var board;
 var chess = new Chess()
@@ -87,8 +87,7 @@ var getResponseMove = function(){
   var depth = e.options[e.selectedIndex].value;
   fen = chess.fen()
   $.get($SCRIPT_ROOT + "/move/" + depth + "/" + fen, function(data){
-    chess.move(data, {sloppy:true}); // wykonaj ruch ściągnięty z url
-    //console.log(chess.pgn());
+    chess.move(data, {sloppy:true});
     updateStatus();
 
     setTimeout(function(){ board.position(chess.fen()); }, 100);
@@ -136,9 +135,10 @@ var getLastCapture = function(){
   }
 }
 
-chess.header('White', '1. platki 2.mleko')
-chess.header('Black', '1. mleko 2.platki')
-
-var analysis = function(){
-  console.log(chess.pgn());  
+const fs = require('fs')
+var getPGN = function(){
+  let pgn = chess.pgn({max_width: 5, newline_char: '<br />'});
+  fs.writeFile('pgn.txt', pgn, (err) => {
+    if (err) throw err;
+  })
 }

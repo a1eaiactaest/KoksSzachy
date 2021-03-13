@@ -103,5 +103,6 @@ python play.py
 * Frontend
 * Analysis Button, czyli klikamy zapisujemy notacje PGN i  przekierowywyuje nas w new tabie do API Lichessa z możliwością analizy naszej gry na podstawie PGN.
 * Kto wygrywa, aka wartość zbitych pionów z obu stron.
+* favicon i logo jakies do readme
 
 ##
