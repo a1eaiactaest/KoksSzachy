@@ -110,12 +110,14 @@ var takeBack = function(){
   }
   board.position(chess.fen());
   updateStatus();
+  console.log('Piece taken back');
 }
 
 var newGame = function(){
   chess.reset();
   board.start();
   updateStatus();
+  console.log('New game');
 }
 
 var getCapturedPieces = function(){
@@ -140,5 +142,8 @@ chess.header('White', '1. platki 2.mleko')
 chess.header('Black', '1. mleko 2.platki')
 
 var analysis = function(){
+  console.log('Analysis requested');
   console.log(chess.pgn());  
+  window.open('https://lichess.org/paste', '_blank');
 }
+

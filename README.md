@@ -105,4 +105,10 @@ python play.py
 * Kto wygrywa, aka wartość zbitych pionów z obu stron.
 * favicon i logo jakies do readme
 
+### Zgodność
+
+- [x] Windows 
+- [ ] Linux
+- [ ] MacOS
+
 ##
