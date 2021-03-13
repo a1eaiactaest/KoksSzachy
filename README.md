@@ -1,5 +1,9 @@
 # KoksSzachy
+
 ![logo-epic-big-daddy-by-smugas-hacker-epic-ok](https://user-images.githubusercontent.com/73793685/111052894-2bfdb300-8457-11eb-872a-bf4387a76ccb.png)
+
+<sub>chess.com pls don't sue us, it's for fun</sub>
+
 ## Jak to działa?
 
 Silnik KoksSzachów działa na bardzo prostej zasadzie:  
