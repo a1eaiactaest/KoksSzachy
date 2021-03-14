@@ -10,12 +10,12 @@ Silnik KoksSzachów działa na bardzo prostej zasadzie:
 
   * Pobranie pozycji [chessboard.js](https://chessboardjs.com/index.html) za pomocą [wpisywania w url](https://github.com/a1eaiactaest/KoksSzachy/blob/a9219e1f95fb4c26696c6a155eed329975d308c9/index.html#L114) [FEN](https://pl.wikipedia.org/wiki/Notacja_Forsytha-Edwardsa) stringów.
   
-  * Rekreacja pozycji w bibliotece [python-chess](https://python-chess.readthedocs.io/), która umożliwia stworzenie listy możliwych ruchów i wiele innych, ktore przydadzą się w algorytime Minimax.
+  * Rekreacja pozycji w bibliotece [python-chess](https://python-chess.readthedocs.io/), która umożliwia stworzenie listy możliwych ruchów i wiele innych, które przydadzą się w algorytmie Minimax.
 
   * Ewaluacja materiału. Działa ona na podstawie zliczania wartości wszystkich bierek na planszy. Wartości te są przedstawione w słowniku [```values```](https://github.com/a1eaiactaest/KoksSzachy/blob/3b1fd99b38b88ca2e1cfbf3fbed893bc4f20b5b0/state.py#L8).
 
   * Ewaluacja pozycji odtworzonej przez wspomnianą wcześniej bibliotekę przy pomocy FEN stringa. Jest ona robiona na podstawie słownika  [```positions```](https://github.com/a1eaiactaest/KoksSzachy/blob/3b1fd99b38b88ca2e1cfbf3fbed893bc4f20b5b0/state.py#L17).
-    * Jak działa to działa? To bardzo proste. W słowniku dla każdej figury isnieje odpowiadający jej dwuwymiarowy rray z liczbami całkowitymi. Array odpowiada prawdziwym rozmiarom szachownicy czyli 8x8.
+    * Jak to działa? To bardzo proste - w słowniku dla każdej figury isnieje odpowiadający jej dwuwymiarowy array z liczbami całkowitymi. Array odpowiada prawdziwym rozmiarom szachownicy czyli 8x8.
       Weźmy dla przykładu array poświęcony [gońcowi](https://pl.wikipedia.org/wiki/Goniec_(szachy)). Specjalnie zaznaczona została notacja szachowa dla ułatwienia wizualicaji. 
       
       ```python3
@@ -37,8 +37,8 @@ Silnik KoksSzachów działa na bardzo prostej zasadzie:
 
       Arraye są przedstawione z perspektywy pierwszej osoby.
   
-  * Gdy białe, gracz, wykonają ruch, czarne czyli komputer analizują pozycje i materiał zapisując obecna wartość ogólną. Po tym procesie uruchamiany jest algorytm [Minimax](https://github.com/a1eaiactaest/KoksSzachy/blob/a4c1d77ba4bf93270c03e2da8e7c17c50c55f1ef/state.py#L128), który analizuje przyszłe i możliwe posunięcia przeciwnika po wykonanym ruchu.
-  W ten sposób algorytm ocenia, który ruch jest dla niego najlepszy. To na ile posunięć do przodu myśli jest kontrolowane przez zmienną ```depth+1```.   
+  * Gdy białe - gracz, wykonają ruch, czarne - czyli komputer analizują pozycje i materiał zapisując obecną wartość ogólną. Po tym procesie uruchamiany jest algorytm [Minimax](https://github.com/a1eaiactaest/KoksSzachy/blob/a4c1d77ba4bf93270c03e2da8e7c17c50c55f1ef/state.py#L128), który analizuje przyszłe i możliwe posunięcia przeciwnika po wykonanym ruchu.
+  W ten sposób algorytm ocenia, który ruch jest dla niego najlepszy. To na ile posunięć do przodu liczy jest kontrolowane przez zmienną ```depth+1```.   
   * Obliczone ruchy są zapisywane w odpowiedniej kolejności
   * Komputer wybiera pierwszy ruch z listy i go wykonuje.
   * Wszystko działa dopóki są możliwe ruchy. Nie działa to na podstawie pętli. 
@@ -58,7 +58,7 @@ Silnik KoksSzachów działa na bardzo prostej zasadzie:
   - https://pl.wikipedia.org/wiki/Algorytm_alfa-beta   
   - https://www.chessprogramming.org/Iterative_Deepening  
  
-## Użycie
+## Jak zagrać?
 
 Do odpalenia KoksSzachów potrzeba bibliotek zawartych w pliku [requirements.txt](https://github.com/a1eaiactaest/KoksSzachy/blob/main/requirements.txt)
 
@@ -108,6 +108,7 @@ python play.py
 * Analysis Button, czyli klikamy zapisujemy notacje PGN i  przekierowywyuje nas w new tabie do API Lichessa z możliwością analizy naszej gry na podstawie PGN.
 * Kto wygrywa, aka wartość zbitych pionów z obu stron.
 * favicon i logo jakies do readme
+* wybór promocji, tzn. na jaką figurę chcemy wypromować piona
 
 ### Zgodność
 
