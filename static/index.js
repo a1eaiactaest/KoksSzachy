@@ -141,9 +141,9 @@ var getLastCapture = function(){
 chess.header('White', '1. platki 2.mleko')
 chess.header('Black', '1. mleko 2.platki')
 
-var analysis = function(){
-  console.log('Analysis requested');
-  console.log(chess.pgn());  
-  window.open('https://lichess.org/paste', '_blank');
+var saveGame = function(){
+  console.log('Saving game...');
+  var content = chess.pgn();  
+	console.log(content);
 }
 

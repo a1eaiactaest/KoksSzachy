@@ -15,7 +15,7 @@ def hello():
 @app.route("/move/<int:depth>/<path:fen>/") # routuj fen i depth do url tak zeby mozna bylo requestowac
 def calc_move(depth, fen):
   print(f'depth: {depth}')
-  engine = ComputerEngine(fen, chess.WHITE, chess.BLACK)
+  engine = ComputerEngine(fen)
   move = engine.iter_deep(depth - 1)
   if move is None:
     print('Game over')
