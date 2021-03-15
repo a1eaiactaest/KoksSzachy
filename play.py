@@ -23,11 +23,14 @@ def calc_move(depth, fen):
     return move
 
 @app.route("/analysis", methods=['POST'])
-def foo():
-  import webbrowser
-  url = 'https://lichess.org/paste'
-  webbrowser.open_new_tab(url)
-  return '0' # musi cos zwracac
+def get_data():
+  #import webbrowser
+  #url = 'https://lichess.org/paste'
+  #webbrowser.open_new_tab(url)
+  if request.method == 'POST':
+    pgn = request.get_json()
+    print(pgn['content'])
+    return '', 200 # musi cos zwracac
  
 if __name__ == "__main__":
   app.run(debug=True)

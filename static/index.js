@@ -139,14 +139,15 @@ chess.header('White', '1. platki 2.mleko')
 chess.header('Black', '1. mleko 2.platki')
 
 var analysis = function(){
-  var content = chess.pgn();  
-	//console.log(content);
+  var content = [chess.pgn()];  
+	console.log(content);
   $.ajax({
     type: "POST",
+    contentType: "application/json;charset=utf-8",
     url: "/analysis",
-    data: {param: content}
-  }).done(function(o){
-    console.log("done");
+    traditional: "true",
+    data: JSON.stringify({content}),
+    dataType: "json"
   });
 }
 
