@@ -127,6 +127,7 @@ class KoksSzachy:
       # zwroc najlepszy ruch wraz z jego wartoscia
       return bmove, bscore 
 
+  
   def ab(self, negative_depth, positive_depth, move, a, b, move_hist, maximiser): #alpha-beta
     seq = [] # sekwencja ruchow
     if negative_depth == 0: # czy to ostatni poziom depth
@@ -150,8 +151,6 @@ class KoksSzachy:
 
     # najnowszy obliczony najlepszy ruch na poczatek listy, powinno pomoc w obcinanu galezi z minimaxa
     if move_hist and len(move_hist) >= negative_depth:
-      if negative_depth == 4 and not self.board.turn:
-        print('wczesniejszy najlepszy:', move_hist[negative_depth-1])
       if move_hist[negative_depth-1] in moves:
         moves.insert(0, move_hist[negative_depth-1])
     
