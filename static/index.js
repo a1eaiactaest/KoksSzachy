@@ -58,8 +58,6 @@ var updateStatus = function(){
 
   setStatus(status);
   getLastCapture();
-  //createTable();
-  //upadteScroll();
 
   statusEl.html(status);
   fenEl.html(chess.fen());
@@ -76,7 +74,7 @@ var config = {
 
 var randomResponse = function(){
   fen = chess.fen()
-  $.get($SCRIPT_ROOT + "/move/" + fen, function(data){
+  $.get($SCRIPT_ROOT + "/info/" + fen, function(data){
     chess.move(data, {sloppy:true});
     upadteStatus();
   })
@@ -86,9 +84,8 @@ var getResponseMove = function(){
   var e = document.getElementById("sel1");
   var depth = e.options[e.selectedIndex].value;
   fen = chess.fen()
-  $.get($SCRIPT_ROOT + "/move/" + depth + "/" + fen, function(data){
+  $.get($SCRIPT_ROOT + "/info/" + depth + "/" + fen, function(data){
     chess.move(data, {sloppy:true}); // wykonaj ruch ściągnięty z url
-    //console.log(chess.pgn());
     updateStatus();
 
     setTimeout(function(){ board.position(chess.fen()); }, 100);
@@ -141,9 +138,15 @@ var getLastCapture = function(){
 chess.header('White', '1. platki 2.mleko')
 chess.header('Black', '1. mleko 2.platki')
 
-var saveGame = function(){
-  console.log('Saving game...');
+var analysis = function(){
   var content = chess.pgn();  
-	console.log(content);
+	//console.log(content);
+  $.ajax({
+    type: "POST",
+    url: "/analysis",
+    data: {param: content}
+  }).done(function(o){
+    console.log("done");
+  });
 }
 

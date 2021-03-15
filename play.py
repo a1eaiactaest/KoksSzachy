@@ -3,19 +3,18 @@ import sys
 import chess
 from engine import *
 
-from flask import Flask, Response, request, render_template
+from flask import Flask, Response, request, render_template, url_for, jsonify
 app = Flask(__name__) 
-
 
 @app.route("/")
 def hello():
   ret = open('index.html').read()
   return ret
 
-@app.route("/move/<int:depth>/<path:fen>/") # routuj fen i depth do url tak zeby mozna bylo requestowac
+@app.route("/info/<int:depth>/<path:fen>/") # routuj fen i depth do url tak zeby mozna bylo requestowac
 def calc_move(depth, fen):
   print(f'depth: {depth}')
-  engine = ComputerEngine(fen)
+  engine = KoksSzachy(fen)
   move = engine.iter_deep(depth - 1)
   if move is None:
     print('Game over')
@@ -23,5 +22,12 @@ def calc_move(depth, fen):
     print(f'computer moves: {move}\n')
     return move
 
+@app.route("/analysis", methods=['POST'])
+def foo():
+  import webbrowser
+  url = 'https://lichess.org/paste'
+  webbrowser.open_new_tab(url)
+  return '0' # musi cos zwracac
+ 
 if __name__ == "__main__":
   app.run(debug=True)

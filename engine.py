@@ -2,7 +2,7 @@
 import chess
 
 MAXVAL = 1000000
-class ComputerEngine:
+class KoksSzachy:
   def __init__(self, fen):
     self.board = chess.Board()
     self.values = { # wartosci poszczegolnych figur
