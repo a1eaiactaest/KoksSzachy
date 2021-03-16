@@ -135,9 +135,6 @@ var getLastCapture = function(){
   }
 }
 
-chess.header('White', '1. platki 2.mleko')
-chess.header('Black', '1. mleko 2.platki')
-
 var analysis = function(){
   var content = [chess.pgn()];  
 	console.log(content);

@@ -25,12 +25,14 @@ def calc_move(depth, fen):
 @app.route("/analysis", methods=['POST'])
 def get_data():
   if request.method == 'POST':
-    pgn = request.get_json()
-    print(pgn['content'])
-    import webbrowser
-    from bs4 import BeautifulSoup as bs
+    import json
+    content = request.get_json() # {"content": ["1. f3 e5 2. g4 Qh4#"]}
+    pgn = content['content'] # ['1. f3 e5 2. g4 Qh4#']
     url = 'https://lichess.org/paste'
-    webbrowser.open_new_tab(url)
+    import re 
+    from mechanize import Browser
+    br = Browser()
+    br.open(url)
     return '', 200 # musi cos zwracac
  
 if __name__ == "__main__":
