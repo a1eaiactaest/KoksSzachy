@@ -26,13 +26,14 @@ def calc_move(depth, fen):
 def get_data():
   if request.method == 'POST':
     import json
+    import urllib
+    import webbrowser
     content = request.get_json() # {"content": ["1. f3 e5 2. g4 Qh4#"]}
-    pgn = content['content'] # ['1. f3 e5 2. g4 Qh4#']
-    url = 'https://lichess.org/paste'
-    import re 
-    from mechanize import Browser
-    br = Browser()
-    br.open(url)
+    pgn = content['content'][0] # ['1. f3 e5 2. g4 Qh4#']
+    pgn = {"pgn": pgn}
+    url = f'https://lichess.org/paste?{urllib.parse.urlencode(pgn)}'
+    print(url)
+    webbrowser.open_new_tab(url)
     return '', 200 # musi cos zwracac
  
 if __name__ == "__main__":
