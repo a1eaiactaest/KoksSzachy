@@ -1,5 +1,2 @@
 chess>=1.4.0
 flask>=1.1.2
-bs4>=0.0.1
-beautifulsoup4>=4.9.3
-mechanize==0.4.5

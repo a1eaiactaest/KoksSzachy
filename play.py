@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import sys
 import chess
 from engine import *
 
@@ -31,7 +30,7 @@ def get_data():
     content = request.get_json() # {"content": ["1. f3 e5 2. g4 Qh4#"]}
     pgn = content['content'][0] # ['1. f3 e5 2. g4 Qh4#']
     pgn = {"pgn": pgn}
-    url = f'https://lichess.org/paste?{urllib.parse.urlencode(pgn)}'
+    url = f'https://lichess.org/paste?{urllib.parse.urlencode(pgn)}' # encode url zeby wstawic dane automatycznie
     print(url)
     webbrowser.open_new_tab(url)
     return '', 200 # musi cos zwracac

@@ -45,9 +45,9 @@ Silnik KoksSzachów działa na bardzo prostej zasadzie:
 
   ## Minimax
 
-  Minimax w KoksSzachach jest zooptyamlizowany poprzez [alpha-beta pruning](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning) oraz iterative deepening.
+  Minimax w KoksSzachach jest zooptymlizowany poprzez [alpha-beta pruning](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning) oraz iterative deepening.
 
-  Ciekawe artykuły i źródła na temat tego algorytmu: 
+  Ciekawe artykuły i źródła na temat tych algorytmów: 
 
   - https://www.cs.cornell.edu/courses/cs312/2002sp/lectures/rec21.htm   
   - https://www.cs.tau.ac.il/~wolf/papers/deepchess.pdf   
