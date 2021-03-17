@@ -72,14 +72,6 @@ var config = {
   onSnapEnd: onSnapEnd
 };
 
-var randomResponse = function(){
-  fen = chess.fen()
-  $.get($SCRIPT_ROOT + "/info/" + fen, function(data){
-    chess.move(data, {sloppy:true});
-    upadteStatus();
-  })
-}
-
 var getResponseMove = function(){
   var e = document.getElementById("sel1");
   var depth = e.options[e.selectedIndex].value;
