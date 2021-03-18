@@ -16,12 +16,13 @@ var onDrop = function(source, target){
   var move = chess.move({
     from: source,
     to: target,
-    promotion: 'n' // TODO: funkcja na wybor promocji
+    promotion: 'q' // TODO: funkcja na wybor promocji
   });
   if (move === null) return 'snapback';
 
   updateStatus();
   getResponseMove();
+  console.log(chess.pgn());
 };
 
 var onSnapEnd = function(){
