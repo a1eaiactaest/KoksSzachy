@@ -9,3 +9,4 @@ print('\n\n\n')
 print(board) # pokaz pozycje figur po ruchach
 
 print(board.legal_moves) # sprawdz czy mozliwe ruchy sie zmienily
+print(board.pieces(chess.ROOK, chess.WHITE))

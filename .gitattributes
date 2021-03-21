@@ -1,1 +1,2 @@
-static/* linguist-vendored
+static/*.min.js linguist-vendored
+static/*.min.css linguist-vendored
