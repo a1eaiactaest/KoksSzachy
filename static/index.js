@@ -60,7 +60,7 @@ var updateStatus = function(){
   setStatus(status);
   getLastCapture();
 
-  document.getElementById('pgnview').innerHTML = chess.pgn();
+  //document.getElementById('pgnview').innerHTML = chess.pgn();
 
   statusEl.html(status);
   fenEl.html(chess.fen());
