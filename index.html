@@ -8,20 +8,25 @@
   <link rel="stylesheet" type="text/css" href="static/style.css">
   <link rel="stylesheet" type="text/css" href="static/chessboard.min.css">
 
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Noto+Sans+JP:wght@300&family=Open+Sans&display=swap" rel="stylesheet">
+
   <script src="static/jquery.min.js"></script>
   <script src="static/chessboard.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js"></script>
 </head>
 <body>
+	<img class="kokslogo" src="static/img/koks/koks.png" alt="szachy">
+	<div class="main">
   <div id="board" style="height:600px;width:600px;"></div>
   <p></p>
-  <button id="newGameButton" type="button" onclick="newGame()">New Game</button>
-  <button id="takeBackButton" type="button" onclick="takeBack()">Take Back</button> 
+	<button id="newGameButton" class="buttons newgame" type="button" onclick="newGame()">+ New Game</button>
+	<button id="takeBackButton" class="buttons takeback"type="button" onclick="takeBack()">↺ Take Back</button> 
   <form action='startAnalysis'>
-    <button id="analysisButton" type="button" onclick="analysis()">Analysis</button>
+    <button id="analysisButton" class="buttons analysis" type="button" onclick="analysis()">🧠 Analysis</button>
   </form>
-  <h3><span id="status">White to move</span></h3>
-  <form class="from-inline">
+  <h3><span id="status" class="move">White to move</span></h3>
+  <form class="from-inline buttons">
     <select class="form-control" id="sel1">
       <option value="5">Depth: 5</option>
       <option value="4">Depth: 4</option>
@@ -31,5 +36,6 @@
     </select>
   </form>
   <script type="text/javascript" src="static/index.js"></script>
+  </div>
 </body>
 </html>
