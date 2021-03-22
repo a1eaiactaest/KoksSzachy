@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!---<link rel="stylesheet" type="text/css" href="static/style.css"> ziomy od css tutaj macie wgrane juz-->
+  <link rel="stylesheet" type="text/css" href="static/style.css">
   <link rel="stylesheet" type="text/css" href="static/chessboard.min.css">
 
   <script src="static/jquery.min.js"></script>
@@ -17,7 +17,9 @@
   <p></p>
   <button id="newGameButton" type="button" onclick="newGame()">New Game</button>
   <button id="takeBackButton" type="button" onclick="takeBack()">Take Back</button> 
-  <button id="getPGNButton" type="button" onclick="analysis()">Analysis</button>
+  <form action='startAnalysis'>
+    <button id="analysisButton" type="button" onclick="analysis()">Analysis</button>
+  </form>
   <h3><span id="status">White to move</span></h3>
   <form class="from-inline">
     <select class="form-control" id="sel1">
@@ -28,6 +30,8 @@
       <option value="1">Depth: 1</option>
     </select>
   </form>
+  <!-- wielkosc do zmiany -->
+  <textarea id="pgnview" rows="20" cols="50"></textarea> 
   <script type="text/javascript" src="static/index.js"></script>
 </body>
 </html>

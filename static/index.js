@@ -16,12 +16,13 @@ var onDrop = function(source, target){
   var move = chess.move({
     from: source,
     to: target,
-    promotion: 'n' // TODO: funkcja na wybor promocji
+    promotion: 'q' // TODO: funkcja na wybor promocji
   });
   if (move === null) return 'snapback';
 
   updateStatus();
   getResponseMove();
+  console.log(chess.pgn());
 };
 
 var onSnapEnd = function(){
@@ -58,8 +59,7 @@ var updateStatus = function(){
 
   setStatus(status);
   getLastCapture();
-  //createTable();
-  //upadteScroll();
+  document.getElementById('pgnview').innerHTML = chess.pgn();
 
   statusEl.html(status);
   fenEl.html(chess.fen());
@@ -74,21 +74,12 @@ var config = {
   onSnapEnd: onSnapEnd
 };
 
-var randomResponse = function(){
-  fen = chess.fen()
-  $.get($SCRIPT_ROOT + "/move/" + fen, function(data){
-    chess.move(data, {sloppy:true});
-    upadteStatus();
-  })
-}
-
 var getResponseMove = function(){
   var e = document.getElementById("sel1");
   var depth = e.options[e.selectedIndex].value;
   fen = chess.fen()
-  $.get($SCRIPT_ROOT + "/move/" + depth + "/" + fen, function(data){
+  $.get($SCRIPT_ROOT + "/info/" + depth + "/" + fen, function(data){
     chess.move(data, {sloppy:true}); // wykonaj ruch ściągnięty z url
-    //console.log(chess.pgn());
     updateStatus();
 
     setTimeout(function(){ board.position(chess.fen()); }, 100);
@@ -138,12 +129,16 @@ var getLastCapture = function(){
   }
 }
 
-chess.header('White', '1. platki 2.mleko')
-chess.header('Black', '1. mleko 2.platki')
-
 var analysis = function(){
-  console.log('Analysis requested');
-  console.log(chess.pgn());  
-  window.open('https://lichess.org/paste', '_blank');
+  var content = [chess.pgn()];  
+	console.log(content);
+  $.ajax({
+    type: "POST",
+    contentType: "application/json;charset=utf-8",
+    url: "/analysis",
+    traditional: "true",
+    data: JSON.stringify({content}),
+    dataType: "json"
+  });
 }
 
