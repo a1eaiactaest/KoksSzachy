@@ -9,6 +9,7 @@
 	font-family: 'Open Sans', sans-serif;
 }
 
+<<<<<<< HEAD
 .chessboard-63f37{
 	width: 30%;
 	height: 40%;
@@ -66,3 +67,8 @@
 	top: 70%;
 	left: 141%;
 }
+=======
+textarea {
+  resize: none;
+}
+>>>>>>> 1e6f0643a378e37613cfc17f4cc87eddf86c29eb

@@ -81,7 +81,7 @@ python play.py
 # webserver na localhost:5000 (127.0.0.1:5000)
 ```
 
-# Plan
+# TODO
 
 * <s>Narysować boarda na stronie.</s>
 * <s>Podpiąć chessboardjs pod python-chessa.</s>
@@ -100,15 +100,13 @@ python play.py
   * newGame()
     * <s>implementacja</s>
     * <s>guziczek</s>
-
-## TODO
-
 * <s>Ktoś może sportować javascripta z index.html do oddzielnego pliku.</s>
 * Frontend
-* Analysis Button, czyli klikamy zapisujemy notacje PGN i  przekierowywyuje nas w new tabie do API Lichessa z możliwością analizy naszej gry na podstawie PGN.
+* <s>Analysis Button, czyli klikamy zapisujemy notacje PGN i  przekierowywyuje nas w new tabie do API Lichessa z możliwością analizy naszej gry na podstawie PGN.</s>
 * Kto wygrywa, aka wartość zbitych pionów z obu stron.
 * favicon i logo jakies do readme
 * wybór promocji, tzn. na jaką figurę chcemy wypromować piona
+* wypisywanie pgn-u do textarea
 
 ### Zgodność
 
@@ -116,4 +114,3 @@ python play.py
 - [ ] Linux
 - [ ] MacOS
 
-##
