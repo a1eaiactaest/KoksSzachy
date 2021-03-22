@@ -1,7 +1,73 @@
-body {
-  align-items: center;
+.move{
+	position: absolute;
+	white-space: nowrap;
+	left: 105%;
+	top: 90%;
+	font-size: 3vh;
+	font-family: 'Noto Sans', sans-serif;
+	font-family: 'Noto Sans JP', sans-serif;
+	font-family: 'Open Sans', sans-serif;
 }
 
+<<<<<<< HEAD
+.chessboard-63f37{
+	width: 30%;
+	height: 40%;
+}
+.main {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+}
+
+.kokslogo{
+	position: absolute;
+	left: 5%;
+	top: 5%;
+	size: 1vh;
+}
+
+.buttons{
+	position: absolute;
+	left: 140%;
+	top: 10%;
+	font-size: 5vh;
+	text-decoration: none;
+	font-family: 'Noto Sans', sans-serif;
+	background-color: white;
+	border-radius: 20px;
+
+}
+.newgame{
+	position: absolute;
+	top: 20%;
+}
+.takeback{
+	position: absolute;
+	top: 55%;
+	
+}
+.form-control{
+	position: absolute;
+	font-size: 3.5vh;
+	text-decoration: none;
+	font-family: 'Noto Sans', sans-serif;
+	background-color: white;
+	border-radius: 20px;
+	
+}
+.from-inline{
+	position: absolute;
+	top: 38%;
+	left: 150%;
+	
+}
+.analysis{
+	position: absolute;
+	top: 70%;
+	left: 141%;
+}
+=======
 textarea {
   resize: none;
   /*-moz-user-select: none;
@@ -10,3 +76,4 @@ textarea {
   -ms-user-select: none;
   user-select: none;*/
 }
+>>>>>>> 1e6f0643a378e37613cfc17f4cc87eddf86c29eb
