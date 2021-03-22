@@ -15,7 +15,7 @@ class KoksSzachy:
     }
 
     self.positions = positions = {
-			# gdzie najlepiej stac przedstawione w arrayach 8x8 
+      # gdzie najlepiej stac przedstawione w arrayach 8x8 
       chess.PAWN: [ 
         0, 0, 0, 0, 0, 0, 0, 0,         # 8
         50, 50, 50, 50, 50, 50, 50, 50, # 7
@@ -236,7 +236,6 @@ class KoksSzachy:
     self.leaves_explored = 0 # reset
     return my_leaves
 
-    
 
 if __name__ == "__main__":
   v = ComputerEngine()
