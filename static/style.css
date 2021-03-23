@@ -1,20 +1,19 @@
 .move{
-	position: absolute;
-	white-space: nowrap;
-	left: 147%;
-	top: 90%;
-	font-size: 3vh;
-	font-family: 'Noto Sans', sans-serif;
-	font-family: 'Noto Sans JP', sans-serif;
-	font-family: 'Open Sans', sans-serif;
+  position: absolute;
+  white-space: nowrap;
+  left: 147%;
+  top: 90%;
+  font-size: 3vh;
+  font-family: 'Noto Sans', sans-serif;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .board-b72b1{
-	position: absolute;
-	left: 10%;
-
-	
+  position: absolute;
+  left: 10%;
 }
+
 .main {
   position: absolute;
   top: 25%;
@@ -22,60 +21,61 @@
 }
 
 .kokslogo{
-	position: absolute;
-	left: 2%;
-	top: 5%;
-	size: 1vh;
+  position: absolute;
+  left: 2%;
+  top: 5%;
+  size: 1vh;
 }
 
 .buttons{
-	position: absolute;
-	left: 140%;
-	top: -20%;
-	font-size: 5vh;
-	text-decoration: none;
-	font-family: 'Noto Sans', sans-serif;
-	background-color: white;
-	border-radius: 20px;
+  position: absolute;
+  left: 140%;
+  top: -20%;
+  font-size: 5vh;
+  text-decoration: none;
+  font-family: 'Noto Sans', sans-serif;
+  background-color: white;
+  border-radius: 20px;
+}
 
-}
 .newgame{
-	position: absolute;
-	top: 20%;
+  position: absolute;
+  top: 20%;
 }
+
 .takeback{
-	position: absolute;
-	top: 55%;
-	
+  position: absolute;
+  top: 55%;
 }
+
 .form-control{
-	position: absolute;
-	font-size: 3.5vh;
-	text-decoration: none;
-	font-family: 'Noto Sans', sans-serif;
-	background-color: white;
-	border-radius: 20px;
-	
+  position: absolute;
+  font-size: 3.5vh;
+  text-decoration: none;
+  font-family: 'Noto Sans', sans-serif;
+  background-color: white;
+  border-radius: 20px;
 }
+
 .from-inline{
-	position: absolute;
-	top: 38%;
-	left: 150%;
-	
+  position: absolute;
+  top: 38%;
+  left: 150%;
 }
+
 .analysis{
-	position: absolute;
-	top: 70%;
-	left: 141%;
+  position: absolute;
+  top: 70%;
+  left: 141%;
 }
 
 .textarea{
-	position: absolute;
-	left: -60%;
-	top: 0%;
-	height: 95%;
-	resize: none;
-  
+  position: absolute;
+  left: -60%;
+  top: 0%;
+  height: 95%;
+  resize: none;
+
   /*-moz-user-select: none;
   -khtml-user-select: none;
   -webkit-user-select: none;

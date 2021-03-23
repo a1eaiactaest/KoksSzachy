@@ -59,8 +59,11 @@ var updateStatus = function(){
 
   setStatus(status);
   getLastCapture();
+  updatePGN();
 
-  document.getElementById('pgnview').innerHTML = chess.pgn();
+  /*if (acc == 1){
+    document.getElementById('pgnview').innerHTML += 
+  }*/
 
   statusEl.html(status);
   fenEl.html(chess.fen());
@@ -143,3 +146,20 @@ var analysis = function(){
   });
 }
 
+var acc = 1;
+var num = 1;
+var updatePGN = function(){
+  console.log(chess.history());
+  if (acc % 2 == 0){
+    console.log(acc);
+    document.getElementById('pgnview').innerHTML += " " + chess.history()[chess.history().length - 1]+"\n";
+    console.log("parzyste");
+    acc += 1;
+  } else if (acc % 2 != 0){
+    console.log(acc);
+    document.getElementById('pgnview').innerHTML += num + ". " + chess.history()[chess.history().length - 1];
+    console.log("nieparzyste");
+    acc += 1;
+    num += 1;
+  }
+}
