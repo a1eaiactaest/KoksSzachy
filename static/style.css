@@ -1,7 +1,7 @@
 .move{
 	position: absolute;
 	white-space: nowrap;
-	left: 105%;
+	left: 115%;
 	top: 90%;
 	font-size: 3vh;
 	font-family: 'Noto Sans', sans-serif;
@@ -9,9 +9,11 @@
 	font-family: 'Open Sans', sans-serif;
 }
 
-.chessboard-63f37{
-	width: 30%;
-	height: 40%;
+.board-b72b1{
+	position: absolute;
+	left: 10%;
+
+	
 }
 .main {
   position: absolute;
@@ -21,7 +23,7 @@
 
 .kokslogo{
 	position: absolute;
-	left: 5%;
+	left: 2%;
 	top: 5%;
 	size: 1vh;
 }
@@ -29,7 +31,7 @@
 .buttons{
 	position: absolute;
 	left: 140%;
-	top: 10%;
+	top: -20%;
 	font-size: 5vh;
 	text-decoration: none;
 	font-family: 'Noto Sans', sans-serif;
@@ -67,8 +69,13 @@
 	left: 141%;
 }
 
-textarea {
-  resize: none;
+.textarea{
+	position: absolute;
+	left: -60%;
+	top: 0%;
+	height: 95%;
+	resize: none;
+  
   /*-moz-user-select: none;
   -khtml-user-select: none;
   -webkit-user-select: none;
