@@ -2,8 +2,27 @@ var $SCRIPT_ROOT = "" //"{{ request.script_root|tojson|safe }}";
 var statusEl = $('#status'), fenEl = $('#fen'), pgnEl = $('#pgn');
 var board;
 var chess = new Chess()
+var whiteSquareGrey = '#a9a9a9'
+var blackSquareGrey = '#696969'
 
-var onDragStart = function(source, piece, position, orientation){
+// move highlighting
+// https://chessboardjs.com/examples#5003
+var removeGreySquares = function(){
+  $('#board .square-55d63').css('background', '');
+}
+
+var greySquare = function(square){
+  var $square = $('#board .square-' + square);
+
+  var background = whiteSquareGrey;
+  if ($square.hasClass('black-3c85d')){
+    background = blackSquareGrey;
+  }
+
+  $square.css('background', background);
+}
+
+var onDragStart = function(source, piece){
   if (chess.game_over() === true ||
       (chess.turn() === 'w' && piece.search(/^b/) !== -1) ||
       (chess.turn() === 'b' && piece.search(/^w/) !== -1)) {
@@ -11,8 +30,9 @@ var onDragStart = function(source, piece, position, orientation){
   }
 };
 
-// odpala sie za kazdym ruchem
 var onDrop = function(source, target){
+  removeGreySquares();
+  
   var move = chess.move({
     from: source,
     to: target,
@@ -22,8 +42,29 @@ var onDrop = function(source, target){
 
   updateStatus();
   getResponseMove();
-  console.log(chess.pgn());
 };
+
+var onMouseoverSquare = function(square, piece){
+  var moves = chess.moves({
+    square: square,
+    verbose: true
+  });
+
+  if (moves.length === 0) return;
+
+  greySquare(square);
+
+  for (var i = 0; i < moves.length; i++){
+    greySquare(moves[i].to);
+  }
+}
+
+var onMouseoutSquare = function(square, piece){
+  removeGreySquares();
+}
+
+
+// odpala sie za kazdym ruchem
 
 var onSnapEnd = function(){
   board.position(chess.fen());
@@ -61,10 +102,6 @@ var updateStatus = function(){
   getLastCapture();
   updatePGN();
 
-  /*if (acc == 1){
-    document.getElementById('pgnview').innerHTML += 
-  }*/
-
   statusEl.html(status);
   fenEl.html(chess.fen());
   pgnEl.html(chess.pgn());
@@ -75,6 +112,8 @@ var config = {
   position: 'start',
   onDragStart: onDragStart,
   onDrop: onDrop,
+  onMouseoutSquare: onMouseoutSquare,
+  onMouseoverSquare: onMouseoverSquare,
   onSnapEnd: onSnapEnd
 };
 
@@ -151,4 +190,4 @@ var acc = 1;
 var num = 1;
 var updatePGN = function(){
   document.getElementById('pgnview').innerHTML = chess.pgn({ max_width: 5, newline_char: '\n' });
-};
+}
