@@ -150,13 +150,5 @@ var analysis = function(){
 var acc = 1;
 var num = 1;
 var updatePGN = function(){
-  console.log(chess.history());
-  if (acc % 2 == 0){
-    document.getElementById('pgnview').innerHTML += " " + chess.history()[chess.history().length - 1]+"\n";
-    acc += 1;
-  } else if (acc % 2 != 0){
-    document.getElementById('pgnview').innerHTML += num + ". " + chess.history()[chess.history().length - 1];
-    acc += 1;
-    num += 1;
-  }
-}
+  document.getElementById('pgnview').innerHTML = chess.pgn({ max_width: 5, newline_char: '\n' });
+};
