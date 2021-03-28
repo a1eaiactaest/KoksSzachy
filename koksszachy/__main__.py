@@ -1,4 +1,5 @@
-import koksszachy
+#!/usr/bin/env python3
+from play import run
 import sys
 
 def my_help():
@@ -20,7 +21,7 @@ def main():
   try: 
     argument = sys.argv[1]
     if argument == '--play' or argument == '-p':
-      koksszachy.play()
+      run()
 
     if argument == '--docs' or argument == '-d':
       import webbrowser
@@ -29,9 +30,10 @@ def main():
     if argument == '--help' or argument == '-h':
       my_help()
 
-  except IndexError:
+  except Exception:
     my_help()
-    return 0
+    print("error: ", sys.exc_info()[0])
+    raise
 
 if __name__ == '__main__':
   main()

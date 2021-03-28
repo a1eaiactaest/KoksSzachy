@@ -7,6 +7,11 @@ import webbrowser
 from flask import Flask, Response, request, render_template, url_for, jsonify
 app = Flask(__name__) 
 
+# for importing
+def run():
+  webbrowser.open_new_tab('http://localhost:5000')
+  app.run(debug=True)
+
 @app.route("/")
 def hello():
   ret = open('index.html').read()
@@ -36,10 +41,6 @@ def get_data():
     webbrowser.open_new_tab(url)
     return '', 200 # musi cos zwracac
  
-# for importing
-def play():
-  webbrowser.open_new_tab('http://localhost:5000')
-  app.run(debug=True)
 
 if __name__ == "__main__":
   app.run(debug=True)

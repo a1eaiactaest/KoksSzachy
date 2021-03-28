@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import os 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 directory = os.path.abspath(os.path.dirname(__file__))
 with open(os.path.join(directory, 'README.md'), encoding='utf-8') as f:
@@ -9,7 +9,7 @@ with open(os.path.join(directory, 'README.md'), encoding='utf-8') as f:
 
 
 setup(name='KoksSzachy',
-      version='0.5.3',
+      version='0.6.7',
       description='Lubisz grać w szachy? Podobał ci się chess.com lub lichess? W takim razie pokochasz KoksSzachy! heart',
       author='a1eaiactaest, czajaproggramer, AeroRocket, igoy1, Kajtek-creator',
       license='MIT',
@@ -26,7 +26,6 @@ setup(name='KoksSzachy',
       entry_points={
         "console_scripts":[
           "koksszachy=koksszachy.__main__:main",
-          "KoksSzachy=koksszachy.__main__:main",
         ]
       },
       include_package_data=True)
