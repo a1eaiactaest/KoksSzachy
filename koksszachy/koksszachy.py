@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-  ret = open(os.path.dirname(__file__) + '/../index.html').read()
+  ret = open('index.html').read()
   return ret
 
 @app.route("/info/<int:depth>/<path:fen>/") # routuj fen i depth do url tak zeby mozna bylo requestowac

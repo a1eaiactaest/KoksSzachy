@@ -3,21 +3,21 @@
 import os 
 from setuptools import setup
 
-directory = os.path.abspath(os.path.dirname(__file))
+directory = os.path.abspath(os.path.dirname(__file__))
 with open(os.path.join(directory, 'README.md'), encoding='utf-8') as f:
   long_description = f.read()
 
 
 setup(name='KoksSzachy',
-      version='0.5.2',
+      version='0.5.3',
       description='Lubisz grać w szachy? Podobał ci się chess.com lub lichess? W takim razie pokochasz KoksSzachy! heart',
       author='a1eaiactaest, czajaproggramer, AeroRocket, igoy1, Kajtek-creator',
       license='MIT',
       long_description=long_description,
       long_description_content_type='text/markdown',
-      packages=['kokszachy'],
+      packages=['koksszachy'],
       classifires=[
-        "Programming Language :: Python :: 3".
+        "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License"
       ],
       url="https://github.com/a1eaiactaest/KoksSzachy",

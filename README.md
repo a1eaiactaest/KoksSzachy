@@ -58,6 +58,9 @@ Silnik KoksSzachów działa na bardzo prostej zasadzie:
   - https://pl.wikipedia.org/wiki/Algorytm_alfa-beta   
   - https://www.chessprogramming.org/Iterative_Deepening  
  
+
+## Instalacja
+
 ## Jak zagrać?
 
 Do odpalenia KoksSzachów potrzeba bibliotek zawartych w pliku [requirements.txt](https://github.com/a1eaiactaest/KoksSzachy/blob/main/requirements.txt)
