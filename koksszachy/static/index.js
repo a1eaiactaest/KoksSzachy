@@ -112,8 +112,8 @@ var config = {
   position: 'start',
   onDragStart: onDragStart,
   onDrop: onDrop,
-  onMouseoutSquare: onMouseoutSquare,
-  onMouseoverSquare: onMouseoverSquare,
+  //onMouseoutSquare: onMouseoutSquare,
+  //onMouseoverSquare: onMouseoverSquare, borys nie lubi move highlighting :(((
   onSnapEnd: onSnapEnd
 };
 

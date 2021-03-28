@@ -1,5 +1,9 @@
-tmp/
-temp/
-__pycache__/
+tmp
+temp
+__pycache__
 .*.swp
 .*.swo
+build
+dist
+*.egg-info
+/env

@@ -111,6 +111,6 @@ python play.py
 ### Zgodność
 
 - [x] Windows 
-- [ ] Linux
+- [x] Linux
 - [ ] MacOS
 
