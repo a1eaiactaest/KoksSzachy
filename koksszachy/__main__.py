@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from play import run
+import play
 import sys
 
 def my_help():
@@ -21,7 +21,7 @@ def main():
   try: 
     argument = sys.argv[1]
     if argument == '--play' or argument == '-p':
-      run()
+      play.run()
 
     if argument == '--docs' or argument == '-d':
       import webbrowser

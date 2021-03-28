@@ -61,27 +61,30 @@ Silnik KoksSzachów działa na bardzo prostej zasadzie:
 
 ## Instalacja
 
+### UNIX
+```bash
+
+$ pip3 install koksszachy
+
+```
+
+### Windows 
+```bash
+
+$ pip install koksszachy
+
+```
+
 ## Jak zagrać?
 
-Do odpalenia KoksSzachów potrzeba bibliotek zawartych w pliku [requirements.txt](https://github.com/a1eaiactaest/KoksSzachy/blob/main/requirements.txt)
-
 ```bash
-git clone https://github.com/a1eaiactaest/KoksSzachy.git
 
-cd KoksSzachy
+$ koksszachy -p
 
-# UNIX
-pip3 install -r requirements.txt
+# lub
 
-./play.py 
+$ koksszachy --play
 
-# Windows
-pip install -r requirements.txt
-
-python play.py
-
-
-# webserver na localhost:5000 (127.0.0.1:5000)
 ```
 
 # TODO
