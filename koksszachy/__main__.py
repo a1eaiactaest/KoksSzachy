@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-import play
-import sys
 
 def my_help():
   mes = '''
@@ -18,6 +16,8 @@ def my_help():
   print(mes)
 
 def main():
+  import play
+  import sys
   try: 
     argument = sys.argv[1]
     if argument == '--play' or argument == '-p':

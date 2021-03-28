@@ -9,13 +9,13 @@ with open(os.path.join(directory, 'README.md'), encoding='utf-8') as f:
 
 
 setup(name='KoksSzachy',
-      version='0.6.9',
+      version='0.7.1',
       description='Lubisz grać w szachy? Podobał ci się chess.com lub lichess? W takim razie pokochasz KoksSzachy! heart',
       author='a1eaiactaest, czajaproggramer, AeroRocket, igoy1, Kajtek-creator',
       license='MIT',
       long_description=long_description,
       long_description_content_type='text/markdown',
-      packages=['koksszachy'],
+      packages=find_packages(),
       classifires=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License"
