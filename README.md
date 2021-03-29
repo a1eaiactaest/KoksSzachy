@@ -58,27 +58,33 @@ Silnik KoksSzachów działa na bardzo prostej zasadzie:
   - https://pl.wikipedia.org/wiki/Algorytm_alfa-beta   
   - https://www.chessprogramming.org/Iterative_Deepening  
  
-## Jak zagrać?
 
-Do odpalenia KoksSzachów potrzeba bibliotek zawartych w pliku [requirements.txt](https://github.com/a1eaiactaest/KoksSzachy/blob/main/requirements.txt)
+# Instalacja 
+
+## Wymagania
+
+Do zainstalowania KoksSzachów wymagany jest pobrany `Python 3.6` lub większy oraz `pip`, czyli pythonowy package manager.
+
+### Unix
 
 ```bash
-git clone https://github.com/a1eaiactaest/KoksSzachy.git
+$ pip3 install koksszachy
+```
 
-cd KoksSzachy
+### Windows
 
-# UNIX
-pip3 install -r requirements.txt
+```bash
+$ pip install koksszachy 
+```
 
-./koksszachy/play.py 
+## Jak zagrać?
 
-# Windows
-pip install -r requirements.txt
+```bash
+$ koksszachy -p
 
-python koksszachy/play.py
+# lub
 
-
-# webserver na localhost:5000 (127.0.0.1:5000)
+$ koksszachy --play
 ```
 
 # TODO
