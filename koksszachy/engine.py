@@ -238,4 +238,4 @@ class KoksSzachy:
 
 
 if __name__ == "__main__":
-  v = ComputerEngine()
+  v = KoksSzachy()

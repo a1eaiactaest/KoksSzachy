@@ -1,14 +1,28 @@
 #!/usr/bin/env python3
-import chess
-from engine import *
 
+import sys
+import chess
+import webbrowser
+from koksszachy.engine import KoksSzachy
 from flask import Flask, Response, request, render_template, url_for, jsonify
 app = Flask(__name__) 
 
+def my_help():
+  mes = '''
+  użycie: koksszachy [ARGUMENT]
+  Lubisz grać w szachy? Podobał ci się chess.com lub lichess? W takim razie pokochasz KoksSzachy! <3
+  Po więcej informacji odwiedź: https://github.com/a1eaiactaest/KoksSzachy
+  argumenty:
+  -h, --help    pokaż tą wiadomość
+  -p, --play    zagraj w swoje ulubione szachy! 
+  -d, --docs    przeczytaj dokumentację
+  '''
+  print(mes)
+
 @app.route("/")
 def hello():
-  ret = open('index.html').read()
-  return ret
+  r = render_template('index.html')
+  return r
 
 @app.route("/info/<int:depth>/<path:fen>/") # routuj fen i depth do url tak zeby mozna bylo requestowac
 def calc_move(depth, fen):
@@ -26,7 +40,6 @@ def get_data():
   if request.method == 'POST':
     import json
     import urllib
-    import webbrowser
     content = request.get_json() # {"content": ["1. f3 e5 2. g4 Qh4#"]}
     pgn = content['content'][0] # ['1. f3 e5 2. g4 Qh4#']
     pgn = {"pgn": pgn, "pgnFile": "", "analyse":"true"} # dwa ostatnie tak profilaktycznie
@@ -35,5 +48,22 @@ def get_data():
     webbrowser.open_new_tab(url)
     return '', 200 # musi cos zwracac
  
+def main():
+  try:
+    argument = sys.argv[1]
+    if argument == '--play' or argument == '-p':
+      webbrowser.open_new_tab('http://localhost:5000')
+      app.run(debug=True)
+    if argument == '--docs' or argument == '-d':
+      webbrowser.open_new_tab('https://github.com/a1eaiactaest/KoksSzachy/blob/main/README.md')
+      return 0
+    if argument == '--help' or argument == '-h':
+      my_help()
+      return 0
+  except IndexError:
+    my_help()
+    return 0
+
 if __name__ == "__main__":
   app.run(debug=True)
+

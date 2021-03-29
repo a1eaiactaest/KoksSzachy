@@ -16,7 +16,7 @@ Silnik KoksSzachów działa na bardzo prostej zasadzie:
 
   * Ewaluacja pozycji odtworzonej przez wspomnianą wcześniej bibliotekę przy pomocy FEN stringa. Jest ona robiona na podstawie słownika  [```positions```](https://github.com/a1eaiactaest/KoksSzachy/blob/3b1fd99b38b88ca2e1cfbf3fbed893bc4f20b5b0/state.py#L17).
     * Jak to działa? To bardzo proste - w słowniku dla każdej figury isnieje odpowiadający jej dwuwymiarowy array z liczbami całkowitymi. Array odpowiada prawdziwym rozmiarom szachownicy czyli 8x8.
-      Weźmy dla przykładu array poświęcony [gońcowi](https://pl.wikipedia.org/wiki/Goniec_(szachy)). Specjalnie zaznaczona została notacja szachowa dla ułatwienia wizualicaji. 
+      Weźmy dla przykładu array poświęcony [gońcowi](https://pl.wikipedia.org/wiki/Goniec_(szachy)). Specjalnie zaznaczona została notacja szachowa dla ułatwienia wizualizacji. 
       
       ```python3
       
@@ -70,12 +70,12 @@ cd KoksSzachy
 # UNIX
 pip3 install -r requirements.txt
 
-./play.py 
+./koksszachy/play.py 
 
 # Windows
 pip install -r requirements.txt
 
-python play.py
+python koksszachy/play.py
 
 
 # webserver na localhost:5000 (127.0.0.1:5000)

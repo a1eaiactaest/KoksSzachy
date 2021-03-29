@@ -1,5 +1,9 @@
 tmp/
 temp/
 __pycache__/
+*.pyc
 .*.swp
 .*.swo
+dist/
+build/
+*.egg-info

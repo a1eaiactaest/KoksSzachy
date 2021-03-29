@@ -1,0 +1,6 @@
+recursive-include koksszachy/templates *
+recursive-include koksszachy/static *
+graft koksszachy/template 
+graft koksszachy/static
+global-include koksszachy *.py
+global-exclude *.pyc
