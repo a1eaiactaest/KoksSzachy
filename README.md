@@ -1,8 +1,11 @@
-# KoksSzachy
-
-![logo-epic-big-daddy-by-smugas-hacker-epic-ok](https://user-images.githubusercontent.com/73793685/111052894-2bfdb300-8457-11eb-872a-bf4387a76ccb.png)
+# ![KoksSzachy](https://user-images.githubusercontent.com/73793685/111052894-2bfdb300-8457-11eb-872a-bf4387a76ccb.png)
 
 <sub>chess.com pls don't sue us, it's for fun</sub>
+
+![Linux](https://img.shields.io/badge/-Linux-grey?logo=linux)
+![OSX](https://img.shields.io/badge/-OSX-black?logo=apple)
+![Python](https://img.shields.io/badge/Python-v3.6%5E-green?logo=python)
+![PyPI](https://img.shields.io/pypi/v/KoksSzachy?color=blue&label=version)
 
 ## Jak to działa?
 
