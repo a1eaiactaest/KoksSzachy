@@ -94,29 +94,29 @@ $ koksszachy --play
 # TODO
 
 * ~~Narysować boarda na stronie.~~
-* <s>Podpiąć chessboardjs pod python-chessa.</s>
-* <s>Bardzo podstawowe działanie takie jak ograniczenie tylko do legalnych ruchów.</s>
-* <s>Troche bardziej rozwinięte działanie.</s>
-  * <s>Promocja</s>
-  * <s>En passant</s>
-  * <s>Roszada</s>
-* <s>Ewaluacja dla poszczególnych bierek.</s>
-* <s>Minimax</s>
-  * <s>Alpha-beta</s>
-* <s>Javascriptowe funkcje</s>
-  * <s>takeBack()</s>
-    * <s>implementacja</s>
-    * <s>guziczek</s>
-  * <s>newGame()</s>
-    * <s>implementacja</s>
-    * <s>guziczek</s>
-* <s>Ktoś może sportować javascripta z index.html do oddzielnego pliku.</s>
+* ~~Podpiąć chessboardjs pod python-chessa.~~
+* ~~Bardzo podstawowe działanie takie jak ograniczenie tylko do legalnych ruchów.~~
+* ~~Troche bardziej rozwinięte działanie.~~
+  * ~~Promocja~~
+  * ~~En passant~~
+  * ~~Roszada~~
+* ~~Ewaluacja dla poszczególnych bierek.~~
+* ~~Minimax~~
+  * ~~Alpha-beta~~
+* ~~Javascriptowe funkcje~~
+  * ~~takeBack()~~
+    * ~~implementacja~~
+    * ~~guziczek~~
+  * ~~newGame()~~
+    * ~~implementacja~~
+    * ~~guziczek~~
+* ~~Ktoś może sportować javascripta z index.html do oddzielnego pliku.~~
 * Frontend
-* <s>Analysis Button, czyli klikamy zapisujemy notacje PGN i  przekierowywyuje nas w new tabie do API Lichessa z możliwością analizy naszej gry na podstawie PGN.</s>
+* ~~Analysis Button, czyli klikamy zapisujemy notacje PGN i  przekierowywyuje nas w new tabie do API Lichessa z możliwością analizy naszej gry na podstawie PGN.~~
 * Kto wygrywa, aka wartość zbitych pionów z obu stron.
-* <s>favicon i logo jakies do readme</s>
+* ~~favicon i logo jakies do readme~~
+* ~~wypisywanie pgn-u do textarea~~
 * wybór promocji, tzn. na jaką figurę chcemy wypromować piona
-* <s>wypisywanie pgn-u do textarea</s>
 
 ### Zgodność
 
