@@ -10,7 +10,7 @@ with open(os.path.join(directory, 'README.md'), encoding='utf-8') as f:
 description = 'Lubisz grać w szachy? Podobał ci się chess.com lub lichess? W takim razie pokochasz KoksSzachy! <3'
 
 setup(name='KoksSzachy',
-      version='0.8.12',
+      version='0.8.13',
       description=description,
       author='a1eaiactaest,czajaproggramer,AeroRocket,igoy1,Kajtek-creator',
       license='MIT',

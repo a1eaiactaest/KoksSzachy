@@ -93,7 +93,7 @@ $ koksszachy --play
 
 # TODO
 
-* <s>Narysować boarda na stronie.</s>
+* ~~Narysować boarda na stronie.~~
 * <s>Podpiąć chessboardjs pod python-chessa.</s>
 * <s>Bardzo podstawowe działanie takie jak ograniczenie tylko do legalnych ruchów.</s>
 * <s>Troche bardziej rozwinięte działanie.</s>
