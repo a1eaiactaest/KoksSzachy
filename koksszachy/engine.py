@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 import chess
 
-MAXVAL = 1000000
 class KoksSzachy:
   def __init__(self, fen):
     self.board = chess.Board()
-    self.values = { # wartosci poszczegolnych figur
+    self.values = { # wartosci poszczegolnych figur podniesione do x*100
       chess.PAWN: 100, # pion
       chess.BISHOP: 300, # skoczek
       chess.KNIGHT: 300, # goniec

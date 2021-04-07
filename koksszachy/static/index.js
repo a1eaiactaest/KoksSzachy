@@ -99,7 +99,6 @@ var updateStatus = function(){
   }
 
   setStatus(status);
-  getLastCapture();
   updatePGN();
 
   statusEl.html(status);
@@ -155,24 +154,6 @@ var newGame = function(){
   document.getElementById('pgnview').innerHTML = "";
 }
 
-var getCapturedPieces = function(){
-  var history = chess.history({verbose:true});
-  for (var i = 0; i < history.length; i++){
-    if ("captured" in history[i]){
-      console.log(history[i]["captured"]);
-    }
-  }  
-}
-
-var getLastCapture = function(){
-  var history = chess.history({verbose:true});
-  var index = history.length-1;
-
-  if (history[index] != undefined && "captured" in history[index]){
-    console.log(history[index]["captured"]);
-  }
-}
-
 var analysis = function(){
   var content = [chess.pgn()];  
 	console.log(content);
@@ -191,3 +172,4 @@ var num = 1;
 var updatePGN = function(){
   document.getElementById('pgnview').innerHTML = chess.pgn({ max_width: 5, newline_char: '\n' });
 }
+

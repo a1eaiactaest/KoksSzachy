@@ -3,6 +3,7 @@
 import sys
 import chess
 import webbrowser
+import time
 from koksszachy.engine import KoksSzachy
 from flask import Flask, Response, request, render_template, url_for, jsonify
 app = Flask(__name__) 
@@ -18,7 +19,7 @@ arguments = [
 
 def my_help():
   mes = '''
-  użycie: koksszachy [ARGUMENT]
+  użycie: koksszachy [OPTION]
   Lubisz grać w szachy? Podobał ci się chess.com lub lichess? W takim razie pokochasz KoksSzachy! <3
   Po więcej informacji odwiedź: https://github.com/a1eaiactaest/KoksSzachy
   argumenty:
@@ -30,19 +31,24 @@ def my_help():
 
 @app.route("/")
 def hello():
-  r = render_template('index.html')
+  r = render_template('index.html') # musialem uzyc render_template, inaczej ciezko by dzialalo z packagowaniem
   return r
 
 @app.route("/info/<int:depth>/<path:fen>/") # routuj fen i depth do url tak zeby mozna bylo requestowac
 def calc_move(depth, fen):
+  start = time.time()
   print(f'depth: {depth}')
   engine = KoksSzachy(fen)
   move = engine.iter_deep(depth - 1)
+  end = time.time()
   if move is None:
     print('Game over')
+    return 0
   else: 
     print(f'computer moves: {move}\n')
+    print(f'time elapsed: {end - start}')
     return move
+
 
 @app.route("/analysis", methods=['POST'])
 def get_data():
@@ -80,5 +86,4 @@ def main():
 
 if __name__ == "__main__":
   app.run(debug=True)
-
 

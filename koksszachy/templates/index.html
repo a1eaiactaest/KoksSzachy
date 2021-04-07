@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="static/style.css">
+  <!--<link rel="stylesheet" type="text/css" href="static/style.css"> debuggowanie, usunac pozniej-->
   <link rel="stylesheet" type="text/css" href="static/chessboard.min.css">
   <link rel="icon" type="image/png" href="static/favicon.png">
 
@@ -18,9 +18,10 @@
 </head>
 <body>
   <img class="kokslogo" src="https://user-images.githubusercontent.com/73793685/111052894-2bfdb300-8457-11eb-872a-bf4387a76ccb.png">
-  <div class="main">
+  <div id="main">
   <div id="board" style="height:600px;width:600px;"></div>
   <p></p>
+  <div id="captured"></div>
   <button id="newGameButton" class="buttons newgame" type="button" onclick="newGame()">+ New Game</button>
   <button id="takeBackButton" class="buttons takeback"type="button" onclick="takeBack()">↺ Take Back</button> 
   <form action='startAnalysis'>
@@ -29,7 +30,12 @@
   <h3><span id="status" class="move">White to move</span></h3>
   <form class="from-inline buttons">
     <select class="form-control" id="sel1">
-      <option value="5">Depth: 5</option>
+      <option value="10">Depth: 10</option>
+      <option value="9">Depth: 9</option>
+      <option value="8">Depth: 8</option>
+      <option value="7">Depth: 7</option>
+      <option value="6">Depth: 6</option>
+      <option value="5" selected>Depth: 5</option> <!-- domyslne, bo najbardziej optymalne -->
       <option value="4">Depth: 4</option>
       <option value="3">Depth: 3</option>
       <option value="2">Depth: 2</option>
