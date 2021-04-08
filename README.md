@@ -47,7 +47,10 @@ Silnik KoksSzachów działa na bardzo prostej zasadzie:
   * Komputer wybiera pierwszy ruch z listy i go wykonuje.
   * Wszystko działa dopóki są możliwe ruchy. Nie działa to na podstawie pętli. 
 
-  ## Minimax
+## Minimax
+  Ty, jako gracz, grasz białymi figurami. Minimax jest wywoływany przez gracza maksymalizującego wynik, w tym przypadku są to czarne figury, czyli komputer. 
+Scenariusz, w którym grasz maksymalizujący wygrywa ma przypisaną warość nieskończoną. Idąc tym schematem przegrana dla gracza maksymalizującego ma wartość ujemnej nieskończoności.
+  
 
   Minimax w KoksSzachach jest zooptymlizowany poprzez [alpha-beta pruning](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning) oraz iterative deepening.
 

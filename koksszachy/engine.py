@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 import chess
+import math
 
 class KoksSzachy:
   def __init__(self, fen):
-    self.board = chess.Board()
     self.values = { # wartosci poszczegolnych figur podniesione do x*100
       chess.PAWN: 100, # pion
       chess.BISHOP: 300, # skoczek
@@ -80,6 +80,7 @@ class KoksSzachy:
     
     self.board.set_fen(fen)
     self.leaves_explored = 0 # mozliwosci rozwiniecia gry
+    self.board = chess.Board()
 
   def evaluate(self): # ewaluacja zmiennych takich jak material i pozycja
     # ocena materialu
@@ -104,30 +105,30 @@ class KoksSzachy:
     return mval, pval
   
   # https://www.cs.cornell.edu/courses/cs312/2002sp/lectures/rec21.htm 
-  def mm(self, depth, move, maximiser): # MINIMAX :0
+  def mm(self, depth, move, maximizing): # ostatni artgument definiuje czy chcemy zwiekszac wynik
     if depth == 0: # ostatni poziom, ewaluuj tylko finalny efekt
       return move, self.evaluate()[1]
 
-    if maximiser:
+    if maximizing:
       # best move 
       bmove = None
       # best score 
-      bscore = -9999 # ujemne bo liczymy dla czarnych 
+      bscore = -math.inf # ujemne bo liczymy dla czarnych 
       moves = list(self.board.legal_moves)
 
       for move in moves:
         self.leaves_explored += 1
         self.board.push(move) # wykonaj ruch
-        nmove, nscore = self.mm(depth - 1, move, False) # new move, new score
+        nmove, nscore = self.mm(depth - 1, move, False) # new move, new score, oblicz wartosc
         if nscore > bscore:
           bscore, bmove = nscore, move
-        self.board.pop()
+        self.board.pop() # cofnij ruch 
 
       # zwroc najlepszy ruch wraz z jego wartoscia
       return bmove, bscore 
 
   
-  def ab(self, negative_depth, positive_depth, move, a, b, move_hist, maximiser): #alpha-beta
+  def ab(self, negative_depth, positive_depth, move, a, b, move_hist, maximizing): #alpha-beta
     seq = [] # sekwencja ruchow
     if negative_depth == 0: # czy to ostatni poziom depth
       seq.append(move)
@@ -146,14 +147,14 @@ class KoksSzachy:
           return seq, -1000000
 
     bmove = None
-    bscore = -10000001 if maximiser else 10000001 
+    bscore = -10000001 if maximizing else 10000001 
 
     # najnowszy obliczony najlepszy ruch na poczatek listy, powinno pomoc w obcinanu galezi z minimaxa
     if move_hist and len(move_hist) >= negative_depth:
       if move_hist[negative_depth-1] in moves:
         moves.insert(0, move_hist[negative_depth-1])
     
-    if maximiser: # dla gracza zwiekszajacego, w tym przypadku czarny
+    if maximizing: # dla gracza zwiekszajacego, w tym przypadku czarny
       for move in moves:
         self.leaves_explored += 1
         self.board.push(move) # zrob ruch
@@ -179,7 +180,7 @@ class KoksSzachy:
       seq.append(bmove)
       return seq, bscore
           
-    if not maximiser: # dla gracza zmniejszajacego to samo co powyżej tyle ze dla alfy
+    if not maximizing: # dla gracza zmniejszajacego to samo co powyżej tyle ze dla alfy
       for move in moves:
         self.leaves_explored += 1
 
@@ -219,13 +220,13 @@ class KoksSzachy:
     return str(tree[-1])
 
   def run_mm(self, depth):
-    maximiser = self.board.turn # tym kto chce zwiekszyc wartosc jest ten kogo jest ruch
-    bmove, bscore = self.mm(depth, None, maximiser)
+    maximizing = self.board.turn # tym kto chce zwiekszyc wartosc jest ten kogo jest ruch
+    bmove, bscore = self.mm(depth, None, maximizing)
     return str(bmove) # zwroc najlepszy ruch obliczony przez minimaxa
 
   def run_ab(self, depth):
-    maximiser = self.board.turn
-    seq, bscore = self.ab(depth, 0, None, -10000001, 10000001, None, maximiser)
+    maximizing = self.board.turn
+    seq, bscore = self.ab(depth, 0, None, -10000001, 10000001, None, maximizing)
     for i in range(1, len(seq)):
       print(f"computers move: {seq[-i]}")
     return str(seq[-1])
