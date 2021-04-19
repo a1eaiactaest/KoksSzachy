@@ -74,7 +74,7 @@ I jeśli rzeczywiście popatrzymy na szachownicę, ta wartość się jak najbard
   <img src="docs/e4_nodes.png"
 </p>
 
-Jeśli porównamy wartości depth od `1-9` to zobaczymy prawdziwe różnice.
+Jeśli porównamy wartości depth od `1-8` to zobaczymy prawdziwe różnice.
 
 Chciałem tutaj dać piękny wykres matplotliba, ale nie udało mi się.
 
