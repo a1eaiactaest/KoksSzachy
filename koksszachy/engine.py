@@ -79,7 +79,7 @@ class KoksSzachy:
     }
     
     self.board.set_fen(fen)
-    self.leaves_explored = 0 # mozliwosci rozwiniecia gry
+    self.nodes_explored = 0 # mozliwosci rozwiniecia gry
     self.board = chess.Board()
 
   def evaluate(self): # ewaluacja zmiennych takich jak material i pozycja
@@ -117,7 +117,7 @@ class KoksSzachy:
       moves = list(self.board.legal_moves)
 
       for move in moves:
-        self.leaves_explored += 1
+        self.nodes_explored += 1
         self.board.push(move) # wykonaj ruch
         nmove, nscore = self.mm(depth - 1, move, False) # new move, new score, oblicz wartosc
         if nscore > bscore:
@@ -156,7 +156,7 @@ class KoksSzachy:
     
     if maximizing: # dla gracza zwiekszajacego, w tym przypadku czarny
       for move in moves:
-        self.leaves_explored += 1
+        self.nodes_explored += 1
         self.board.push(move) # zrob ruch
         # oblicz, zapisz w var(nseq)
         nseq, nscore = self.ab(negative_depth-1, positive_depth+1, move, a, b, move_hist, False)
@@ -182,7 +182,7 @@ class KoksSzachy:
           
     if not maximizing: # dla gracza zmniejszajacego to samo co powyżej tyle ze dla alfy
       for move in moves:
-        self.leaves_explored += 1
+        self.nodes_explored += 1
 
         self.board.push(move) # zrob ruch
         # oblicz, zapisz w var(nseq)
@@ -213,10 +213,10 @@ class KoksSzachy:
   # https://www.youtube.com/watch?v=JnXKZYFmGOg bardzo polecam koks filmik
   def iter_deep(self, depth): 
     tree, ret = self.ab(1, 0, None, -10000001, 10000001, None, self.board.turn)
-    for i in range(2, depth+1):
-      print(f"iteration nr.{i}")
+    for i in range(2, depth):
+      print("iteration nr.%s"%i)
       tree, ret = self.ab(i, 0, None, -10000001, 10000001, tree, self.board.turn)
-    print(f"depth reached {len(tree)}")
+    print("depth reached %s"%len(tree))
     return str(tree[-1])
 
   def run_mm(self, depth):
@@ -228,14 +228,12 @@ class KoksSzachy:
     maximizing = self.board.turn
     seq, bscore = self.ab(depth, 0, None, -10000001, 10000001, None, maximizing)
     for i in range(1, len(seq)):
-      print(f"computers move: {seq[-i]}")
+      print("computers move: %s"%seq[-i])
     return str(seq[-1])
 
-  def leaves(self): # ile mozliwosci
-    my_leaves = self.leaves_explored
-    self.leaves_explored = 0 # reset
-    return my_leaves
+  def leaves(self): # mozliwosci ruchow
+    my_nodes = self.nodes_explored
+    self.nodes_explored = 0 # reset
+    return my_nodes
 
 
-if __name__ == "__main__":
-  v = KoksSzachy()

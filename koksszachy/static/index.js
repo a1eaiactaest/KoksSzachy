@@ -42,6 +42,7 @@ var onDrop = function(source, target){
 
   updateStatus();
   getResponseMove();
+  console.log(chess.fen());
 };
 
 var onMouseoverSquare = function(square, piece){

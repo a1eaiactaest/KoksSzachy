@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf8 -*-
 
 import sys
 import chess
@@ -37,16 +38,17 @@ def hello():
 @app.route("/info/<int:depth>/<path:fen>/") # routuj fen i depth do url tak zeby mozna bylo requestowac
 def calc_move(depth, fen):
   start = time.time()
-  print(f'depth: {depth}')
+  print('depth: %s'%depth)
   engine = KoksSzachy(fen)
-  move = engine.iter_deep(depth - 1)
+  move = engine.iter_deep(depth)
   end = time.time()
   if move is None:
     print('Game over')
     return 0
   else: 
-    print(f'computer moves: {move}\n')
-    print(f'time elapsed: {end - start}')
+    print('computer moves: %s\n'%move)
+    print(engine.leaves())
+    print('time elapsed: %s'%(end-start))
     return move
 
 
@@ -58,7 +60,7 @@ def get_data():
     content = request.get_json() # {"content": ["1. f3 e5 2. g4 Qh4#"]}
     pgn = content['content'][0] # ['1. f3 e5 2. g4 Qh4#']
     pgn = {"pgn": pgn, "pgnFile": "", "analyse":"true"} # dwa ostatnie tak profilaktycznie
-    url = f'https://lichess.org/paste?{urllib.parse.urlencode(pgn)}' # encode url zeby wstawic dane automatycznie
+    url = 'https://lichess.org/paste?%s'%urllib.parse.urlencode(pgn) # encode url zeby wstawic dane automatycznie
     print(url)
     webbrowser.open_new_tab(url)
     return '', 200 # zwroc odpowiedni kod
@@ -67,7 +69,7 @@ def main():
   try:
     argument = sys.argv[1]
     if argument not in arguments:
-      print(f'\n  Wystąpił problem z rozpoznaniem argumentu {argument}')
+      print('\n  Wystąpił problem z rozpoznaniem argumentu %s'%argument)
       my_help()
       return 0
     else:
@@ -86,4 +88,3 @@ def main():
 
 if __name__ == "__main__":
   app.run(debug=True)
-

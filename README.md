@@ -5,7 +5,7 @@
 ![Linux](https://img.shields.io/badge/-Linux-grey?logo=linux)
 ![OSX](https://img.shields.io/badge/-OSX-grey?logo=apple)
 ![Windows 10](https://img.shields.io/badge/-Windows-grey?logo=windows)
-![Python](https://img.shields.io/badge/Python-v3.6%5E-green?logo=python)
+![Python](https://img.shields.io/badge/Python-v3.7%5E-green?logo=python)
 ![PyPI](https://img.shields.io/pypi/v/KoksSzachy?color=blue&label=version)
 
 ## Jak to działa?
@@ -48,7 +48,7 @@ Silnik KoksSzachów działa na bardzo prostej zasadzie:
   * Wszystko działa dopóki są możliwe ruchy. Nie działa to na podstawie pętli. 
 
 ## Minimax
-  Ty, jako gracz, grasz białymi figurami. Minimax jest wywoływany przez gracza maksymalizującego wynik, w tym przypadku są to czarne figury, czyli komputer. 
+Ty, jako gracz, grasz białymi figurami. Minimax jest wywoływany przez gracza maksymalizującego wynik, w tym przypadku są to czarne figury, czyli komputer. 
 Scenariusz, w którym grasz maksymalizujący wygrywa ma przypisaną warość nieskończoną. Idąc tym schematem przegrana dla gracza maksymalizującego ma wartość ujemnej nieskończoności.
   
 
@@ -65,12 +65,38 @@ Scenariusz, w którym grasz maksymalizujący wygrywa ma przypisaną warość nie
   - https://pl.wikipedia.org/wiki/Algorytm_alfa-beta   
   - https://www.chessprogramming.org/Iterative_Deepening  
  
+## Różnice depth w iterative deepeningu
+Przeprowadziłem prosty test polegający na mierzeniu różnic czasowych i eksploracyjnych pomiędzy wartościami depth.
+Najniższą możliwą wartością depth jest `1`. Zakładając, że mierzymy wszystkie wartości dla klasycznego i każdemu znango ruchu `e4`, wartość zmiennej `nodes_explored`, czyli jednym słowem możliwe rozwinięcia dla danej sytuacji, wynosi `20` rozwinięć.
+I jeśli rzeczywiście popatrzymy na szachownicę, ta wartość się jak najbardziej zgadza.
+
+<p align="center">
+  <img src="docs/e4_nodes.png"
+</p>
+
+Jeśli porównamy wartości depth od `1-9` to zobaczymy prawdziwe różnice.
+
+Chciałem tutaj dać piękny wykres matplotliba, ale nie udało mi się.
+
+| Depth  | Nodes  | Czas(s)|
+| -------|:------:|------:|
+| 1      | 20     | 0.004 | 
+| 2      | 102    | 0.014 |
+| 3      | 1233   | 0.086 | 
+| 4      | 22884  | 1.563 | 
+| 5      | 197047 | 13.232| 
+| 6      | 768488 | 51.222|
+| 7      | 12713930| 886.259| 
+| 8      | 78510963| 5392.2| 
+
+
+
 
 # Instalacja lub update
 
 ## Wymagania
 
-Do zainstalowania KoksSzachów wymagany jest pobrany `Python 3.6` lub nowszy oraz `pip` odpowiadjący wersji Pythona, czyli pythonowy package manager.
+Do zainstalowania KoksSzachów wymagany jest pobrany `Python 3.7` lub nowszy oraz `pip` odpowiadjący wersji Pythona, czyli pythonowy package manager.
 
 ### Unix
 
@@ -93,33 +119,6 @@ $ koksszachy -p
 
 $ koksszachy --play
 ```
-
-# TODO
-
-* ~~Narysować boarda na stronie.~~
-* ~~Podpiąć chessboardjs pod python-chessa.~~
-* ~~Bardzo podstawowe działanie takie jak ograniczenie tylko do legalnych ruchów.~~
-* ~~Troche bardziej rozwinięte działanie.~~
-  * ~~Promocja~~
-  * ~~En passant~~
-  * ~~Roszada~~
-* ~~Ewaluacja dla poszczególnych bierek.~~
-* ~~Minimax~~
-  * ~~Alpha-beta~~
-* ~~Javascriptowe funkcje~~
-  * ~~takeBack()~~
-    * ~~implementacja~~
-    * ~~guziczek~~
-  * ~~newGame()~~
-    * ~~implementacja~~
-    * ~~guziczek~~
-* ~~Ktoś może sportować javascripta z index.html do oddzielnego pliku.~~
-* Frontend
-* ~~Analysis Button, czyli klikamy zapisujemy notacje PGN i  przekierowywyuje nas w new tabie do API Lichessa z możliwością analizy naszej gry na podstawie PGN.~~
-* Kto wygrywa, aka wartość zbitych pionów z obu stron.
-* ~~favicon i logo jakies do readme~~
-* ~~wypisywanie pgn-u do textarea~~
-* wybór promocji, tzn. na jaką figurę chcemy wypromować piona
 
 ### Zgodność
 
