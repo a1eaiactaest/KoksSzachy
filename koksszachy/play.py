@@ -65,17 +65,18 @@ def get_data():
     webbrowser.open_new_tab(url)
     return '', 200 # zwroc odpowiedni kod
  
-def main():
+def main(argument=""):
   try:
-    argument = sys.argv[1]
+    if argument == "":
+      argument = sys.argv[1]
     if argument not in arguments:
-      print('\n  Wystąpił problem z rozpoznaniem argumentu %s'%argument)
+      print('\n  Wystąpił problem z rozpoznaniem argumentu %s' % argument)
       my_help()
       return 0
     else:
       if argument == '--play' or argument == '-p':
         webbrowser.open_new_tab('http://localhost:5000')
-        app.run(debug=True)
+        app.run(debug=False)
       if argument == '--docs' or argument == '-d':
         webbrowser.open_new_tab('https://github.com/a1eaiactaest/KoksSzachy/blob/main/README.md')
         return 0
@@ -87,4 +88,19 @@ def main():
     return 0
 
 if __name__ == "__main__":
-  app.run(debug=True)
+  try:
+    argument = sys.argv[1]
+    if argument not in arguments:
+      print('\n  Wystąpił problem z rozpoznaniem argumentu "%s"' % argument)
+      my_help()
+    else:
+      if argument == '--play' or argument == '-p':
+        webbrowser.open_new_tab('http://localhost:5000')
+        app.run(debug=False)
+      if argument == '--docs' or argument == '-d':
+        webbrowser.open_new_tab('https://github.com/a1eaiactaest/KoksSzachy/blob/main/README.md')
+      if argument == '--help' or argument == '-h':
+        my_help()
+        print('argument: %s'%arugment)
+  except IndexError:
+    app.run(debug=True)

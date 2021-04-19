@@ -78,9 +78,9 @@ class KoksSzachy:
         ]
     }
     
+    self.board = chess.Board()
     self.board.set_fen(fen)
     self.nodes_explored = 0 # mozliwosci rozwiniecia gry
-    self.board = chess.Board()
 
   def evaluate(self): # ewaluacja zmiennych takich jak material i pozycja
     # ocena materialu
