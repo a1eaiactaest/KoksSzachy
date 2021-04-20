@@ -8,6 +8,34 @@
 ![Python](https://img.shields.io/badge/Python-v3.7%5E-green?logo=python)
 ![PyPI](https://img.shields.io/pypi/v/KoksSzachy?color=blue&label=version)
 
+# Instalacja i update
+
+## Wymagania
+
+Do zainstalowania KoksSzachów wymagany jest pobrany `Python 3.7` lub nowszy oraz `pip` odpowiadjący wersji Pythona, czyli pythonowy package manager.
+
+### Unix
+
+```bash
+$ pip3 install koksszachy --upgrade
+```
+
+### Windows
+
+```bash
+$ pip install koksszachy --upgrade
+```
+
+## Jak zagrać?
+
+```bash
+$ koksszachy -p
+
+# lub
+
+$ koksszachy --play
+```
+
 ## Jak to działa?
 
 Silnik KoksSzachów działa na bardzo prostej zasadzie:  
@@ -91,38 +119,4 @@ Chciałem tutaj dać piękny wykres matplotliba, ale nie udało mi się.
 
 
 
-
-# Instalacja lub update
-
-## Wymagania
-
-Do zainstalowania KoksSzachów wymagany jest pobrany `Python 3.7` lub nowszy oraz `pip` odpowiadjący wersji Pythona, czyli pythonowy package manager.
-
-### Unix
-
-```bash
-$ pip3 install koksszachy --upgrade
-```
-
-### Windows
-
-```bash
-$ pip install koksszachy --upgrade
-```
-
-## Jak zagrać?
-
-```bash
-$ koksszachy -p
-
-# lub
-
-$ koksszachy --play
-```
-
-### Zgodność
-
-- [x] Windows 
-- [x] Linux
-- [x] MacOS
 
