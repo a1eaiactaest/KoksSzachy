@@ -8,9 +8,7 @@
 ![Python](https://img.shields.io/badge/Python-v3.7%5E-green?logo=python)
 ![PyPI](https://img.shields.io/pypi/v/KoksSzachy?color=blue&label=version)
 
-# Instalacja i update
-
-## Wymagania
+## Instalacja i update
 
 Do zainstalowania KoksSzachów wymagany jest pobrany `Python 3.7` lub nowszy oraz `pip` odpowiadjący wersji Pythona, czyli pythonowy package manager.
 
