@@ -46,9 +46,10 @@ def calc_move(depth, fen):
     print('Game over')
     return 0
   else: 
-    print('computer moves: %s\n'%move)
-    print(engine.leaves())
+    #print('computer moves: %s'%move)
+    print('nodes explored: %s '%engine.leaves())
     print('time elapsed: %s'%(end-start))
+    print(engine.board,'\n')
     return move
 
 
@@ -65,7 +66,7 @@ def get_data():
     webbrowser.open_new_tab(url)
     return '', 200 # zwroc odpowiedni kod
  
-def main(argument=""):
+def main(argument="", show=True):
   try:
     if argument == "":
       argument = sys.argv[1]
@@ -75,8 +76,14 @@ def main(argument=""):
       return 0
     else:
       if argument == '--play' or argument == '-p':
-        webbrowser.open_new_tab('http://localhost:5000')
-        app.run(debug=False)
+        if show == False:
+          print('DEBUG OFF')
+          import os
+          os.environ['WERKZEUG_RUN_MAIN'] = 'true'
+          app.run(debug=False)
+        else:
+          webbrowser.open_new_tab('http://localhost:5000')
+          app.run(debug=False)
       if argument == '--docs' or argument == '-d':
         webbrowser.open_new_tab('https://github.com/a1eaiactaest/KoksSzachy/blob/main/README.md')
         return 0
@@ -86,6 +93,7 @@ def main(argument=""):
   except IndexError:
     my_help()
     return 0
+
 
 if __name__ == "__main__":
   try:
@@ -104,3 +112,4 @@ if __name__ == "__main__":
         print('argument: %s'%arugment)
   except IndexError:
     app.run(debug=True)
+

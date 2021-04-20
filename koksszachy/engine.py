@@ -214,9 +214,7 @@ class KoksSzachy:
   def iter_deep(self, depth): 
     tree, ret = self.ab(1, 0, None, -10000001, 10000001, None, self.board.turn)
     for i in range(2, depth):
-      print("iteration nr.%s"%i)
       tree, ret = self.ab(i, 0, None, -10000001, 10000001, tree, self.board.turn)
-    print("depth reached %s"%len(tree))
     return str(tree[-1])
 
   def run_mm(self, depth):
@@ -227,8 +225,6 @@ class KoksSzachy:
   def run_ab(self, depth):
     maximizing = self.board.turn
     seq, bscore = self.ab(depth, 0, None, -10000001, 10000001, None, maximizing)
-    for i in range(1, len(seq)):
-      print("computers move: %s"%seq[-i])
     return str(seq[-1])
 
   def leaves(self): # mozliwosci ruchow
