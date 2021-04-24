@@ -1,4 +1,8 @@
-# ![KoksSzachy](https://user-images.githubusercontent.com/73793685/111052894-2bfdb300-8457-11eb-872a-bf4387a76ccb.png)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/73793685/111052894-2bfdb300-8457-11eb-872a-bf4387a76ccb.png"
+</p>
+
+---------------------------------------------------------------------------
 
 <sub>chess.com pls don't sue us, it's for fun</sub>
 
@@ -32,6 +36,12 @@ $ koksszachy -p
 # lub
 
 $ koksszachy --play
+```
+
+## Testujesz?
+
+```
+python3 -m pytest
 ```
 
 ## Jak to działa?
@@ -92,7 +102,7 @@ Scenariusz, w którym grasz maksymalizujący wygrywa ma przypisaną warość nie
   - https://www.chessprogramming.org/Iterative_Deepening  
  
 ## Różnice depth w iterative deepeningu
-Przeprowadziłem prosty test polegający na mierzeniu różnic czasowych i eksploracyjnych pomiędzy wartościami depth.
+Przeprowadziłem prosty eksperyment polegający na mierzeniu różnic czasowych i eksploracyjnych pomiędzy wartościami depth.
 Najniższą możliwą wartością depth jest `1`. Zakładając, że mierzymy wszystkie wartości dla klasycznego i każdemu znango ruchu `e4`, wartość zmiennej `nodes_explored`, czyli jednym słowem możliwe rozwinięcia dla danej sytuacji, wynosi `20` rozwinięć.
 I jeśli rzeczywiście popatrzymy na szachownicę, ta wartość się jak najbardziej zgadza.
 
