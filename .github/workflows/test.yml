@@ -1,0 +1,41 @@
+name: Unit Testy
+
+on: [push, pull_request]
+
+jobs:
+  linter:
+    name: Linter
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+    - name: Set up Python3.7
+      uses: actions/setup-python@v2
+      with: 
+        python-version: 3.7
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m install pylint 
+    - name: Lint with pylint
+    run: |
+      python -m pylint --disable=all -e W0311 --jobs=0 --indent-string='  ' **/*.py
+
+
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+
+    steps: 
+    - name: Checkout Code:
+      uses: actions/checkout@v2
+    - name: Set up Python3.7
+      uses: actions/setup-python@v2
+      with: 
+        python-version: 3.7
+    - name: Install Dependencies
+      run: pip install -e '.'
+    - name: Run Pytest
+      run: python -m pytest -s -v
+

@@ -41,7 +41,7 @@ $ koksszachy --play
 ## Testujesz?
 
 ```
-python3 -m pytest
+$ python3 -m pytest
 ```
 
 ## Jak to działa?
