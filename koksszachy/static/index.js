@@ -41,7 +41,7 @@ var onDrop = function(source, target){
   if (move === null) return 'snapback';
 
   updateStatus();
-  getResponseMove();
+  pullMove();
   console.log(chess.fen());
 };
 
@@ -117,7 +117,7 @@ var config = {
   onSnapEnd: onSnapEnd
 };
 
-var getResponseMove = function(){
+var pullMove = function(){
   var e = document.getElementById("sel1");
   var depth = e.options[e.selectedIndex].value;
   fen = chess.fen()

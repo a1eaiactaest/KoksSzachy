@@ -38,16 +38,19 @@ def hello():
 @app.route("/info/<int:depth>/<path:fen>/") # routuj fen i depth do url tak zeby mozna bylo requestowac
 def calc_move(depth, fen):
   start = time.time()
-  print('depth: %s'%depth)
+  print('\ndepth: %s'%depth)
   engine = KoksSzachy(fen)
   move = engine.iter_deep(depth)
+  nodes_explored = engine.leaves()
+  val = engine.evaluate()
   end = time.time()
   if move is None:
     print('Game over')
     return 0
   else: 
     #print('computer moves: %s'%move)
-    print('nodes explored: %s '%engine.leaves())
+    print('nodes explored: %s '%nodes_explored)
+    print('eval: %s'%str(val))
     print('time elapsed: %s'%(end-start))
     print(engine.board,'\n')
     return move
