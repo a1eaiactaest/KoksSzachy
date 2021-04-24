@@ -1,4 +1,5 @@
 chess
 flask
 koksszachy
+requests
 pytest
