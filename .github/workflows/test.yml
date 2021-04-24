@@ -19,8 +19,8 @@ jobs:
         python -m pip install --upgrade pip
         python -m install pylint 
     - name: Lint with pylint
-    run: |
-      python -m pylint --disable=all -e W0311 --jobs=0 --indent-string='  ' **/*.py
+      run: |
+        python -m pylint --disable=all -e W0311 --jobs=0 --indent-string='  ' **/*.py
 
 
   test:
