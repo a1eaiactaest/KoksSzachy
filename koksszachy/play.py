@@ -49,9 +49,10 @@ def calc_move(depth, fen):
     return 0
   else: 
     #print('computer moves: %s'%move)
-    print('nodes explored: %s '%nodes_explored)
-    print('eval: %s'%str(val))
-    print('time elapsed: %s'%(end-start))
+    print('nodes explored: %s '% nodes_explored)
+    print('eval: %s'% str(val))
+    print('fen: %s'% fen)
+    print('time elapsed: %s'% (end-start))
     print(engine.board,'\n')
     return move
 
