@@ -2,12 +2,26 @@
 # -*- coding: utf8 -*-
 
 import sys
+import os
+DEBUG = os.getenv("DEBUG", None) is not None
+
+
+if __name__=="koksszachy.play":
+  from koksszachy.engine import KoksSzachy
+else:
+  sys.path.append(os.getcwd())
+  from engine import KoksSzachy
+
 import chess
 import webbrowser
 import time
-from koksszachy.engine import KoksSzachy
 from flask import Flask, Response, request, render_template, url_for, jsonify
 app = Flask(__name__) 
+
+if not DEBUG: # jesli nie debug nie pokazuj logów flaska
+  import logging
+  log = logging.getLogger('werkzeug')
+  log.setLevel(logging.ERROR)
 
 arguments = [
     '-h',
@@ -30,6 +44,8 @@ def my_help():
   '''
   print(mes)
 
+
+
 @app.route("/")
 def hello():
   r = render_template('index.html') # musialem uzyc render_template, inaczej ciezko by dzialalo z packagowaniem
@@ -37,24 +53,32 @@ def hello():
 
 @app.route("/info/<int:depth>/<path:fen>/") # routuj fen i depth do url tak zeby mozna bylo requestowac
 def calc_move(depth, fen):
-  start = time.time()
-  print('\ndepth: %s'%depth)
-  engine = KoksSzachy(fen)
-  move = engine.iter_deep(depth)
-  nodes_explored = engine.leaves()
-  val = engine.evaluate()
-  end = time.time()
-  if move is None:
-    print('Game over')
-    return 0
-  else: 
-    #print('computer moves: %s'%move)
-    print('nodes explored: %s '% nodes_explored)
-    print('eval: %s'% str(val))
-    print('fen: %s'% fen)
-    print('time elapsed: %s'% (end-start))
-    print(engine.board,'\n')
-    return move
+  if DEBUG:
+    start = time.time()
+    print('\ndepth: %s'%depth)
+    v = KoksSzachy(fen)
+    move = v.iter_deep(depth)
+    nodes_explored = v.leaves()
+    val = v.evaluate()
+    end = time.time()
+    if move is None:
+      print('Game over')
+      return 0
+    else: 
+      #print('computer moves: %s'%move)
+      print('nodes explored: %s '% nodes_explored)
+      print('eval: %s'% str(val))
+      print('fen: %s'% fen)
+      print('time elapsed: %s'% (end-start))
+      print(v.game,'\n')
+      return move
+  else:
+    v = KoksSzachy(fen)
+    move = v.iter_deep(depth)
+    if move is None:
+      return 0
+    else:
+      return move
 
 
 @app.route("/analysis", methods=['POST'])
@@ -66,11 +90,12 @@ def get_data():
     pgn = content['content'][0] # ['1. f3 e5 2. g4 Qh4#']
     pgn = {"pgn": pgn, "pgnFile": "", "analyse":"true"} # dwa ostatnie tak profilaktycznie
     url = 'https://lichess.org/paste?%s'%urllib.parse.urlencode(pgn) # encode url zeby wstawic dane automatycznie
-    print(url)
+    if DEBUG:
+      print(url)
     webbrowser.open_new_tab(url)
     return '', 200 # zwroc odpowiedni kod
  
-def main(argument="", show=True):
+def main(argument="", DEBUG=False, show=True):
   try:
     if argument == "":
       argument = sys.argv[1]
@@ -80,13 +105,13 @@ def main(argument="", show=True):
       return 0
     else:
       if argument == '--play' or argument == '-p':
-        if show == False:
-          print('DEBUG OFF')
-          import os
-          os.environ['WERKZEUG_RUN_MAIN'] = 'true'
-          app.run(debug=False)
+        if DEBUG:
+          #os.environ['WERKZEUG_RUN_MAIN'] = 'true'
+          app.run(debug=True)
         else:
-          webbrowser.open_new_tab('http://localhost:5000')
+          #os.environ['WERKZEUG_RUN_MAIN'] = 'false'
+          if show==True:
+            webbrowser.open_new_tab('http://localhost:5000')
           app.run(debug=False)
       if argument == '--docs' or argument == '-d':
         webbrowser.open_new_tab('https://github.com/a1eaiactaest/KoksSzachy/blob/main/README.md')
@@ -103,17 +128,23 @@ if __name__ == "__main__":
   try:
     argument = sys.argv[1]
     if argument not in arguments:
-      print('\n  Wystąpił problem z rozpoznaniem argumentu "%s"' % argument)
+      print('\n  Wystąpił problem z rozpoznaniem argumentu %s' % argument)
       my_help()
     else:
       if argument == '--play' or argument == '-p':
-        webbrowser.open_new_tab('http://localhost:5000')
-        app.run(debug=False)
+        if DEBUG:
+          app.run(debug=True)
+        else:
+          webbrowser.open_new_tab('http://localhost:5000')
+          app.run(debug=False)
       if argument == '--docs' or argument == '-d':
         webbrowser.open_new_tab('https://github.com/a1eaiactaest/KoksSzachy/blob/main/README.md')
       if argument == '--help' or argument == '-h':
         my_help()
-        print('argument: %s'%arugment)
   except IndexError:
-    app.run(debug=True)
+    if DEBUG:
+      app.run(debug=True)
+    else:
+      webbrowser.open_new_tab('http://localhost:5000')
+      app.run(debug=False)
 

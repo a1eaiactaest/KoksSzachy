@@ -38,6 +38,10 @@ $ koksszachy -p
 $ koksszachy --play
 ```
 
+PROTIP: Jeśli debugujesz, to ci się przyda.
+```
+$ DEBUG=1 koksszachy --play
+```
 ## Testujesz?
 
 ```

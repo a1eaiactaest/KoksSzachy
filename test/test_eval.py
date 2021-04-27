@@ -1,14 +1,28 @@
 #!/usr/bin/env python3
+import sys
+import os
+
+parent = os.path.basename(os.getcwd())
+if parent == 'test':
+  sys.path.insert(0, '../koksszachy')
+if parent == 'KoksSzachy':
+  sys.path.insert(0, 'koksszachy')
+from engine import KoksSzachy
 
 import unittest
-import chess
-from koksszachy.engine import KoksSzachy
+#from koksszachy.engine import KoksSzachy
 
 
 """
 rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR%20b%20KQkq%20e3%200%201
 
 rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1
+
+
+przetestowac to:
+
+5k2/4N3/4Q1P1/pr2P3/8/1P3P2/1K5P/8 b - - 0 47
+
 """
 
 class TestEval(unittest.TestCase):

@@ -2,102 +2,103 @@
 import chess
 import math
 
-class KoksSzachy:
-  def __init__(self, fen):
-    self.values = { # wartosci poszczegolnych figur podniesione do x*100
-      chess.PAWN: 100, # pion
-      chess.BISHOP: 300, # skoczek
-      chess.KNIGHT: 300, # goniec
-      chess.ROOK: 500, # wieza
-      chess.QUEEN: 900, # hetman
-      chess.KING: 99999 # krol
-    }
+MAXVAL = 10000
 
-    self.positions = positions = {
-      # gdzie najlepiej stac przedstawione w arrayach 8x8 
-      chess.PAWN: [ 
-        0, 0, 0, 0, 0, 0, 0, 0,         # 8
-        50, 50, 50, 50, 50, 50, 50, 50, # 7
-        10, 10, 20, 30, 30, 20, 10, 10, # 6
-        5, 5, 10, 25, 25, 10, 5, 5,     # 5
-        0, 0, 0, 20, 20, 0, 0, 0,       # 4
-        5, -5, -10, 0, 0, -10, -5, 5,   # 3
-        5, 10, 10, -20, -20, 10, 10, 5, # 2
-        0, 0, 0, 0, 0, 0, 0, 0          # 1
+class KoksSzachy:
+  values = { # wartosci poszczegolnych figur podniesione do x*100
+    chess.PAWN: 100, # pion
+    chess.BISHOP: 300, # skoczek
+    chess.KNIGHT: 300, # goniec
+    chess.ROOK: 500, # wieza
+    chess.QUEEN: 900, # hetman
+    chess.KING: 0 # krol, zero bo nie da sie przejac
+  }
+  positions = {
+    # gdzie najlepiej stac przedstawione w arrayach 8x8 
+    chess.PAWN: [ 
+      0, 0, 0, 0, 0, 0, 0, 0,         # 8
+      50, 50, 50, 50, 50, 50, 50, 50, # 7
+      10, 10, 20, 30, 30, 20, 10, 10, # 6
+      5, 5, 10, 25, 25, 10, 5, 5,     # 5
+      0, 0, 0, 20, 20, 0, 0, 0,       # 4
+      5, -5, -10, 0, 0, -10, -5, 5,   # 3
+      5, 10, 10, -20, -20, 10, 10, 5, # 2
+      0, 0, 0, 0, 0, 0, 0, 0          # 1
 #       a  b  c  d  e  f  g  h 
+    ],
+    chess.BISHOP: [
+      -50, -40, -30, -30, -30, -30, -40, -50,
+      -40, -20, 0, 0, 0, 0, -20, -40,
+      -30, 0, 10, 15, 15, 10, 0, -30,
+      -30, 5, 15, 20, 20, 15, 5, -30,
+      -30, 0, 15, 20, 20, 15, 0, -30,
+      -30, 5, 10, 15, 15, 10, 5, -30,
+      -40, -20, 0, 5, 5, 0, -20, -40,
+      -50, -40, -30, -30, -30, -30, -40, -50,
+    ],
+    chess.KNIGHT: [
+      -20, -10, -10, -10, -10, -10, -10, -20,
+      -10, 0, 0, 0, 0, 0, 0, -10,
+      -10, 0, 5, 10, 10, 5, 0, -10,
+      -10, 5, 5, 10, 10, 5, 5, -10,
+      -10, 0, 10, 10, 10, 10, 0, -10,
+      -10, 10, 10, 10, 10, 10, 10, -10,
+      -10, 5, 0, 0, 0, 0, 5, -10,
+      -20, -10, -10, -10, -10, -10, -10, -20,
+    ],
+    chess.ROOK: [
+      0, 0, 0, 0, 0, 0, 0, 0,
+      5, 10, 10, 10, 10, 10, 10, 5,
+      -5, 0, 0, 0, 0, 0, 0, -5,
+      -5, 0, 0, 0, 0, 0, 0, -5,
+      -5, 0, 0, 0, 0, 0, 0, -5,
+      -5, 0, 0, 0, 0, 0, 0, -5,
+      -5, 0, 0, 0, 0, 0, 0, -5,
+      0, 0, 0, 5, 5, 0, 0, 0
       ],
-      chess.BISHOP: [
-        -50, -40, -30, -30, -30, -30, -40, -50,
-        -40, -20, 0, 0, 0, 0, -20, -40,
-        -30, 0, 10, 15, 15, 10, 0, -30,
-        -30, 5, 15, 20, 20, 15, 5, -30,
-        -30, 0, 15, 20, 20, 15, 0, -30,
-        -30, 5, 10, 15, 15, 10, 5, -30,
-        -40, -20, 0, 5, 5, 0, -20, -40,
-        -50, -40, -30, -30, -30, -30, -40, -50,
-      ],
-      chess.KNIGHT: [
-        -20, -10, -10, -10, -10, -10, -10, -20,
-        -10, 0, 0, 0, 0, 0, 0, -10,
-        -10, 0, 5, 10, 10, 5, 0, -10,
-        -10, 5, 5, 10, 10, 5, 5, -10,
-        -10, 0, 10, 10, 10, 10, 0, -10,
-        -10, 10, 10, 10, 10, 10, 10, -10,
-        -10, 5, 0, 0, 0, 0, 5, -10,
-        -20, -10, -10, -10, -10, -10, -10, -20,
-      ],
-      chess.ROOK: [
-        0, 0, 0, 0, 0, 0, 0, 0,
-        5, 10, 10, 10, 10, 10, 10, 5,
-        -5, 0, 0, 0, 0, 0, 0, -5,
-        -5, 0, 0, 0, 0, 0, 0, -5,
-        -5, 0, 0, 0, 0, 0, 0, -5,
-        -5, 0, 0, 0, 0, 0, 0, -5,
-        -5, 0, 0, 0, 0, 0, 0, -5,
-        0, 0, 0, 5, 5, 0, 0, 0
-        ],
-      chess.QUEEN: [
-        -20, -10, -10, -5, -5, -10, -10, -20,
-        -10, 0, 0, 0, 0, 0, 0, -10,
-        -10, 0, 5, 5, 5, 5, 0, -10,
-        -5, 0, 5, 5, 5, 5, 0, -5,
-        0, 0, 5, 5, 5, 5, 0, -5,
-        -10, 5, 5, 5, 5, 5, 0, -10,
-        -10, 0, 5, 0, 0, 0, 0, -10,
-        -20, -10, -10, -5, -5, -10, -10, -20
-      ],
-      chess.KING: [
-        -30, -40, -40, -50, -50, -40, -40, -30,
-        -30, -40, -40, -50, -50, -40, -40, -30,
-        -30, -40, -40, -50, -50, -40, -40, -30,
-        -30, -40, -40, -50, -50, -40, -40, -30,
-        -20, -30, -30, -40, -40, -30, -30, -20,
-        -10, -20, -20, -20, -20, -20, -20, -10,
-        20, 20, 0, 0, 0, 0, 20, 20,
-        20, 30, 10, 0, 0, 10, 30, 20
-        ]
-    }
-    
-    self.board = chess.Board()
-    self.board.set_fen(fen)
+    chess.QUEEN: [
+      -20, -10, -10, -5, -5, -10, -10, -20,
+      -10, 0, 0, 0, 0, 0, 0, -10,
+      -10, 0, 5, 5, 5, 5, 0, -10,
+      -5, 0, 5, 5, 5, 5, 0, -5,
+      0, 0, 5, 5, 5, 5, 0, -5,
+      -10, 5, 5, 5, 5, 5, 0, -10,
+      -10, 0, 5, 0, 0, 0, 0, -10,
+      -20, -10, -10, -5, -5, -10, -10, -20
+    ],
+    chess.KING: [
+      -30, -40, -40, -50, -50, -40, -40, -30,
+      -30, -40, -40, -50, -50, -40, -40, -30,
+      -30, -40, -40, -50, -50, -40, -40, -30,
+      -30, -40, -40, -50, -50, -40, -40, -30,
+      -20, -30, -30, -40, -40, -30, -30, -20,
+      -10, -20, -20, -20, -20, -20, -20, -10,
+      20, 20, 0, 0, 0, 0, 20, 20,
+      20, 30, 10, 0, 0, 10, 30, 20
+      ]
+  }
+
+  def __init__(self, fen):
+    self.game = chess.Board()
+    self.game.set_fen(fen)
     self.nodes_explored = 0 # mozliwosci rozwiniecia gry
 
   def evaluate(self): # ewaluacja zmiennych takich jak material i pozycja
     # ocena materialu
     mval = 0
     for piece in self.values:
-      mval += len(self.board.pieces(piece, chess.WHITE)) * self.values[piece]
-      mval -= len(self.board.pieces(piece, chess.BLACK)) * self.values[piece]
+      mval += len(self.game.pieces(piece, chess.WHITE)) * self.values[piece]
+      mval -= len(self.game.pieces(piece, chess.BLACK)) * self.values[piece]
 
     # ocena pozycji
     pval = 0
     for piece in self.values:
-      w_squares = self.board.pieces(piece, chess.WHITE) # pola, na ktorych stoi var(piece)
+      w_squares = self.game.pieces(piece, chess.WHITE) # pola, na ktorych stoi var(piece)
       pval += len(w_squares) * self.values[piece]
       for square in w_squares:
         pval += self.positions[piece][-square]
 
-      b_squares = self.board.pieces(piece, chess.BLACK)
+      b_squares = self.game.pieces(piece, chess.BLACK)
       pval -= len(b_squares) * self.values[piece]
       for square in b_squares:
         pval -= self.positions[piece][square]
@@ -114,15 +115,15 @@ class KoksSzachy:
       bmove = None
       # best score 
       bscore = -math.inf # ujemne bo liczymy dla czarnych 
-      moves = list(self.board.legal_moves)
+      moves = list(self.game.legal_moves)
 
       for move in moves:
         self.nodes_explored += 1
-        self.board.push(move) # wykonaj ruch
+        self.game.push(move) # wykonaj ruch
         nmove, nscore = self.mm(depth - 1, move, False) # new move, new score, oblicz wartosc
         if nscore > bscore:
           bscore, bmove = nscore, move
-        self.board.pop() # cofnij ruch 
+        self.game.pop() # cofnij ruch 
 
       # zwroc najlepszy ruch wraz z jego wartoscia
       return bmove, bscore 
@@ -134,20 +135,20 @@ class KoksSzachy:
       seq.append(move)
       return seq, self.evaluate()[1]
     
-    moves = list(self.board.legal_moves)
+    moves = list(self.game.legal_moves)
 
     # wartosci "game over", jesli nie ma legalnych ruchow
     if not moves: # komputer sprawdza czy ma w zasiegu jakies checkm8 albo paty
-      if self.board.is_checkmate():
-        if self.board.result() == "1-0": # jesli checkm8 jest z korzyscia dla nas
+      if self.game.is_checkmate():
+        if self.game.result() == "1-0": # sprawdza czy wynik jest korzystny
           seq.append(move)
-          return seq, 1000000
-        elif self.board.result() == "0-1":
+          return seq, MAXVAL
+        elif self.game.result() == "0-1":
           seq.append(move)
-          return seq, -1000000
+          return seq, -MAXVAL
 
     bmove = None
-    bscore = -10000001 if maximizing else 10000001 
+    bscore = -MAXVAL if maximizing else MAXVAL
 
     # najnowszy obliczony najlepszy ruch na poczatek listy, powinno pomoc w obcinanu galezi z minimaxa
     if move_hist and len(move_hist) >= negative_depth:
@@ -157,10 +158,10 @@ class KoksSzachy:
     if maximizing: # dla gracza zwiekszajacego, w tym przypadku czarny
       for move in moves:
         self.nodes_explored += 1
-        self.board.push(move) # zrob ruch
+        self.game.push(move) # zrob ruch
         # oblicz, zapisz w var(nseq)
         nseq, nscore = self.ab(negative_depth-1, positive_depth+1, move, a, b, move_hist, False)
-        self.board.pop() # cofnij ruch
+        self.game.pop() # cofnij ruch
 
         # sprawdz czy odkryty ruch jest lepszy niz poprzedni, jesli tak zamien 
         if nscore > bscore:
@@ -184,10 +185,10 @@ class KoksSzachy:
       for move in moves:
         self.nodes_explored += 1
 
-        self.board.push(move) # zrob ruch
+        self.game.push(move) # zrob ruch
         # oblicz, zapisz w var(nseq)
         nseq, nscore = self.ab(negative_depth-1, positive_depth+1, move, a, b, move_hist, True)
-        self.board.pop() # cofnij ruch
+        self.game.pop() # cofnij ruch
 
         # sprawdz czy odkryty ruch jest lepszy niz poprzedni, jesli tak zamien 
         if nscore < bscore:
@@ -212,19 +213,19 @@ class KoksSzachy:
 
   # https://www.youtube.com/watch?v=JnXKZYFmGOg bardzo polecam koks filmik
   def iter_deep(self, depth): 
-    tree, ret = self.ab(1, 0, None, -10000001, 10000001, None, self.board.turn)
+    tree, ret = self.ab(1, 0, None, -MAXVAL, MAXVAL, None, self.game.turn)
     for i in range(2, depth):
-      tree, ret = self.ab(i, 0, None, -10000001, 10000001, tree, self.board.turn)
+      tree, ret = self.ab(i, 0, None, -MAXVAL, MAXVAL, tree, self.game.turn)
     return str(tree[-1])
 
   def run_mm(self, depth):
-    maximizing = self.board.turn # tym kto chce zwiekszyc wartosc jest ten kogo jest ruch
+    maximizing = self.game.turn # tym kto chce zwiekszyc wartosc jest ten kogo jest ruch
     bmove, bscore = self.mm(depth, None, maximizing)
     return str(bmove) # zwroc najlepszy ruch obliczony przez minimaxa
 
   def run_ab(self, depth):
-    maximizing = self.board.turn
-    seq, bscore = self.ab(depth, 0, None, -10000001, 10000001, None, maximizing)
+    maximizing = self.game.turn
+    seq, bscore = self.ab(depth, 0, None, -MAXVAL, MAXVAL, None, maximizing)
     return str(seq[-1])
 
   def leaves(self): # mozliwosci ruchow
