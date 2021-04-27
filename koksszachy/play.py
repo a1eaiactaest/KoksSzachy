@@ -5,7 +5,6 @@ import sys
 import os
 DEBUG = os.getenv("DEBUG", None) is not None
 
-
 if __name__=="koksszachy.play":
   from koksszachy.engine import KoksSzachy
 else:
@@ -44,8 +43,6 @@ def my_help():
   '''
   print(mes)
 
-
-
 @app.route("/")
 def hello():
   r = render_template('index.html') # musialem uzyc render_template, inaczej ciezko by dzialalo z packagowaniem
@@ -79,7 +76,6 @@ def calc_move(depth, fen):
       return 0
     else:
       return move
-
 
 @app.route("/analysis", methods=['POST'])
 def get_data():
@@ -122,7 +118,6 @@ def main(argument="", DEBUG=False, show=True):
   except IndexError:
     my_help()
     return 0
-
 
 if __name__ == "__main__":
   try:
