@@ -1,2 +1,1 @@
-koksszachy/static/*.min.js linguist-vendored
-koksszachy/static/*.min.css linguist-vendored
+koksszachy/static/lib/* linguist-vendored
