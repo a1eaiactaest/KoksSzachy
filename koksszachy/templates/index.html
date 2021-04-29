@@ -9,22 +9,19 @@
   <link rel="stylesheet" type="text/css" href="static/chessboard.min.css">
   <link rel="icon" type="image/png" href="static/favicon.png">
 
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Noto+Sans+JP:wght@300&family=Open+Sans&display=swap" rel="stylesheet">
-
   <script src="static/jquery.min.js"></script>
   <script src="static/chessboard.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js"></script>
+  <script src="static/chess.js"></script>
 </head>
 <body>
-  <img class="kokslogo" src="https://user-images.githubusercontent.com/73793685/111052894-2bfdb300-8457-11eb-872a-bf4387a76ccb.png">
+  <img class="kokslogo" src="static/logo.png">
   <div id="main">
   <div id="board" style="height:600px;width:600px;"></div>
   <p></p>
   <div id="captured"></div>
   <button id="newGameButton" class="buttons newgame" type="button" onclick="newGame()">+ New Game</button>
   <button id="takeBackButton" class="buttons takeback"type="button" onclick="takeBack()">↺ Take Back</button> 
-  <form action='startAnalysis'>
+  <form action="startAnalysis">
   <button id="analysisButton" class="buttons analysis" type="button" onclick="analysis()">🧠 Analysis</button>
   </form>
   <h3><span id="status" class="move">White to move</span></h3>
