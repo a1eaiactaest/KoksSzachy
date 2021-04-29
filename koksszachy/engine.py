@@ -83,6 +83,11 @@ class KoksSzachy:
     self.game.set_fen(fen)
     self.nodes_explored = 0 # mozliwosci rozwiniecia gry
 
+  def leaves(self): # mozliwosci ruchow
+    my_nodes = self.nodes_explored
+    self.nodes_explored = 0 # reset
+    return my_nodes
+
   def evaluate(self): # ewaluacja zmiennych takich jak material i pozycja
     # ocena materialu
     mval = 0
@@ -186,9 +191,6 @@ class KoksSzachy:
       seq.append(bmove)
       return seq, bscore
 
-    
-  # Debugowanie -------
-
   # https://www.youtube.com/watch?v=JnXKZYFmGOg bardzo polecam koks filmik
   def iter_deep(self, depth): 
     tree, ret = self.ab(1, 0, None, -MAXVAL, MAXVAL, None, self.game.turn) # oblicz raz
@@ -196,7 +198,3 @@ class KoksSzachy:
       tree, ret = self.ab(i, 0, None, -MAXVAL, MAXVAL, tree, self.game.turn) # licz w petli, ustaw {tree} jako move_hist
     return str(tree[-1])
 
-  def leaves(self): # mozliwosci ruchow
-    my_nodes = self.nodes_explored
-    self.nodes_explored = 0 # reset
-    return my_nodes
