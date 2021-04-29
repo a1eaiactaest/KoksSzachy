@@ -77,6 +77,7 @@ def calc_move(depth, fen):
     else:
       return move
 
+# nie dziala na heroku, prawdopodobnie dlatego, ze to serwer nie client
 @app.route("/analysis", methods=['POST'])
 def get_data():
   if request.method == 'POST':

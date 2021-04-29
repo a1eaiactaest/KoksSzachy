@@ -112,8 +112,8 @@ var config = {
   position: 'start',
   onDragStart: onDragStart,
   onDrop: onDrop,
-  onMouseoutSquare: onMouseoutSquare,
-  onMouseoverSquare: onMouseoverSquare,
+  //onMouseoutSquare: onMouseoutSquare,
+  //onMouseoverSquare: onMouseoverSquare,
   onSnapEnd: onSnapEnd
 };
 
@@ -158,14 +158,17 @@ var newGame = function(){
 var analysis = function(){
   var content = [chess.pgn()];  
 	console.log(content);
-  $.ajax({
+  /*$.ajax({
     type: "POST",
     contentType: "application/json;charset=utf-8",
     url: "/analysis",
     traditional: "true",
     data: JSON.stringify({content}),
     dataType: "json"
-  });
+  });*/
+  pgn_dict = {"pgn":content[0],"pgnFile":"", "analyse":"true"};
+  url_encoded = jQuery.param(pgn_dict);
+  window.open(`https://lichess.org/paste?${url_encoded}`);
 }
 
 var acc = 1;
