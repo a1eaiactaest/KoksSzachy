@@ -104,6 +104,7 @@ Scenariusz, w którym grasz maksymalizujący wygrywa ma przypisaną warość nie
   - https://towardsdatascience.com/how-a-chess-playing-computer-thinks-about-its-next-move-8f028bd0e7b1   
   - https://pl.wikipedia.org/wiki/Algorytm_alfa-beta   
   - https://www.chessprogramming.org/Iterative_Deepening  
+  - https://www.youtube.com/watch?v=STjW3eH0Cik
  
 ## Różnice depth w iterative deepeningu
 Przeprowadziłem prosty eksperyment polegający na mierzeniu różnic czasowych i eksploracyjnych pomiędzy wartościami depth.
