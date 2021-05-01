@@ -145,16 +145,19 @@ Przyjrzyjmy się zdjęciu tego drzewka:
 
 W tym przypadku wartość `depth` będzie wynosiła `3`, ponieważ drzewko zagłębia się na 3 poziomy.
 
-`Node`, to są punkty na drzewku w KoksSzachach jest to legalny ruch. Istnieją dwa pojęcia na tą wartość:
+`Node`, to są punkty na drzewku, w KoksSzachach jest to legalny ruch. Istnieją dwa pojęcia na tą wartość:
 
 
 - `leaf nodes`, `terminal nodes`
+
   Są to punkty, w których drzewko się kończy. W tym przypadku są to wszytkie punkty na samym dole przy `depth` równemu `3` i jest ich `8`.
 
 - `root node`
+
   Na drzewku zawsze istnieje taki jeden punkt. W przypadku szachów jest to pozycja, w której obecnie jesteśmy. Od niego rozchodzi się całe drzewko.
 
 - `internal nodes`, `non-leaf nodes`
+
   Są to wszystkie punkty na drzewku, nie licząc `leaf nodes`. Jak sama nazwa mowi są to punkty "wewnętrzne".
 
 
@@ -162,7 +165,7 @@ W algorytmie minimax istnieje takie pojęcie jak `branching factor`. Jest to śr
 
 > The average branching factor can be quickly calculated as the number of non-root nodes (the size of the tree, minus one; or the number of edges) divided by the number of non-leaf nodes (the number of nodes with children).
 
-Zatem w przypadku przykładowego drzewka możemy to zastosować:
+Zatem w przypadku przykładowego drzewka możemy tą formułę:
 
 ```python
 
