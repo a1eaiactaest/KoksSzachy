@@ -82,7 +82,7 @@ Silnik KoksSzachów działa na bardzo prostej zasadzie:
       Arraye są przedstawione z perspektywy pierwszej osoby.
   
   * Gdy białe - gracz, wykonają ruch, czarne - czyli komputer analizują pozycje i materiał zapisując obecną wartość ogólną. Po tym procesie uruchamiany jest algorytm [Minimax](https://pl.wikipedia.org/wiki/Algorytm_min-max), który analizuje przyszłe i możliwe posunięcia przeciwnika po wykonanym ruchu.
-  W ten sposób algorytm ocenia, który ruch jest dla niego najlepszy. To na ile posunięć do przodu liczy jest kontrolowane przez zmienną ```depth+1```.   
+  W ten sposób algorytm ocenia, który ruch jest dla niego najlepszy. To na ile posunięć do przodu liczy jest kontrolowane przez zmienną `depth`.   
   * Obliczone ruchy są zapisywane w odpowiedniej kolejności.
   * Komputer wybiera pierwszy ruch z listy i go wykonuje.
   * Wszystko działa dopóki są możliwe ruchy. Nie działa to na podstawie pętli. 
@@ -96,6 +96,7 @@ Scenariusz, w którym grasz maksymalizujący wygrywa ma przypisaną warość nie
 
   Ciekawe artykuły i źródła na temat tych algorytmów: 
 
+  - https://pl.wikipedia.org/wiki/Algorytm_min-max
   - https://www.cs.cornell.edu/courses/cs312/2002sp/lectures/rec21.htm   
   - https://www.cs.tau.ac.il/~wolf/papers/deepchess.pdf   
   - https://en.wikipedia.org/wiki/Evaluation_function#In_chess   
@@ -105,10 +106,11 @@ Scenariusz, w którym grasz maksymalizujący wygrywa ma przypisaną warość nie
   - https://pl.wikipedia.org/wiki/Algorytm_alfa-beta   
   - https://www.chessprogramming.org/Iterative_Deepening  
   - https://www.youtube.com/watch?v=STjW3eH0Cik
+  - https://www.chessprogramming.org/Branching_Factor
  
 ## Różnice depth w iterative deepeningu
 Przeprowadziłem prosty eksperyment polegający na mierzeniu różnic czasowych i eksploracyjnych pomiędzy wartościami depth.
-Najniższą możliwą wartością depth jest `1`. Zakładając, że mierzymy wszystkie wartości dla klasycznego i każdemu znango ruchu `e4`, wartość zmiennej `nodes_explored`, czyli jednym słowem możliwe rozwinięcia dla danej sytuacji, wynosi `20` rozwinięć.
+Najniższą możliwą wartością depth jest `1`. Zakładając, że mierzymy wszystkie wartości dla klasycznego i każdemu znango ruchu `e4`, wartość zmiennej `leaves_explored`, czyli jednym słowem możliwe rozwinięcia dla danej sytuacji, wynosi `20` rozwinięć.
 I jeśli rzeczywiście popatrzymy na szachownicę, ta wartość się jak najbardziej zgadza.
 
 <p align="center">
@@ -119,7 +121,7 @@ Jeśli porównamy wartości depth od `1-8` to zobaczymy prawdziwe różnice.
 
 Chciałem tutaj dać piękny wykres matplotliba, ale nie udało mi się.
 
-| Depth  | Nodes  | Czas(s)|
+| Depth  | Leaves | Czas(s)|
 | -------|:------:|------:|
 | 1      | 20     | 0.004 | 
 | 2      | 102    | 0.014 |
@@ -131,5 +133,42 @@ Chciałem tutaj dać piękny wykres matplotliba, ale nie udało mi się.
 | 8      | 78510963| 5392.2| 
 
 
+</br>
 
+## Co w takim razie oznaczają te wszystkie pojęcia jak `depth`, `node`?
+
+Przyjrzyjmy się zdjęciu tego drzewka:
+<p align="center">
+  <img = src="docs/tree.png">
+  <sub><a href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fphilippmuens.com%2Fminimax-and-mcts&psig=AOvVaw3ghcoLtGNtDNknITafgI5n&ust=1619953199544000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMiO74mqqPACFQAAAAAdAAAAABA1">źródło</a></sub>
+</p>
+
+W tym przypadku wartość `depth` będzie wynosiła `3`, ponieważ drzewko zagłębia się na 3 poziomy.
+
+`Node`, to są punkty na drzewku w KoksSzachach jest to legalny ruch. Istnieją dwa pojęcia na tą wartość:
+
+
+- `leaf nodes`, `terminal nodes`
+  Są to punkty, w których drzewko się kończy. W tym przypadku są to wszytkie punkty na samym dole przy `depth` równemu `3` i jest ich `8`.
+
+- `root node`
+  Na drzewku zawsze istnieje taki jeden punkt. W przypadku szachów jest to pozycja, w której obecnie jesteśmy. Od niego rozchodzi się całe drzewko.
+
+- `internal nodes`, `non-leaf nodes`
+  Są to wszystkie punkty na drzewku, nie licząc `leaf nodes`. Jak sama nazwa mowi są to punkty "wewnętrzne".
+
+
+W algorytmie minimax istnieje takie pojęcie jak `branching factor`. Jest to średnia ilość dzieci każdego z punktów na danej głębokości. Na naszym przykładowym drzewku jest to `2`. Ponieważ każdy punkt ma przypisane 2 inne punkty. Oczywiście `branching factor` w szachach nie jest stały i się zmienia zależnie od pozycji oraz tego czy ucinamy pewne rozwinięcia z alpha-beta. Średnio wynosi on od 31 do 35. `Branching factor` można obliczyć w taki sposób:
+
+> The average branching factor can be quickly calculated as the number of non-root nodes (the size of the tree, minus one; or the number of edges) divided by the number of non-leaf nodes (the number of nodes with children).
+
+Zatem w przypadku przykładowego drzewka możemy to zastosować:
+
+```python
+
+>> # (len(tree)-1)/leaves
+>> (15-1)/7
+2.0
+
+```
 
