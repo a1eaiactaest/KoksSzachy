@@ -15,6 +15,7 @@ class KoksSzachy:
   }
   positions = {
     # gdzie najlepiej stac przedstawione w arrayach 8x8 
+    # moze kiedys: https://www.chessprogramming.org/PeSTO%27s_Evaluation_Function
     chess.PAWN: [ 
       0, 0, 0, 0, 0, 0, 0, 0,         # 8
       50, 50, 50, 50, 50, 50, 50, 50, # 7
@@ -26,57 +27,68 @@ class KoksSzachy:
       0, 0, 0, 0, 0, 0, 0, 0          # 1
 #       a  b  c  d  e  f  g  h 
     ],
-    chess.BISHOP: [
-      -50, -40, -30, -30, -30, -30, -40, -50,
-      -40, -20, 0, 0, 0, 0, -20, -40,
-      -30, 0, 10, 15, 15, 10, 0, -30,
-      -30, 5, 15, 20, 20, 15, 5, -30,
-      -30, 0, 15, 20, 20, 15, 0, -30,
-      -30, 5, 10, 15, 15, 10, 5, -30,
-      -40, -20, 0, 5, 5, 0, -20, -40,
-      -50, -40, -30, -30, -30, -30, -40, -50,
-    ],
     chess.KNIGHT: [
-      -20, -10, -10, -10, -10, -10, -10, -20,
-      -10, 0, 0, 0, 0, 0, 0, -10,
-      -10, 0, 5, 10, 10, 5, 0, -10,
-      -10, 5, 5, 10, 10, 5, 5, -10,
-      -10, 0, 10, 10, 10, 10, 0, -10,
-      -10, 10, 10, 10, 10, 10, 10, -10,
-      -10, 5, 0, 0, 0, 0, 5, -10,
-      -20, -10, -10, -10, -10, -10, -10, -20,
+      -50,-40,-30,-30,-30,-30,-40,-50,
+      -40,-20,  0,  0,  0,  0,-20,-40,
+      -30,  0, 10, 15, 15, 10,  0,-30,
+      -30,  5, 15, 20, 20, 15,  5,-30,
+      -30,  0, 15, 20, 20, 15,  0,-30,
+      -30,  5, 10, 15, 15, 10,  5,-30,
+      -40,-20,  0,  5,  5,  0,-20,-40,
+      -50,-40,-30,-30,-30,-30,-40,-50 
+    ],
+    chess.BISHOP: [
+      -20,-10,-10,-10,-10,-10,-10,-20,
+      -10,  0,  0,  0,  0,  0,  0,-10,
+      -10,  0,  5, 10, 10,  5,  0,-10,
+      -10,  5,  5, 10, 10,  5,  5,-10,
+      -10,  0, 10, 10, 10, 10,  0,-10,
+      -10, 10, 10, 10, 10, 10, 10,-10,
+      -10,  5,  0,  0,  0,  0,  5,-10,
+      -20,-10,-10,-10,-10,-10,-10,-20
     ],
     chess.ROOK: [
-      0, 0, 0, 0, 0, 0, 0, 0,
-      5, 10, 10, 10, 10, 10, 10, 5,
-      -5, 0, 0, 0, 0, 0, 0, -5,
-      -5, 0, 0, 0, 0, 0, 0, -5,
-      -5, 0, 0, 0, 0, 0, 0, -5,
-      -5, 0, 0, 0, 0, 0, 0, -5,
-      -5, 0, 0, 0, 0, 0, 0, -5,
-      0, 0, 0, 5, 5, 0, 0, 0
+        0,  0,  0,  0,  0,  0,  0,  0,
+      5, 10, 10, 10, 10, 10, 10,  5,
+      -5,  0,  0,  0,  0,  0,  0, -5,
+      -5,  0,  0,  0,  0,  0,  0, -5,
+      -5,  0,  0,  0,  0,  0,  0, -5,
+      -5,  0,  0,  0,  0,  0,  0, -5,
+      -5,  0,  0,  0,  0,  0,  0, -5,
+      0,  0,  0,  5,  5,  0,  0,  0
       ],
     chess.QUEEN: [
-      -20, -10, -10, -5, -5, -10, -10, -20,
-      -10, 0, 0, 0, 0, 0, 0, -10,
-      -10, 0, 5, 5, 5, 5, 0, -10,
-      -5, 0, 5, 5, 5, 5, 0, -5,
-      0, 0, 5, 5, 5, 5, 0, -5,
-      -10, 5, 5, 5, 5, 5, 0, -10,
-      -10, 0, 5, 0, 0, 0, 0, -10,
-      -20, -10, -10, -5, -5, -10, -10, -20
+      -20,-10,-10, -5, -5,-10,-10,-20,
+      -10,  0,  0,  0,  0,  0,  0,-10,
+      -10,  0,  5,  5,  5,  5,  0,-10,
+       -5,  0,  5,  5,  5,  5,  0, -5,
+        0,  0,  5,  5,  5,  5,  0, -5,
+      -10,  5,  5,  5,  5,  5,  0,-10,
+      -10,  0,  5,  0,  0,  0,  0,-10,
+      -20,-10,-10, -5, -5,-10,-10,-20
     ],
     chess.KING: [
-      -30, -40, -40, -50, -50, -40, -40, -30,
-      -30, -40, -40, -50, -50, -40, -40, -30,
-      -30, -40, -40, -50, -50, -40, -40, -30,
-      -30, -40, -40, -50, -50, -40, -40, -30,
-      -20, -30, -30, -40, -40, -30, -30, -20,
-      -10, -20, -20, -20, -20, -20, -20, -10,
-      20, 20, 0, 0, 0, 0, 20, 20,
-      20, 30, 10, 0, 0, 10, 30, 20
-      ]
-  }
+      -30,-40,-40,-50,-50,-40,-40,-30,
+      -30,-40,-40,-50,-50,-40,-40,-30,
+      -30,-40,-40,-50,-50,-40,-40,-30,
+      -30,-40,-40,-50,-50,-40,-40,-30,
+      -20,-30,-30,-40,-40,-30,-30,-20,
+      -10,-20,-20,-20,-20,-20,-20,-10,
+       20, 20,  0,  0,  0,  0, 20, 20,
+       20, 30, 10,  0,  0, 10, 30, 20
+    ]}
+
+  """
+  chess.KING w middle gamie
+  -50,-40,-30,-20,-20,-30,-40,-50,
+  -30,-20,-10,  0,  0,-10,-20,-30,
+  -30,-10, 20, 30, 30, 20,-10,-30,
+  -30,-10, 30, 40, 40, 30,-10,-30,
+  -30,-10, 30, 40, 40, 30,-10,-30,
+  -30,-10, 20, 30, 30, 20,-10,-30,
+  -30,-30,  0,  0,  0,  0,-30,-30,
+  -50,-30,-30,-30,-30,-30,-30,-50
+  """
 
   def __init__(self, fen):
     self.game = chess.Board()
@@ -89,13 +101,6 @@ class KoksSzachy:
     return my_nodes
 
   def evaluate(self): # ewaluacja zmiennych takich jak material i pozycja
-    # ocena materialu
-    mval = 0
-    for piece in self.values:
-      # (ilosc pol, na ktorych stoi piece * wartosc) 
-      mval += len(self.game.pieces(piece, chess.WHITE)) * self.values[piece] 
-      mval -= len(self.game.pieces(piece, chess.BLACK)) * self.values[piece]
-
     # ocena pozycji
     pval = 0
     for piece in self.values:
@@ -109,24 +114,25 @@ class KoksSzachy:
       for square in b_squares:
         pval -= self.positions[piece][square]
     
-    return mval, pval
+    return pval
   
   # https://www.cs.cornell.edu/courses/cs312/2002sp/lectures/rec21.htm 
   def minmax(self, negative_depth, positive_depth, move, a, b, move_hist, ismax): #alpha-beta minimax
     seq = [] # sekwencja ruchow
     if negative_depth == 0: # czy to ostatni poziom depth
       seq.append(move)
-      return seq, self.evaluate()[1]
+      return seq, self.evaluate()
     
     moves = list(self.game.legal_moves) # mozliwe, legalne ruchy
+    #print('moves before:',moves, 'moves length:',len(moves))
 
     # wartosci "game over", jesli nie ma legalnych ruchow
     if not moves: # jesli nie ma ruchow sprawdz czy sa zakonczenia gry
       if self.game.is_checkmate():
-        if self.game.result() == "1-0": # sprawdza czy wynik jest korzystny
+        if self.game.result() == '1-0': # sprawdza czy wynik jest korzystny
           seq.append(move)
           return seq, MAXVAL
-        elif self.game.result() == "0-1":
+        elif self.game.result() == '0-1':
           seq.append(move)
           return seq, -MAXVAL
 
@@ -139,6 +145,7 @@ class KoksSzachy:
         moves.insert(0, move_hist[negative_depth-1]) # do indexu 0
     
     if ismax: # dla gracza zwiekszajacego, raz to jest czarny raz bialy
+      #print((moves))
       for move in moves:
         self.leaves_explored += 1
         self.game.push(move) # zrob ruch
@@ -165,6 +172,7 @@ class KoksSzachy:
       return seq, bscore
           
     if not ismax: # dla gracza zmniejszajacego to samo co powyżej tyle ze dla alfy
+      #print((moves))
       for move in moves:
         self.leaves_explored += 1
 
@@ -195,6 +203,14 @@ class KoksSzachy:
   def iter_deep(self, depth): 
     tree, ret = self.minmax(1, 0, None, -MAXVAL, MAXVAL, None, self.game.turn) # oblicz raz
     for i in range(2, depth):
-      tree, ret = self.minmax(i, 0, None, -MAXVAL, MAXVAL, tree, self.game.turn) # licz w petli, ustaw {tree} jako move_hist
+      tree, ret = self.minmax(i, 0, None,-MAXVAL, MAXVAL, tree, self.game.turn) # licz w petli, ustaw {tree} jako move_hist
+    if len(tree) == 1:
+      return list(self.game.legal_moves)[0]
     return str(tree[-1])
 
+if __name__ == "__main__":
+  #fen = "r1b2k1r/pp1pQppp/3P4/5P2/8/5N2/4KP1P/qN3B1R b - - 3 19"
+  fen = "r1b1k3/ppp1nQ2/4P1pN/2q5/8/6P1/5PBP/R3R1K1 b - - 2 28"
+  v = KoksSzachy(fen)
+  m = v.iter_deep(5)
+  print(m)

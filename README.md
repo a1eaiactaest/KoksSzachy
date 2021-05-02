@@ -100,14 +100,17 @@ Scenariusz, w którym grasz maksymalizujący wygrywa ma przypisaną warość nie
   - https://www.cs.cornell.edu/courses/cs312/2002sp/lectures/rec21.htm   
   - https://www.cs.tau.ac.il/~wolf/papers/deepchess.pdf   
   - https://en.wikipedia.org/wiki/Evaluation_function#In_chess   
+  - https://www.chessprogramming.org/Simplified_Evaluation_Function
   - https://www.youtube.com/watch?v=JnXKZYFmGOg   
   - https://www.freecodecamp.org/news/simple-chess-ai-step-by-step-1d55a9266977/   
   - https://towardsdatascience.com/how-a-chess-playing-computer-thinks-about-its-next-move-8f028bd0e7b1   
+  - https://andreasstckl.medium.com/writing-a-chess-program-in-one-day-30daff4610ec
   - https://pl.wikipedia.org/wiki/Algorytm_alfa-beta   
   - https://www.chessprogramming.org/Iterative_Deepening  
   - https://www.youtube.com/watch?v=STjW3eH0Cik
   - https://www.chessprogramming.org/Branching_Factor
- 
+  - https://www.flyingmachinestudios.com/programming/minimax/ 
+
 ## Różnice depth w iterative deepeningu
 Przeprowadziłem prosty eksperyment polegający na mierzeniu różnic czasowych i eksploracyjnych pomiędzy wartościami depth.
 Najniższą możliwą wartością depth jest `1`. Zakładając, że mierzymy wszystkie wartości dla klasycznego i każdemu znango ruchu `e4`, wartość zmiennej `leaves_explored`, czyli jednym słowem możliwe rozwinięcia dla danej sytuacji, wynosi `20` rozwinięć.

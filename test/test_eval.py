@@ -29,17 +29,17 @@ class TestEval(unittest.TestCase):
   def test_eval_basic(self):
     v = KoksSzachy("rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1")
     val = v.evaluate()
-    self.assertEqual(val, (0,10))
+    self.assertEqual(val, 30)
 
   def test_eval_1(self):
     v = KoksSzachy("1r4k1/p1p2ppp/8/8/q7/N7/5nPP/K3Q2R b - - 0 31")
     val = v.evaluate()
-    self.assertEqual(val, (-300, -390))
+    self.assertEqual(val, -420)
 
   def test_eval_2(self):
     v = KoksSzachy("4r1k1/1p3ppp/p5N1/3p1R2/8/PPnn3b/8/K7 b - - 5 31")
     val = v.evaluate()
-    self.assertEqual(val, (-1000, -1095))
+    self.assertEqual(val, -1120)
 
 
 
