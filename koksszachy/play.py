@@ -62,7 +62,7 @@ def calc_move(depth, fen):
       print('Game over')
       return 0
     else: 
-      #print('computer moves: %s'%move)
+      print(move)
       print('nodes explored: %s '% nodes_explored)
       print('eval: %s'% str(val))
       print('fen: %s'% fen)

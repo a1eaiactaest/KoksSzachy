@@ -205,12 +205,15 @@ class KoksSzachy:
     for i in range(2, depth):
       tree, ret = self.minmax(i, 0, None,-MAXVAL, MAXVAL, tree, self.game.turn) # licz w petli, ustaw {tree} jako move_hist
     if len(tree) == 1:
-      return list(self.game.legal_moves)[0]
+      #print('BOB')
+      if not self.game.is_checkmate():
+        return list(self.game.legal_moves)[0]
     return str(tree[-1])
 
 if __name__ == "__main__":
+  import sys
   #fen = "r1b2k1r/pp1pQppp/3P4/5P2/8/5N2/4KP1P/qN3B1R b - - 3 19"
-  fen = "r1b1k3/ppp1nQ2/4P1pN/2q5/8/6P1/5PBP/R3R1K1 b - - 2 28"
-  v = KoksSzachy(fen)
+  #fen = "r1b1k3/ppp1nQ2/4P1pN/2q5/8/6P1/5PBP/R3R1K1 b - - 2 28"
+  v = KoksSzachy(sys.argv[1]) # bierz fen z argumentu
   m = v.iter_deep(5)
   print(m)
