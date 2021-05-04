@@ -22,10 +22,18 @@ var greySquare = function(square){
   $square.css('background', background);
 }
 
+/*
 var onDragStart = function(source, piece){
   if (chess.game_over() === true ||
       (chess.turn() === 'w' && piece.search(/^b/) !== -1) ||
       (chess.turn() === 'b' && piece.search(/^w/) !== -1)) {
+    return false;
+  }
+};*/
+
+
+var onDragStart = function(source, piece){
+  if (piece.search(/^w/) === -1){
     return false;
   }
 };

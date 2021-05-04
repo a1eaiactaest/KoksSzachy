@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+# r2qrk2/pp3p2/2pb1nn1/5Np1/3P4/7Q/PP4PP/R4RK1 w Qq - 0 1
+
 import sys
 import os
 
