@@ -22,7 +22,7 @@ setup(name='KoksSzachy',
         "License :: OSI Approved :: MIT License"
       ],
       url="https://github.com/a1eaiactaest/KoksSzachy",
-      install_requires=['chess', 'Flask'],
+      install_requires=['chess', 'Flask', 'requests'],
       python_requires='>=3.7',
       entry_points={
         "console_scripts":[
