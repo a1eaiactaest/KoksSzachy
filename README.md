@@ -111,7 +111,7 @@ Scenariusz, w którym grasz maksymalizujący wygrywa ma przypisaną warość nie
   - https://www.chessprogramming.org/Branching_Factor
   - https://www.flyingmachinestudios.com/programming/minimax/ 
 
-## Różnice depth w iterative deepeningu
+## Różnice depth w algorytmie minimax.
 Przeprowadziłem prosty eksperyment polegający na mierzeniu różnic czasowych i eksploracyjnych pomiędzy wartościami depth.
 Najniższą możliwą wartością depth jest `1`. Zakładając, że mierzymy wszystkie wartości dla klasycznego i każdemu znango ruchu `e4`, wartość zmiennej `leaves_explored`, czyli jednym słowem możliwe rozwinięcia dla danej sytuacji, wynosi `20` rozwinięć.
 I jeśli rzeczywiście popatrzymy na szachownicę, ta wartość się jak najbardziej zgadza.
