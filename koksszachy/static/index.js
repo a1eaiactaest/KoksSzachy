@@ -179,9 +179,12 @@ var analysis = function(){
   window.open(`https://lichess.org/paste?${url_encoded}`);
 }
 
-var acc = 1;
-var num = 1;
-var updatePGN = function(){
-  document.getElementById('pgnview').innerHTML = chess.pgn({ max_width: 5, newline_char: '\n' });
-}
 
+textarea = document.getElementById('pgnview');
+
+var updatePGN = function(){
+  setInterval(function(){
+    textarea.value = chess.pgn({ max_width: 5, newline_char: '\n' });
+    textarea.scrollTop = textarea.scrollHeight; // autoscroll, ostatni ruch zawsze na dole
+  }, 1000);
+};

@@ -205,7 +205,6 @@ class KoksSzachy:
     for i in range(2, depth):
       tree, ret = self.minmax(i, 0, None,-MAXVAL, MAXVAL, tree, self.game.turn) # licz w petli, ustaw {tree} jako move_hist
     if len(tree) == 1:
-      #print('BOB')
       if not self.game.is_checkmate():
         return list(self.game.legal_moves)[0]
     return str(tree[-1])

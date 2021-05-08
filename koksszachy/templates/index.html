@@ -5,42 +5,48 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!--<link rel="stylesheet" type="text/css" href="static/style.css"> debuggowanie, usunac pozniej-->
+  <link rel="stylesheet" type="text/css" href="static/style.css">
   <link rel="stylesheet" type="text/css" href="static/lib/chessboard.min.css">
   <link rel="icon" type="image/png" href="static/favicon.png">
+  <script src="https://kit.fontawesome.com/fcb072c13d.js" crossorigin="anonymous"></script>
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Noto+Sans+JP:wght@300&family=Open+Sans&display=swap" rel="stylesheet">
 
   <script src="static/lib/jquery.min.js"></script>
   <script src="static/lib/chessboard.min.js"></script>
   <script src="static/lib/chess.js"></script>
 </head>
 <body>
-  <img class="kokslogo" src="static/logo.png">
-  <div id="main">
-  <div id="board" style="height:600px;width:600px;"></div>
-  <p></p>
-  <div id="captured"></div>
-  <button id="newGameButton" class="buttons newgame" type="button" onclick="newGame()">+ New Game</button>
-  <button id="takeBackButton" class="buttons takeback"type="button" onclick="takeBack()">↺ Take Back</button> 
-  <form action="startAnalysis">
-  <button id="analysisButton" class="buttons analysis" type="button" onclick="analysis()">🧠 Analysis</button>
-  </form>
-  <h3><span id="status" class="move">White to move</span></h3>
-  <form class="from-inline buttons">
-    <select class="form-control" id="sel1">
-      <option value="10">Depth: 10</option>
-      <option value="9">Depth: 9</option>
-      <option value="8">Depth: 8</option>
-      <option value="7">Depth: 7</option>
-      <option value="6">Depth: 6</option>
-      <option value="5" selected>Depth: 5</option> <!-- domyslne, bo najbardziej optymalne -->
-      <option value="4">Depth: 4</option>
-      <option value="3">Depth: 3</option>
-      <option value="2">Depth: 2</option>
-      <option value="1">Depth: 1</option>
-    </select>
-  </form>
-  <textarea readonly id="pgnview" class="textarea" rows="4" cols="50"></textarea>
-  <script type="text/javascript" src="static/index.js"></script>
+  <div class="navbar">
+    <img class="kokslogo" src="static/logo.png">
+  </div>
+  <div class="main">
+    <div id="board"></div>
+    <div class="inf-area">
+      <textarea id="pgnview" rows="10" readonly></textarea>
+      <h3><span id="status" class="move">White to move</span></h3>
+      <select class="form-control" id="sel1">
+        <option value="10">Depth: 10</option>
+        <option value="9">Depth: 9</option>
+        <option value="8">Depth: 8</option>
+        <option value="7">Depth: 7</option>
+        <option value="6">Depth: 6</option>
+        <option value="5" selected>Depth: 5</option>
+        <option value="4">Depth: 4</option>
+        <option value="3">Depth: 3</option>
+        <option value="2">Depth: 2</option>
+        <option value="1">Depth: 1</option>
+      </select>
+    </div>
+    <div class="button-area">
+      <button id="newGameButton" class="buttons newgame" type="button" onclick="newGame()"><div class="text-wrapper"><p>New Game</p></div></button>
+      <button id="takeBackButton" class="buttons takeback"type="button" onclick="takeBack()"><div class="text-wrapper"><p>Take Back</p></div></button> 
+      <form action='startAnalysis'>
+        <button id="analysisButton" class="buttons analysis" type="button" onclick="analysis()"><div class="text-wrapper"><p>Analysis</p></div></button>
+      </form>
+    </div>
+    <script type="text/javascript" src="static/index.js"></script>
   </div>
 </body>
 </html>
